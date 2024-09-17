@@ -14,7 +14,7 @@ const config: Config = {
       },
       brightness: {
         20: '.20',
-      }
+      },
     },
   },
   plugins: [],

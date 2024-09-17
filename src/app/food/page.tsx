@@ -2,7 +2,7 @@ import React from 'react'
 
 function foodPage() {
   return (
-    <div className='aspect-[16/8.5]'>foodPage</div>
+    <div className='aspect-[16/9] bg-[--neutrals-color]'></div>
   )
 }
 
