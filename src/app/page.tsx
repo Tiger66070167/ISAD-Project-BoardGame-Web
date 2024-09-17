@@ -3,16 +3,21 @@
 export default function Home() {
   return (
     <div>
+      {/* idk why i write these 2 div lol :Win */}
       <div>
-        <div className="bg-[url('../assets/boardgame.jpeg')] bg-cover blur-sm brightness-20 text-white text-center aspect-[16/9] place-content-center bg-repeat"></div>
+        {/* Background */}
+        <div className="bg-[url('../assets/boardgame.jpeg')] bg-cover blur-sm brightness-20 aspect-[16/9] place-content-center bg-repeat"></div>
 
-        <div id="home-text" className="text-center place-content-center text-center text-[#5865F2]">
-          <h1 className='font-black text-8xl'>Board Game Cafe</h1>
-          <p className='font-medium text-4xl'>Let's booking your board game from home</p>
+        {/* Center Text */}
+        <div id="home-text" className="text-center place-content-center text-center text-[--primary-color]">
+          <h1 className='font-black laptop:text-7xl desktop:text-8xl'>Board Game Cafe</h1>
+          <p className='font-medium laptop:text-3xl desktop:text-4xl'>Let's booking your board game from home</p>
         </div>
 
+        {/* Segtion 2 of page Home */}
         <div className="aspect-[16/9] bg-[--neutrals-color]"></div>
       </div>
+
     </div>
   );
 }

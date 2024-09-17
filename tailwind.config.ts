@@ -15,6 +15,16 @@ const config: Config = {
       brightness: {
         20: '.20',
       },
+      screens: {
+        'tablet': '640px',
+        // => @media (min-width: 640px) { ... }
+  
+        'laptop': '1470px',
+        // => @media (min-width: 1024px) { ... }
+  
+        'desktop': '1770px',
+        // => @media (min-width: 1280px) { ... }
+      },
     },
   },
   plugins: [],

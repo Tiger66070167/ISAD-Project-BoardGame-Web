@@ -3,18 +3,27 @@ import Link from 'next/link';
 
 function Nav() {
   return (
-    <div className='w-full grid grid-cols-3 justify-items py-4 bg-[#292929] text-white font-semibold fixed z-10'>
-        <div className='place-content-start pl-20'>LOGO</div>
-        <ul className='flex items-center justify-center space-x-6'>
-            <li className='hover:text-[#5865F2] hover:scale-110 transition hover:delay-50'><Link href="/">Home</Link></li>
-            <li className='hover:text-[#5865F2] hover:scale-110 transition hover:delay-50'><Link href="/booking">Booking</Link></li>
-            <li className='hover:text-[#5865F2] hover:scale-110 transition hover:delay-50'><Link href="/status">Status</Link></li>
-            <li className='hover:text-[#5865F2] hover:scale-110 transition hover:delay-50'><Link href="/food">Food</Link></li>
+    <header className='w-full grid grid-cols-3 justify-items items-center laptop:py-4 desktop:py-5 bg-[#292929] text-white font-semibold fixed z-10'>
+
+        {/* Left */}
+        <div className='place-content-start pl-20 laptop:text-base desktop:text-3xl'>LOGO</div>
+
+        {/* Center */}
+        <ul className='flex items-center justify-center laptop:space-x-6 desktop:space-x-12 laptop:text-base desktop:text-3xl'>
+            <li className='hover:text-[--primary-color] hover:scale-110 transition hover:delay-50'><Link href="/">Home</Link></li>
+            <li className='hover:text-[--primary-color] hover:scale-110 transition hover:delay-50'><Link href="/booking">Booking</Link></li>
+            <li className='hover:text-[--primary-color] hover:scale-110 transition hover:delay-50'><Link href="/status">Status</Link></li>
+            <li className='hover:text-[--primary-color] hover:scale-110 transition hover:delay-50'><Link href="/food">Food</Link></li>
         </ul>
+
+        {/* Right */}
         <div className='pr-20 justify-self-end'>
-            <button className="rounded outline outline-[#5865F2] bg-[#5865F2] px-2" type='button'>Sign in</button>
+            <button className="rounded bg-[--primary-color] laptop:px-4 desktop:px-6 desktop:py-1 laptop:text-base desktop:text-3xl transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]" type='button'>
+              Sign in
+            </button>
         </div>
-    </div>
+
+    </header>
   )
 }
 
