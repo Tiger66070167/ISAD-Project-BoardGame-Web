@@ -3,10 +3,10 @@ import Link from 'next/link'
 
 function registerPage() {
   return (
-    <div className='laptop:aspect-[16/8.4] desktop:aspect-[16/7.6] bg-[--neutrals-color]'>
+    <div className='min-h-screen min-w-screen bg-[--neutrals-color]'>
 
-        <div className='flex justify-center items-center laptop:pt-20 desktop:pt-28 laptop:px-96 desktop:px-[32rem] h-full laptop:pb-12 desktop:pb-22 mx-32'>
-            <div className='shadow-md rounded-lg bg-[#303030] flex flex-col w-full h-full pt-8'>
+        <div className='flex justify-center items-center tablet:pt-16 laptop:pt-20 desktop:pt-28 laptop:pb-12 desktop:pb-22'>
+            <div className='shadow-md rounded-lg bg-[#303030] flex flex-col pt-8 laptop:w-96 desktop:w-[500px] h-auto pb-10'>
 
                 <div>
                     <h1 className='laptop:text-3xl desktop:text-4xl laptop:py-5 desktop:py-12 font-black text-[--primary-color] flex justify-center items-center'>Register</h1>

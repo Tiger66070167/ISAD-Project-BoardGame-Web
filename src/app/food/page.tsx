@@ -16,7 +16,7 @@ import FoodCard from "../components/foodCard";
 function foodPage() {
   return (
     // content location
-    <div className="min-h-[40vh] bg-[--neutrals-color] py-6">
+    <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-6">
       {/* <div className="flex justify-center items-center laptop:pt-20 desktop:pt-28 laptop:px 96 desktop:px-[32rem] h-full laptop:pb-12 desktop:pb-22 mx-32">
           <div className="shadow-md rounded-lg bg-[#303030] flex flex-col w-full h-full pt-8"></div>
           

@@ -2,7 +2,7 @@ import React from 'react'
 
 function profilePage() {
   return (
-    <div className='aspect-[16/9] bg-[--neutrals-color] flex justify-center laptop:py-20 desktop:py-32'>
+    <div className='min-h-screen min-w-screen bg-[--neutrals-color] flex justify-center laptop:py-20 desktop:py-32'>
 
       {/* My Profile */}
       <div className='w-full px-32'>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 function Footer() {
   return (
     <footer className="relative aspect-[16/3] bg-[#232323] px-20 pt-5 ">
-        <div className='grid grid-cols-3 gap-x-2'>
+        <div className='grid laptop:grid-cols-3 gap-x-2 tablet:grid-rows-4 laptop:grid-rows-1'>
 
             {/* Left */}
             <div className='laptop:text-2xl desktop:text-3xl font-bold text-[#5865F2]'>
@@ -42,7 +42,7 @@ function Footer() {
         </div>
 
         {/* Bottom left */}
-        <div className='absolute bottom-2 laptop:text-sm desktop:text-base '>Copyright © 2024-2024 Skibidi All Rights Reserved. | Produced by LnwWinZa0072547</div>
+        <div className='absolute bottom-2 tablet:text-xs laptop:text-sm desktop:text-base '>Copyright © 2024-2024 Skibidi All Rights Reserved. | Produced by LnwWinZa0072547</div>
     </footer>
   )
 }

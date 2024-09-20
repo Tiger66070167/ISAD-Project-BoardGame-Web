@@ -2,7 +2,7 @@ import React from 'react'
 
 function bookingPage() {
   return (
-    <div className='laptop:aspect-[16/8.4] bg-[--neutrals-color]'>
+    <div className='min-h-screen min-w-screen bg-[--neutrals-color]'>
       
     </div>
   )
