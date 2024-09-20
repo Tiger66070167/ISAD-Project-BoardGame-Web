@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Nav() {
   return (
-    <header className="w-full grid grid-cols-3 justify-items items-center laptop:py-4 desktop:py-5 bg-[#292929] text-white font-semibold fixed z-10">
+    <header className="w-full grid grid-cols-3 justify-items items-center laptop:py-4 desktop:py-5 bg-[#292929] text-white font-semibold fixed top-0 left-0 z-10 ">
       {/* Left */}
       <div className="place-content-start pl-20 laptop:text-base desktop:text-3xl">
         LOGO
