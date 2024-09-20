@@ -1,5 +1,5 @@
-import database from "./database";
-import dbConnector from "./dbConnector";
+import database from "../database";
+import dbConnector from "../dbConnector";
 import state from "./state";
 import mysql from "mysql2/promise"
 
@@ -11,9 +11,9 @@ export default class insert implements state {
     }
 
     async query(info: database) {
+        let conn: mysql.Connection = await dbConnector.getConnection();
+        conn.connect();
         try {
-            let conn: mysql.Connection = await dbConnector.getConnection();
-            conn.connect();
     
             let stringQuery: string = "INSERT INTO ";
             stringQuery += info.getTable() + " ";
@@ -34,8 +34,11 @@ export default class insert implements state {
             
             conn.execute(stringQuery);
             conn.end();
+            return true;
         } catch (error) {
-            console.log("There a bug here 🤓☝ AT 'insesrtDB.ts' line 39", error);
+            console.log("There a bug here 🤓☝ AT 'insesrtDB.ts' line 39");
+            conn.end();
+            return false;
         }
     }
 }

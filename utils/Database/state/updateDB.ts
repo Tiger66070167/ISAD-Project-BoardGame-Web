@@ -1,7 +1,7 @@
-import database, {sequence} from "./database";
+import database, {sequence} from "../database";
 import state from "./state";
 import mysql from "mysql2/promise";
-import dbConnector from "./dbConnector";
+import dbConnector from "../dbConnector";
 
 export default class update implements state{
     private difference: Array<{current: string; change: string | number;}>;
@@ -16,9 +16,9 @@ export default class update implements state{
     }
 
     async query(info: database) {
+        let conn: mysql.Connection = await dbConnector.getConnection();
+        conn.connect();
         try {
-            let conn: mysql.Connection = await dbConnector.getConnection();
-            conn.connect();
     
             let stringQuery: string = "UPDATE ";
             stringQuery += `${info.getTable()} `;
@@ -58,8 +58,12 @@ export default class update implements state{
             conn.execute(stringQuery);
             conn.end();
 
+            return true;
+
         } catch (error) {
-            console.log("There a bug here 🤓☝ AT 'updateDB.ts' line 64", error);
+            console.log("There a bug here 🤓☝ AT 'updateDB.ts' line 64");
+            conn.end();
+            return false;
         }
     }
 }

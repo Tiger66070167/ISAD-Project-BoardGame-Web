@@ -1,7 +1,5 @@
 import compare from "./enumCompare";
-import state from "./state";
-import insert from "./insertDB";
-import update from "./updateDB";
+import state from "./state/state";
 
 type table = 'board_game' | 'booking' | 'food_menu' | 'food_order' | 'table_data' | 'users'
 export type sequence = {
@@ -9,6 +7,8 @@ export type sequence = {
     compare: compare,
     check: string | number;
 }
+
+//TODO: add some generic here for better column search
 
 export default class database{
     private queryTable: table | null;
@@ -43,5 +43,3 @@ export default class database{
         return this.allSequence;
     }
 }
-
-new database(new update().change("username", "nigga man").change("role", 'normal man')).table("users").where("users_id", compare.EQUAL, 6).query();
