@@ -2,17 +2,16 @@ import database, {sequence} from "../database";
 import dbConnector from "../dbConnector";
 import state from "./state";
 import mysql from "mysql2/promise"
+import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table";
 
-//TODO: add some generic here for better column search
-
-export default class select implements state {
+export default class select<T extends board_game | booking | food_menu | food_order | food_type | table_data | users> implements state {
     private column: Array<string>;
 
-    constructor(...column: string[]) {
+    constructor(...column: T[]) {
         this.column = column;
     }
 
-    async query(info: database){
+    async query(info: database<any>){
         let conn: mysql.Connection = await dbConnector.getConnection();
         conn.connect();
         try {

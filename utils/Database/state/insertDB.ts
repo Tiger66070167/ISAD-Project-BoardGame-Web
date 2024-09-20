@@ -2,6 +2,7 @@ import database from "../database";
 import dbConnector from "../dbConnector";
 import state from "./state";
 import mysql from "mysql2/promise"
+import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table";
 
 export default class insert implements state {
     private column: Array<string | number>;
@@ -10,7 +11,7 @@ export default class insert implements state {
         this.column = value;
     }
 
-    async query(info: database) {
+    async query(info: database<any>) {
         let conn: mysql.Connection = await dbConnector.getConnection();
         conn.connect();
         try {

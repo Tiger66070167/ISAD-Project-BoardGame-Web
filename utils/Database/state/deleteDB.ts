@@ -2,11 +2,12 @@ import database, { sequence } from "../database";
 import dbConnector from "../dbConnector";
 import state from "./state";
 import mysql from "mysql2/promise";
+import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table";
 
 export default class deleteDB implements state {
     constructor() { }
 
-    async query(info: database) {
+    async query(info: database<any>) {
         let conn: mysql.Connection = await dbConnector.getConnection();
         conn.connect();
         try {
