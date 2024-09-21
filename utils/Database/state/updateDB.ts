@@ -62,9 +62,8 @@ export default class update implements state{
             return true;
 
         } catch (error) {
-            console.log("There a bug here 🤓☝ AT 'updateDB.ts' line 64");
             conn.end();
-            return false;
+            throw error;
         }
     }
 }

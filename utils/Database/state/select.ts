@@ -4,7 +4,7 @@ import state from "./state";
 import mysql from "mysql2/promise"
 import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table";
 
-export default class select<T extends board_game | booking | food_menu | food_order | food_type | table_data | users> implements state {
+export default class select<T extends board_game | booking | food_menu | food_order | food_type | table_data | users | string> implements state {
     private column: Array<string>;
 
     constructor(...column: T[]) {
@@ -53,8 +53,8 @@ export default class select<T extends board_game | booking | food_menu | food_or
             return result[0];
 
         } catch (error) {
-            console.log("There a bug here 🤓☝ AT 'selectDB.ts' line 55");
             conn.end();
+            throw error;
         }
     }
 }

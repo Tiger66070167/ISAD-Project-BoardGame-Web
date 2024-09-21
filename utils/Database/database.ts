@@ -1,10 +1,7 @@
-import { extname } from "path";
 import compare from "./enumCompare";
 import state from "./state/state";
 import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "./table"
 import { table } from "console";
-import insert from "./state/insertDB";
-import select from "./state/select";
 
 type table = 'board_game' | 'booking' | 'food_menu' | 'food_order' | 'food_type' | 'table_data' | 'users'
 export type sequence = {
@@ -12,8 +9,6 @@ export type sequence = {
     compare: compare,
     check: string | number;
 }
-
-//TODO: add some generic here for better column search
 
 export default class database<T extends board_game | booking | food_menu | food_order | food_type | table_data | users>{
     private queryTable: table | null;
@@ -36,8 +31,8 @@ export default class database<T extends board_game | booking | food_menu | food_
         return this;
     }
 
-    public query() {
-        this.state.query(this);
+    public async query() {
+        return await this.state.query(this);
     }
 
     public getTable(): table | null {

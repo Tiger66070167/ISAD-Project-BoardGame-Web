@@ -35,11 +35,9 @@ export default class insert implements state {
             
             conn.execute(stringQuery);
             conn.end();
-            return true;
         } catch (error) {
-            console.log("There a bug here 🤓☝ AT 'insesrtDB.ts' line 39");
             conn.end();
-            return false;
+            throw error;
         }
     }
 }

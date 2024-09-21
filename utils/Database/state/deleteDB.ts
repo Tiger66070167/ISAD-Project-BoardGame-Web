@@ -41,12 +41,9 @@ export default class deleteDB implements state {
             conn.execute(stringQuery);
             conn.end();
 
-            return true;
-
         } catch (error) {
-            console.log("There a bug here 🤓☝ AT 'deleteDB.ts' line 44");
             conn.end();
-            return false;
+            throw error;
         }
     }
 }
