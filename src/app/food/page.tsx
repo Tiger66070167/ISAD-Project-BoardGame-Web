@@ -27,7 +27,7 @@ function foodPage() {
         {/*h-1 for set height*/}
         {/* <div className="w-1 h-28"></div> */}
         {/* create column */}
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-4 bg-[#292929] text-white mt-2">
           <TabsTrigger value="fastFood">ฟาสต์ฟู๊ด</TabsTrigger>
           <TabsTrigger value="singleFood">จานเดียว</TabsTrigger>
           <TabsTrigger value="dessert">ขนม</TabsTrigger>
@@ -35,83 +35,44 @@ function foodPage() {
         </TabsList>
         {/* content size */}
         <TabsContent value="fastFood">
-        <Card>
+        {/* <Card> */}
           {/* bg-[#292929] */}
-          <div className="grid grid-cols-3 gap-6  h-full"> 
+          <div className="grid grid-cols-3 gap-6  h-full bg-[#171717] "> 
               {[0, 0, 0, 0, 0].map(() => (
                 <FoodCard></FoodCard>
               ))}
           </div>
-        </Card>
+        {/* </Card> */}
         </TabsContent>
         <TabsContent value="singleFood">
-          <Card>
-            <CardHeader>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>
-                Change your password here. After saving, you'll be logged out.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="current">Current password</Label>
-                <Input id="current" type="password" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="new">New password</Label>
-                <Input id="new" type="password" />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button>Save password</Button>
-            </CardFooter>
-          </Card>
+        {/* <Card> */}
+          {/* bg-[#292929] */}
+          <div className="grid grid-cols-3 gap-6  h-full bg-[#171717] "> 
+              {[0, 0, 0, 0].map(() => (
+                <FoodCard></FoodCard>
+              ))}
+          </div>
+        {/* </Card> */}
         </TabsContent>
         <TabsContent value="dessert">
-          <Card>
-            <CardHeader>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>
-                Change your password here. After saving, you'll be logged out.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="current">Current password</Label>
-                <Input id="current" type="password" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="new">New password</Label>
-                <Input id="new" type="password" />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button>Save password</Button>
-            </CardFooter>
-          </Card>
+        {/* <Card> */}
+          {/* bg-[#292929] */}
+          <div className="grid grid-cols-3 gap-6  h-full bg-[#171717] "> 
+              {[0, 0, 0].map(() => (
+                <FoodCard></FoodCard>
+              ))}
+          </div>
+        {/* </Card> */}
         </TabsContent>
         <TabsContent value="drink">
-          <Card>
-            <CardHeader>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>
-                Change your password here. After saving, you'll be logged out.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="current">Current password</Label>
-                <Input id="current" type="password" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="new">New password</Label>
-                <Input id="new" type="password" />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button>Save password</Button>
-            </CardFooter>
-          </Card>
+        {/* <Card> */}
+          {/* bg-[#292929] */}
+          <div className="grid grid-cols-3 gap-6 h-full bg-[#171717]"> 
+              {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
+                <FoodCard></FoodCard>
+              ))}
+          </div>
+        {/* </Card> */}
         </TabsContent>
       </Tabs>
     </div>
