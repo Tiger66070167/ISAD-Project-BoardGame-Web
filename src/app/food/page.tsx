@@ -22,7 +22,7 @@ function foodPage() {
           
         </div> */}
       {/* inline content input box and list-item*/}
-      <Tabs defaultValue="account" className=" w-[1000px] mx-auto py-16">
+      <Tabs defaultValue="Food" className=" w-[1000px] mx-auto py-16">
         {" "}
         {/*h-1 for set height*/}
         {/* <div className="w-1 h-28"></div> */}
