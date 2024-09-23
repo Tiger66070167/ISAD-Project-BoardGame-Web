@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import image from "../assets/homeSegtion2.png"
 
 export default function Home() {
   return (
@@ -23,24 +25,23 @@ export default function Home() {
 
         {/* Segtion 2 of page Home */}
         <div className="min-h-screen min-w-screen bg-[--neutrals-color] flex justify-center items-center">
-          <div className="tablet:hidden laptop:grid laptop:grid-cols-2 px-20 gap-10">
+          <div className="tablet:hidden laptop:grid laptop:grid-cols-2 px-20 gap-10 justify-center items-center">
             <div>
               <h1 className="tablet:text-xl laptop:text-3xl desktop:text-4xl pb-5 font-black">
-                จองบอร์ดเกมได้ง่าย ๆ ผ่านเว็บ
+                Resvere board game easily via the website
               </h1>
               <p className="tablet:text-lg laptop:text-xl desktop:text-2xl pb-5">
-                เว็บจองบอร์ดเกมออนไลน์เพื่อใช้บริการกับทางร้าน
-                สามารถทราบถึงสถานะการบริการของบอร์ดเกมและ ...
+                Online board game booking service website, easy, does not take long, and can be booked from anywhere. You can also check the status of the board games available in the shop, and order food to eat and play.
               </p>
               <button className="rounded bg-[--primary-color] tablet:px-2 laptop:px-4 desktop:px-6 laptop:py-4 tablet:text-xl laptop:text-3xl desktop:text-4xl transition hover:scale-110 ml-10 text-black">
                 <Link href="/booking">จองโต๊ะเลย!</Link>
               </button>
             </div>
 
-            <div className="grid place-items-end">
-              <img
-                src="../assets/homeSegtion2.png"
-                className="h-full w-full"
+            <div className="grid justify-center items-center">
+              <Image
+                className="h-auto w-96"
+                src={image}
                 alt="Board Game"
               />
             </div>
@@ -50,20 +51,19 @@ export default function Home() {
           <div>
             <div className="tablet:grid tablet:grid-rows-2 laptop:hidden px-20 gap-10">
               <div className="grid place-items-end">
-                <img
-                  src="../assets/homeSegtion2.png"
-                  className="h-full w-full"
+                <Image
+                  className="h-full w-96"
+                  src={image}
                   alt="Board Game"
                 />
               </div>
 
               <div>
                 <h1 className="tablet:text-xl laptop:text-3xl desktop:text-4xl pb-5 font-black">
-                  จองบอร์ดเกมได้ง่าย ๆ ผ่านเว็บ
+                  Resvere board game easily via the website
                 </h1>
                 <p className="tablet:text-sm laptop:text-xl desktop:text-2xl pb-5">
-                  เว็บจองบอร์ดเกมออนไลน์เพื่อใช้บริการกับทางร้าน
-                  สามารถทราบถึงสถานะการบริการของบอร์ดเกมและ ...
+                  Online board game booking service website, easy, does not take long, and can be booked from anywhere. You can also check the status of the board games available in the shop, and order food to eat and play.
                 </p>
                 <div className="flex justify-center">
                   <button

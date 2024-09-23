@@ -30,19 +30,16 @@ function Footer() {
             {/* Right */}
             <div className='laptop:text-2xl desktop:text-3xl font-bold text-[#5865F2]'>Contact
                 <div className='laptop:text-base desktop:text-2xl  font-normal text-[#ffffff]'>
-                    LINE :
+                    LINE : boardgamecafe
                 </div>
                 <div className='laptop:text-base desktop:text-2xl  font-normal text-[#ffffff]'>
-                    IG :
-                </div>
-                <div className='laptop:text-base desktop:text-2xl  font-normal text-[#ffffff]'>
-                    Email :
+                    Email : boardgamecafe@gmail.com
                 </div>
             </div>
         </div>
 
         {/* Bottom left */}
-        <div className='absolute bottom-2 tablet:text-xs laptop:text-sm desktop:text-base '>Copyright © 2024-2024 Skibidi All Rights Reserved. | Produced by LnwWinZa0072547</div>
+        <div className='absolute bottom-2 tablet:text-xs laptop:text-sm desktop:text-base '>Copyright © 2024.</div>
     </footer>
   )
 }
