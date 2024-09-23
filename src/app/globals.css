@@ -95,3 +95,25 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@media only screen and (max-width: 640px) {
+  #navbar-container {
+    display: grid;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 56px;
+  }
+
+  #menu {
+    margin-top: 25px;
+    width: 100%;
+    top: 100;
+    left: 0;
+  }
+
+  .menu-active {
+    display: block !important;
+    background-color: #292929;
+  }
+}
+
