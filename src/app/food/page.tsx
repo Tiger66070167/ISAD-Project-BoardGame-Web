@@ -22,8 +22,8 @@ function foodPage() {
           <div className="shadow-md rounded-lg bg-[#303030] flex flex-col w-full h-full pt-8"></div>
           
         </div> */}
-      {/* inline content input box and list-item*/}
-      <Tabs defaultValue="all" className="mx-auto py-16 min-h-screen min-w-[200px] max-w-[1400px]">
+      {/* inline content input box and list-item      min-w-[200px] max-w-[1400px]  */}
+      <Tabs defaultValue="all" className="mx-auto py-16 min-w-[200px] max-w-[1400px]">
         {" "}
         {/*h-1 for set height*/}
         {/* <div className="w-1 h-28"></div> */}
@@ -72,7 +72,9 @@ function foodPage() {
           {/* bg-[#292929] */}
           <div className={style["grid-layout-box"]}>
             {[0, 0, 0, 0, 0].map(() => (
+              <div className="flex justify-center items-center">
               <FoodCard></FoodCard>
+            </div>
             ))}
           </div>
           {/* </Card> */}
@@ -82,7 +84,9 @@ function foodPage() {
           {/* bg-[#292929] */}
           <div className={style["grid-layout-box"]}>
             {[0, 0, 0, 0].map(() => (
+              <div className="flex justify-center items-center">
               <FoodCard></FoodCard>
+            </div>
             ))}
           </div>
           {/* </Card> */}
@@ -92,7 +96,9 @@ function foodPage() {
           {/* bg-[#292929] */}
           <div className={style["grid-layout-box"]}>
             {[0, 0, 0].map(() => (
+              <div className="flex justify-center items-center">
               <FoodCard></FoodCard>
+            </div>
             ))}
           </div>
           {/* </Card> */}
@@ -102,7 +108,9 @@ function foodPage() {
           {/* bg-[#292929] */}
           <div className={style["grid-layout-box"]}>
             {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
+              <div className="flex justify-center items-center">
               <FoodCard></FoodCard>
+            </div>
             ))}
           </div>
           {/* </Card> */}
