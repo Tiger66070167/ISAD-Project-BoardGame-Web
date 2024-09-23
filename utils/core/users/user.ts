@@ -6,13 +6,13 @@ import { users } from "../../Database/table";
 const bcrypt = require('bcrypt')
 
 export default class user {
-    private formatDate(date: Date) {
+    private static formatDate(date: Date) {
         let output: string;
         output = ([date.getFullYear(), (date.getMonth() + 1).toString().padStart(2, '0'), (date.getDate().toString().padStart(2, "0"))].join('-') + ' ' + [(date.getHours().toString().padStart(2, '0')), (date.getMinutes().toString().padStart(2, '0')), (date.getSeconds().toString().padStart(2, '0'))].join(':'));
         return output;
     }
 
-    public async createUser(username: string, email: string, password: string): Promise<boolean> {
+    public static async createUser(username: string, email: string, password: string): Promise<boolean> {
         const passwordHash = await bcrypt.hash(password, 10);
 
         try {
@@ -24,7 +24,7 @@ export default class user {
         return true;
     }
 
-    public async checkLogin(email: string, password: string): Promise<boolean> {
+    public static async checkLogin(email: string, password: string): Promise<boolean> {
         try {
             const result = await new database<users>(new select<users>('email', 'password')).table('users').where('email', compare.EQUAL, email).query();
     

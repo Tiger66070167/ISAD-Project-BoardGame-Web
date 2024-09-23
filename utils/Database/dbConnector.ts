@@ -1,4 +1,6 @@
 import mysql from 'mysql2/promise';
+const dotenv = require("dotenv")
+dotenv.config()
 
 export default class dbConnector {
     private static connection: mysql.Connection;
@@ -8,11 +10,10 @@ export default class dbConnector {
     public static async getConnection() {
         if (!this.connection) {
             this.connection = await mysql.createConnection({
-                host: "161.246.38.35",
-                user: "it66070217_Anawat",
-                password: "2005253",
-                port: 3306,
-                database: "it66070217_Anawat",
+                host: process.env.DB_HOST,
+                user: process.env.DB_USER,
+                password: process.env.DB_PASS,
+                database: process.env.DB_DATABASE,
                 connectTimeout: 1000000
             });
         }
