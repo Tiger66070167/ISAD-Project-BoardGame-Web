@@ -5,7 +5,7 @@ import Link from "next/link";
 
 function clickHam() {
   let event = document.getElementById("menu");
-  (event?.className === 'hidden absolute px-20 pb-5') ? event.className += ' menu-active' : event.className = 'hidden absolute px-20 pb-5';
+  (event?.className === 'hidden absolute px-20 pb-5') ? event.className += ' menu-active' : event!.className = 'hidden absolute px-20 pb-5';
 };
 
 function clickMenu() {
@@ -18,26 +18,25 @@ function Nav() {
     <nav>
       <div
         id="navbar-container"
-        className="w-full px-20
-      tablet:flex tablet:py-3
-      laptop:grid laptop:grid-cols-3 laptop:py-4
-      desktop:py-5
+        className="w-full h-14 px-20
+      tablet:flex
+      laptop:grid laptop:grid-cols-3
       justify-items items-center
       bg-[#292929] text-white font-semibold
       fixed
       top-0 left-0 z-10 "
       >
         {/* Left */}
-        <div className="place-content-start laptop:text-base tablet:hidden desktop:text-3xl laptop:flex">
+        <div className="place-content-start laptop:text-base tablet:hidden desktop:text-lg laptop:flex">
           LOGO
         </div>
 
         {/* Center Laptop and Desktop */}
         <ul
           className="flex items-center justify-center
-        tablet:space-x-3 teblet:text-base tablet:hidden
+        teblet:text-base tablet:hidden
         laptop:space-x-6 laptop:text-base laptop:flex
-        desktop:space-x-12 desktop:text-3xl"
+        desktop:space-x-9 desktop:text-lg"
         >
           <li className="hover:text-[--primary-color] hover:scale-110 transition hover:delay-50">
             <Link href="/">Home</Link>
@@ -59,7 +58,7 @@ function Nav() {
             className="rounded bg-[--primary-color]
             tablet:px-2 tablet:text-base
             laptop:px-4 laptop:text-base
-            desktop:px-6 desktop:py-1 desktop:text-3xl
+            desktop:px-6 desktop:text-lg
             transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
             type="button"
           >

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import image from "../assets/homeSegtion2.png"
+import image from "../assets/homeSegtion2.png";
 
 export default function Home() {
   return (
@@ -31,19 +31,22 @@ export default function Home() {
                 Resvere board game easily via the website
               </h1>
               <p className="tablet:text-lg laptop:text-xl desktop:text-2xl pb-5">
-                Online board game booking service website, easy, does not take long, and can be booked from anywhere. You can also check the status of the board games available in the shop, and order food to eat and play.
+                Online board game booking service website, easy, does not take
+                long, and can be booked from anywhere. You can also check the
+                status of the board games available in the shop, and order food
+                to eat and play.
               </p>
-              <button className="rounded bg-[--primary-color] tablet:px-2 laptop:px-4 desktop:px-6 laptop:py-4 tablet:text-xl laptop:text-3xl desktop:text-4xl transition hover:scale-110 ml-10 text-black">
-                <Link href="/booking">จองโต๊ะเลย!</Link>
+              <button className="rounded bg-[--primary-color]
+              laptop:px-4 laptop:py-4 laptop:text-2xl
+              desktop:px-6 desktop:text-4xl
+              transition hover:scale-110
+              text-black font-black">
+                <Link href="/booking">Booking now!</Link>
               </button>
             </div>
 
             <div className="grid justify-center items-center">
-              <Image
-                className="h-auto w-96"
-                src={image}
-                alt="Board Game"
-              />
+              <Image className="h-auto w-96" src={image} alt="Board Game" />
             </div>
           </div>
 
@@ -51,11 +54,7 @@ export default function Home() {
           <div>
             <div className="tablet:grid tablet:grid-rows-2 laptop:hidden px-20 gap-10">
               <div className="grid place-items-end">
-                <Image
-                  className="h-full w-96"
-                  src={image}
-                  alt="Board Game"
-                />
+                <Image className="h-full w-96" src={image} alt="Board Game" />
               </div>
 
               <div>
@@ -63,18 +62,19 @@ export default function Home() {
                   Resvere board game easily via the website
                 </h1>
                 <p className="tablet:text-sm laptop:text-xl desktop:text-2xl pb-5">
-                  Online board game booking service website, easy, does not take long, and can be booked from anywhere. You can also check the status of the board games available in the shop, and order food to eat and play.
+                  Online board game booking service website, easy, does not take
+                  long, and can be booked from anywhere. You can also check the
+                  status of the board games available in the shop, and order
+                  food to eat and play.
                 </p>
                 <div className="flex justify-center">
                   <button
                     className="rounded bg-[--primary-color]
-                  tablet:px-2 tablet:text-xl
-                  laptop:px-4 laptop:py-4 laptop:text-3xl
-                  desktop:px-6 desktop:text-4xl
+                  tablet:px-3 tablet:text-xl tablet:py-3
                   transition hover:scale-110
-                  text-black"
+                  text-black font-black"
                   >
-                    <Link href="/booking">จองโต๊ะเลย!</Link>
+                    <Link href="/booking">Booking now!</Link>
                   </button>
                 </div>
               </div>
