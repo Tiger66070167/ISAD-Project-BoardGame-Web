@@ -13,7 +13,6 @@ export default class insert implements state {
 
     async query(info: database<any>) {
         let conn: mysql.Connection = await dbConnector.getConnection();
-        conn.connect();
         try {
     
             let stringQuery: string = "INSERT INTO ";

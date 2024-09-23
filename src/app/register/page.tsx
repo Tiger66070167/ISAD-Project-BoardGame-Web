@@ -1,7 +1,17 @@
-import React from "react";
+'use client'
+
+import React, {useState} from "react";
 import Link from "next/link";
+import { createUserAction } from "../../../utils/core/users/serverActionUser";
 
 function registerPage() {
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  function checkCreateUser() {
+    
+  }
+
   return (
     <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
 
@@ -11,13 +21,16 @@ function registerPage() {
 
           {/* Head */}
           <div>
-            <h1 className="laptop:text-3xl desktop:text-4xl laptop:py-5 desktop:py-12 font-black text-[--primary-color] flex justify-center items-center">
+            <h1 className="laptop:text-3xl desktop:text-4xl laptop:my-5 desktop:my-12 font-black text-[--primary-color] flex justify-center items-center">
               Register
             </h1>
           </div>
+          
+          {/* if error in login */}
+          {error && <p className="flex justify-center items-center py-5 bg-[--incorrect-color] mx-8 rounded-sm">{error}</p>}
 
           {/* Input Form */}
-          <form className="w-full px-10">
+          <form className="w-full px-10 laptop:my-5 desktop:my-12">
             <div className="pb-5">
               <label className="laptop:text-xl desktop:text-2xl font-semibold">
                 Username

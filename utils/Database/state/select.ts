@@ -13,7 +13,6 @@ export default class select<T extends board_game | booking | food_menu | food_or
 
     async query(info: database<any>){
         let conn: mysql.Connection = await dbConnector.getConnection();
-        conn.connect();
         try {
 
             let stringQuery: string = "SELECT ";

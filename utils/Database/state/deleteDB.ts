@@ -9,7 +9,6 @@ export default class deleteDB implements state {
 
     async query(info: database<any>) {
         let conn: mysql.Connection = await dbConnector.getConnection();
-        conn.connect();
         try {
 
             let stringQuery: string = "DELETE FROM ";
