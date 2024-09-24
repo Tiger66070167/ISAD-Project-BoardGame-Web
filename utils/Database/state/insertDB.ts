@@ -2,7 +2,6 @@ import database from "../database";
 import dbConnector from "../dbConnector";
 import state from "./state";
 import mysql from "mysql2/promise"
-import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table";
 
 export default class insert implements state {
     private column: Array<string | number>;
@@ -32,8 +31,9 @@ export default class insert implements state {
                 stringQuery += `"${this.column[this.column.length-1]}");`;
             } 
             
-            conn.execute(stringQuery);
+            await conn.execute(stringQuery);
             conn.end();
+            console.log(stringQuery);
         } catch (error) {
             conn.end();
             throw error;

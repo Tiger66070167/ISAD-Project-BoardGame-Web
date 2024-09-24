@@ -18,7 +18,7 @@ export default class user {
         try {
             await new database<users>(new insert('default', username, 'customer', email, passwordHash, this.formatDate(new Date()))).table("users").query();
         } catch (error) {
-            console.log("Cannot create user, bug at user.ts");
+            console.log("Cannot create user, bug at user.ts"); //TODO: maybe delete this
             return false;
         }
         return true;
@@ -30,7 +30,7 @@ export default class user {
     
             return await bcrypt.compare(password, result[0].password)
         } catch (error) {
-            console.log(`Can't find ${email} in our database`);
+            console.log(`Can't find ${email} in our database`); //TODO: maybe delete this
             return false;
         }
     }

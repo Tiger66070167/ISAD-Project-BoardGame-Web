@@ -37,7 +37,7 @@ export default class deleteDB implements state {
 
             stringQuery += `;`;
 
-            conn.execute(stringQuery);
+            await conn.execute(stringQuery);
             conn.end();
 
         } catch (error) {

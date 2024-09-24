@@ -56,7 +56,7 @@ export default class update implements state{
             }
             stringQuery += `;`;
 
-            conn.execute(stringQuery);
+            await conn.execute(stringQuery);
             conn.end();
 
             return true;
