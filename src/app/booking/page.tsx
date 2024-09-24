@@ -1,11 +1,13 @@
-import React from 'react'
+"use client";
 
-function bookingPage() {
-  return (
-    <div className='min-h-screen min-w-screen bg-[--neutrals-color]'>
-      
-    </div>
-  )
+import React from "react";
+
+export default class bookingPage extends React.Component {
+  render() {
+    return (
+      <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
+        
+      </div>
+    );
+  }
 }
-
-export default bookingPage

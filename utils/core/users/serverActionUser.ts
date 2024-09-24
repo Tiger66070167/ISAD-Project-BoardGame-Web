@@ -1,3 +1,5 @@
+"use server"
+
 import user from "./user"
 
 export async function checkLoginAction(email: string, password: string) {
