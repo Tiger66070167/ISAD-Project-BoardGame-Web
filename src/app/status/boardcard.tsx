@@ -11,7 +11,7 @@ export default class boardcard extends React.Component {
           <div className=" flex-none w-64 mx-auto mt-4 mb-3">
             <div className="bg-[url('../assets/boardgame.jpeg')] object-scale-down h-48 w-79 rounded-2xl overflow-hidden shadow-md"></div>
           </div>
-          {/* set name and descrip of Menu */}
+          {/* set name and descrip of game */}
           <div className="flex flex-col items-center">
             <div className="text-2xl font-bold text-white">Name</div>
           </div>

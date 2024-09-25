@@ -3,11 +3,17 @@
 import React from "react";
 import Boardcard from "../status/boardcard";
 
-export default class statusPage extends React.Component {
+export default class statusAdminPage extends React.Component {
   render() {
     return (
       <div className="laptop:aspect-[16/8.4] bg-[--neutrals-color]">
-        <div className="grid grid-cols-2 pt-32">
+        <div className="grid grid-cols-2 pt-20 px-16">
+            <div></div>
+            <div className="flex flex-col items-end">
+                <button type="button"><span className="add"></span></button>
+            </div>
+        </div>
+        <div className="grid grid-cols-2 pt-8">
           <div className="pl-48 flex">
             <h1 className="text-4xl text-[#5865F2] font-bold ">
               รายการบอร์ดเกม
@@ -34,7 +40,6 @@ export default class statusPage extends React.Component {
             ))}
           </div>
         </div>
-        
       </div>
     );
   }
