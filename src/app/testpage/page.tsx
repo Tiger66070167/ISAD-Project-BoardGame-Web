@@ -5,7 +5,7 @@ export default class descriptgame extends React.Component {
     render() {
         return (
             <div className="laptop:aspect-[16/8.4] bg-[--neutrals-color]">
-                <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center tablet:pt-16 laptop:pt-20 desktop:pt-28 laptop:pb-12 desktop:pb-22">
                     <div className="shadow-md rounded-lg bg-[#303030] flex flex-col pt-6 w-96 desktop:w-[500px] h-auto pb-20">
                         <div className="grid grid-cols-2">
                             <div></div>

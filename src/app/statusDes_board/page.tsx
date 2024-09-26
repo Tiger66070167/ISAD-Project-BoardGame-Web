@@ -1,17 +1,28 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 
 export default class descriptgame extends React.Component {
     render() {
+        function clickMenu() {
+            let event = document.getElementById("menu");
+            event?.className === "hidden absolute px-20 pb-5 menu-active"
+              ? (event.className = "hidden absolute px-20 pb-5")
+              : 0;
+          }
         return (
             <div className="laptop:aspect-[16/8.4] bg-[--neutrals-color]">
-                <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center tablet:pt-16 laptop:pt-20 desktop:pt-28 laptop:pb-12 desktop:pb-22">
                     <div className="shadow-md rounded-lg bg-[#303030] flex flex-col pt-6 w-96 desktop:w-[500px] h-auto pb-20">
                         <div className="grid grid-cols-2">
                             <div></div>
                             <div className="flex flex-col items-end">
                                 <div className="flex flex-col items-end mr-8">
-                                    <button type="button"><span className="close"></span></button>
+                                    <button type="button">
+                                        <Link href="/status" onClick={clickMenu}>
+                                            <span className="close"></span>
+                                        </Link>
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import Descriptgame from "../status/descriptgame";
 import Boardcard from "../status/boardcard";
+import {Popover,PopoverContent,PopoverTrigger} from "../status/popover"
 
 export default class statusPage extends React.Component {
   render() {
@@ -28,13 +30,13 @@ export default class statusPage extends React.Component {
           </div>
         </div>
         <div className="min-h-screen min-w-screen bg-[--neutrals-color] px-16 py-16">
-          <div className="grid grid-cols-3 gap-6 h-full bg-[#171717]">
+          <div className="grid grid-cols-3 gap-6 bg-[#171717]">
             {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
               <Boardcard></Boardcard>
             ))}
           </div>
         </div>
-        
+
       </div>
     );
   }
