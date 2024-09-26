@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Descriptgame from "../status/descriptgame";
-import {Popover,PopoverContent,PopoverTrigger} from "../status/popover"
+import Descriptgame from "./descriptgame";
+import {Popover,PopoverContent,PopoverTrigger} from "./popover"
 
 export default class boardcard extends React.Component {
   render() {

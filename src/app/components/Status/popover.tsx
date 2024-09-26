@@ -17,7 +17,7 @@ const PopoverContent = React.forwardRef<
     <PopoverPrimitive.Content
       ref={ref}
       className={cn(
-        <div className="shadow-md rounded-lg bg-[#303030] pt-6 w-96 desktop:w-[500px] h-auto pb-20 "><span className="center"></span></div>
+        <div className="shadow-md rounded-lg bg-[#303030] pt-6 w-96 desktop:w-[500px] h-auto pb-20"><span className="center"></span></div>
       )}
       {...props}
     />

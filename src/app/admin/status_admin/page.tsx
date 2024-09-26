@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Boardcard from "../status/boardcard";
+import Boardcard from "../../components/Status/boardcard";
 
 export default class statusAdminPage extends React.Component {
   render() {

@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import style from "./food.module.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import FoodCard from "../components/foodCard";
+import FoodCard from "../components/Food/foodCard";
 
 export default class foodPage extends React.Component {
   render() {
