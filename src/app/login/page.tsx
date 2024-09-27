@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { checkLoginAction } from "../../../utils/core/users/serverActionUser";
+import { checkLoginAction } from "../../../utils/core/Account/serverActionUser";
 
 
 class loginPage extends React.Component {

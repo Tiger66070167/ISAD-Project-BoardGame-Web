@@ -1,28 +1,23 @@
-import database, {sequence} from "../database";
+import {sequence} from "./state";
+import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table"
 import state from "./state";
-import mysql from "mysql2/promise";
-import dbConnector from "../dbConnector";
-import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table";
 
-export default class update implements state{
+export default class update<T extends board_game | booking | food_menu | food_order | food_type | table_data | users> extends state<T>{
     private difference: Array<{current: string; change: string | number;}>;
 
     constructor() {
+        super();
         this.difference = new Array<{current: string; change: string | number;}>;
     }
 
-    public change(current: string, change: string | number): update {
+    public change(current: string, change: string | number): update<T> {
         this.difference.push({current, change});
         return this;
     }
 
-    async query(info: database<any>) {
-        let conn: mysql.Connection = await dbConnector.getConnection();
-        conn.connect();
-        try {
-    
-            let stringQuery: string = "UPDATE ";
-            stringQuery += `${info.getTable()} `;
+    makeQuery(stringQuery: string): string {
+            stringQuery = "UPDATE ";
+            stringQuery += `${this.getTable()} `;
     
             stringQuery += "SET ";
             for (let i = 0; i < this.difference.length-1; i++) {
@@ -38,7 +33,7 @@ export default class update implements state{
                 stringQuery += `${this.difference[this.difference.length-1].current} = ${this.difference[this.difference.length-1].change} `                   
             }
 
-            let arrayWhere: Array<sequence> = info.getWhere();
+            let arrayWhere: Array<sequence> = this.getWhere();
             if (arrayWhere.length > 0) {
                 stringQuery += "WHERE "
                 for (let i = 0; i < arrayWhere.length - 1; i++) {
@@ -52,18 +47,10 @@ export default class update implements state{
                     stringQuery += `${arrayWhere[arrayWhere.length-1].column} ${arrayWhere[arrayWhere.length-1].compare} "${arrayWhere[arrayWhere.length-1].check}" `;
                 } else if (typeof arrayWhere[arrayWhere.length-1].check === 'number') {
                     stringQuery += `${arrayWhere[arrayWhere.length-1].column} ${arrayWhere[arrayWhere.length-1].compare} ${arrayWhere[arrayWhere.length-1].check} `; 
-                }
+                }   
             }
             stringQuery += `;`;
 
-            await conn.execute(stringQuery);
-            conn.end();
-
-            return true;
-
-        } catch (error) {
-            conn.end();
-            throw error;
-        }
+            return stringQuery;
     }
 }

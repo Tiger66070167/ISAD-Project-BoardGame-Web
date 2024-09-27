@@ -1,29 +1,26 @@
-import database, {sequence} from "../database";
-import dbConnector from "../dbConnector";
+import {sequence} from "./state";
 import state from "./state";
-import mysql from "mysql2/promise"
 import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table";
 
-export default class select<T extends board_game | booking | food_menu | food_order | food_type | table_data | users | string> implements state {
+
+export default class select<T extends board_game | booking | food_menu | food_order | food_type | table_data | users | string> extends state<T> {
     private column: Array<string>;
 
     constructor(...column: T[]) {
+        super()
         this.column = column;
     }
 
-    async query(info: database<any>){
-        let conn: mysql.Connection = await dbConnector.getConnection();
-        try {
-
-            let stringQuery: string = "SELECT ";
+    makeQuery(stringQuery: string): string{
+            stringQuery += " SELECT ";
             for (let i = 0; i < this.column.length - 1; i++) {
                 stringQuery += `${this.column[i]}, `;
             }
             stringQuery += `${this.column[this.column.length - 1]} `;
 
-            stringQuery += `FROM ${info.getTable()} `;
+            stringQuery += `FROM ${this.getTable()} `;
 
-            let arrayWhere: Array<sequence> = info.getWhere();
+            let arrayWhere: Array<sequence> = this.getWhere();
             if (arrayWhere.length > 0) {
                 stringQuery += "WHERE ";
                 for (let i = 0; i < arrayWhere.length - 1; i++) {
@@ -45,15 +42,7 @@ export default class select<T extends board_game | booking | food_menu | food_or
             }
 
             stringQuery += `;`;
-
-            let result = await conn.execute(stringQuery);
-            conn.end();
             
-            return result[0];
-
-        } catch (error) {
-            conn.end();
-            throw error;
-        }
+            return stringQuery;
     }
 }

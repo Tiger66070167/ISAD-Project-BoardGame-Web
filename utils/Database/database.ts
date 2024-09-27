@@ -1,45 +1,35 @@
-import compare from "./enumCompare";
+import dbConnector from "./dbConnector";
+import select from "./state/select";
 import state from "./state/state";
-import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "./table"
-import { table } from "console";
 
-type table = 'board_game' | 'booking' | 'food_menu' | 'food_order' | 'food_type' | 'table_data' | 'users'
-export type sequence = {
-    column: string,
-    compare: compare,
-    check: string | number;
-}
+export default class database{
+    private state: Array<state<any>>;
 
-export default class database<T extends board_game | booking | food_menu | food_order | food_type | table_data | users>{
-    private queryTable: table | null;
-    private state: state;
-    private allSequence: Array<sequence>;
-
-    constructor(state: state) {
+    constructor(...state: Array<state<any>>) {
         this.state = state;
-        this.queryTable = null;
-        this.allSequence = new Array<sequence>;
     }
 
-    public table(table: table): database<T> {
-        this.queryTable = table;
-        return this;
-    }
+    public async query(): Promise<any> {
+        // make SQL command
+        let stringQuery: string = '';
+        let isSelect: boolean = false;
+        for (let i = 0; i < this.state.length; i++) {
+            if (this.state[i] instanceof select) isSelect = true;
+            stringQuery += this.state[i].makeQuery(stringQuery) + " ";
+        }
 
-    public where(column: T, compare: compare, check: string | number): database<T> {
-        this.allSequence.push({column, compare, check});
-        return this;
-    }
+        // make connection
+        try {
+            const conn = await dbConnector.getConnection();
+            if (isSelect) {
+                let output = await conn.execute(stringQuery);
+                return output[0];
+            } else {
+                await conn.execute(stringQuery);
+            }
+        } catch (error) {
+            throw error;
+        }
 
-    public async query() {
-        return await this.state.query(this);
-    }
-
-    public getTable(): table | null {
-        return this.queryTable;
-    }
-
-    public getWhere(): Array<sequence> {
-        return this.allSequence;
     }
 }

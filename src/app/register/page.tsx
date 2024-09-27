@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { createUserAction } from "../../../utils/core/users/serverActionUser";
+import { createUserAction } from "../../../utils/core/Account/serverActionUser";
 
 class registerPage extends React.Component {
   state = {
@@ -74,7 +74,7 @@ class registerPage extends React.Component {
               </h1>
             </div>
 
-            {/* if error in login {/* 
+            {/* if error in login */} 
             {this.state.error && <p className="flex justify-center items-center py-5 bg-[--incorrect-color] mx-8 rounded-sm">{this.state.error}</p>}
             {this.state.success && <p className="flex justify-center items-center py-5 bg-[--passed-color] mx-8 rounded-sm">Your reddit account has been successfully created</p>}
 
