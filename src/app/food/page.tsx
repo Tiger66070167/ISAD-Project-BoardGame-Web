@@ -5,53 +5,56 @@ import { Button } from "@/components/ui/button";
 import style from "./food.module.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FoodCard from "../components/Food/foodCard";
+import CartButton from "../components/Food/cartButton";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default class foodPage extends React.Component {
   render() {
     return (
       // content location
       <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-6">
-        {/* <div className="flex justify-center items-center laptop:pt-20 desktop:pt-28 laptop:px 96 desktop:px-[32rem] h-full laptop:pb-12 desktop:pb-22 mx-32">
-          <div className="shadow-md rounded-lg bg-[#303030] flex flex-col w-full h-full pt-8"></div>
-          
-        </div> */}
-        {/* inline content input box and list-item      min-w-[200px] max-w-[1400px]  */}
         <Tabs
           defaultValue="all"
           className="mx-auto py-16 min-w-[200px] max-w-[1400px]"
         >
-          {" "}
-          {/*h-1 for set height*/}
-          {/* <div className="w-1 h-28"></div> */}
-          {/* create column */}
           <div className="flex justify-center">
-            <TabsList className="grid min-w-[1000px] max-w-full lg:grid-cols-5 md:grid-cols-2 grid-cols-1 bg-[#292929] text-white mt-2 relative">
-              <TabsTrigger value="all">All Menu</TabsTrigger>
-              <TabsTrigger value="fastFood">Fast food</TabsTrigger>
-              <TabsTrigger value="singleFood">Dish</TabsTrigger>
-              <TabsTrigger value="dessert">Snack</TabsTrigger>
-              <TabsTrigger value="drink">Drink</TabsTrigger>
-            </TabsList>
-            {/* create button */}
-            <Button
-              type="button"
-              className=" absolute right-20 mt-1.5 mr-0 text-white bg-[--primary-color] hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 delay-0"
-            >
-              {/* create Cart */}
-              <svg
-                className="w-6 h-7x me-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 18 21"
-              >
-                <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-              </svg>
-              {/* create circle and number of items */}
-              <span className="inline-flex items-center justify-center w-8 h-8 ms-2 text-xl font-semibold text-blue-800 bg-blue-200 rounded-full">
-                50
-              </span>
-            </Button>
+            {/* Button on PC */}
+            <Select>
+              <SelectTrigger className=" justify-centerw-[180px] sm:block lg:hidden block">
+                <SelectValue placeholder="Categories" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup className="bg-[#292929] text-white bg-opacity-60">
+                  <SelectItem value="all">All</SelectItem>
+                  <SelectItem value="fastFood">Fast food</SelectItem>
+                  <SelectItem value="singlefood">Dish</SelectItem>
+                  <SelectItem value="dessert">Snack</SelectItem>
+                  <SelectItem value="drink">Drink</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <div className="justify-center lg:block hidden">
+              <TabsList className="grid min-w-[1000px] max-w-full lg:grid-cols-5 md:grid-cols-2 grid-cols-1 bg-[#292929] text-white mt-2 relative">
+                <TabsTrigger value="all">All Menu</TabsTrigger>
+                <TabsTrigger value="fastFood">Fast food</TabsTrigger>
+                <TabsTrigger value="singleFood">Dish</TabsTrigger>
+                <TabsTrigger value="dessert">Snack</TabsTrigger>
+                <TabsTrigger value="drink">Drink</TabsTrigger>
+              </TabsList>
+              {/* Select Drop Down for Mobile and Mini Screen */}
+              </div>
+              {/* create button */}
+              <div className="lg:block hidden">
+              <CartButton></CartButton>
+              </div>
           </div>
           <TabsContent value="all">
             <div className={style["grid-layout-box"]}>
