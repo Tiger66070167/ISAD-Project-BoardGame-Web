@@ -29,11 +29,11 @@ export default abstract class state<T extends board_game | booking | food_menu |
 
     abstract makeQuery(stringQuery: string): string;
 
-    public getTable(): table | null {
+    protected getTable(): table | null {
         return this.queryTable;
     }
 
-    public getWhere(): Array<sequence> {
+    protected getWhere(): Array<sequence> {
         return this.allSequence;
     }
 }

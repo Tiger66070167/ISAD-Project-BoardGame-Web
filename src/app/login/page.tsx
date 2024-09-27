@@ -3,6 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { checkLoginAction } from "../../../utils/core/Account/serverActionUser";
+import { redirect } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 
 class loginPage extends React.Component {
@@ -12,7 +14,7 @@ class loginPage extends React.Component {
   };
 
   constructor(prop: any) { super(prop); }
-
+  
   setError(value: boolean) {
     this.setState({error: value});
   }
@@ -22,17 +24,16 @@ class loginPage extends React.Component {
   }
 
   async compareLogin() {
+
     this.setError(false);
     this.setLoading(true);
 
     let user: any = document.querySelector('#email')!;
     let pass: any = document.querySelector("#password")!;
 
-    if (user.value && pass.value) {
-      this.setError(!await checkLoginAction(user.value, pass.value));
-      console.log("nigga");
-    } else {
-      this.setError(true);
+    if (!user.value && !pass.value) { this.setError(true); } 
+    else {
+      if (!await checkLoginAction(user.value, pass.value)) { this.setError(true) }
     }
     user.value = '';
     pass.value = '';

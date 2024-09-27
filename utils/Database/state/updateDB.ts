@@ -3,14 +3,14 @@ import {board_game, booking, food_menu, food_order, food_type, table_data, users
 import state from "./state";
 
 export default class update<T extends board_game | booking | food_menu | food_order | food_type | table_data | users> extends state<T>{
-    private difference: Array<{current: string; change: string | number;}>;
+    private difference: Array<{current: T; change: string | number;}>;
 
     constructor() {
         super();
-        this.difference = new Array<{current: string; change: string | number;}>;
+        this.difference = new Array<{current: T; change: string | number;}>;
     }
 
-    public change(current: string, change: string | number): update<T> {
+    public change(current: T, change: string | number): update<T> {
         this.difference.push({current, change});
         return this;
     }

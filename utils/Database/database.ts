@@ -18,6 +18,8 @@ export default class database{
             stringQuery += this.state[i].makeQuery(stringQuery) + " ";
         }
 
+        console.log(stringQuery); //TODO: delete this
+
         // make connection
         try {
             const conn = await dbConnector.getConnection();

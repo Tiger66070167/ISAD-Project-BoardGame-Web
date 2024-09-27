@@ -15,7 +15,7 @@ export default class insert<T extends board_game | booking | food_menu | food_or
 
         stringQuery += "VALUES (";
         for (let i = 0; i < this.column.length - 1; i++) {
-            if (typeof this.column[i] === "number" || this.column[i] === "default" || this.column[i] === "DEFAULT") {
+            if (typeof this.column[i] === "number" || this.column[i] === "default" || this.column[i] === "DEFAULT" || this.column[i] === 'null' || this.column[i] === 'NULL') {
                 stringQuery += `${this.column[i]}, `;
             } else if (typeof this.column[i] === "string") {
                 stringQuery += `"${this.column[i]}", `;
