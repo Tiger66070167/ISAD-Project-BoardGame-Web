@@ -28,7 +28,7 @@ export default class foodPage extends React.Component {
             {/* Button on PC */}
             <Select>
               <SelectTrigger className=" justify-center w-[300px] lg:hidden bg-[#292929] text-white bg-opacity-60 border-none hover:bg-[--primary-color]">
-                <SelectValue placeholder="Categories" />
+                <SelectValue placeholder="Categories"/>
               </SelectTrigger>
               <SelectContent className="bg-[#292929] text-white bg-opacity-60 border-none">
                 <SelectGroup >
@@ -41,7 +41,7 @@ export default class foodPage extends React.Component {
               </SelectContent>
             </Select>
             <div className="justify-center lg:block hidden">
-              <TabsList className="grid lg:min-w-[1000px] transition md:min-w-[600px] lg:grid-cols-5 md:grid-cols-5 grid-cols-1 bg-[#292929] text-white mt-2 relative">
+              <TabsList className="grid min-w-[1000px] transition md:min-w-[600px] lg:grid-cols-5 md:grid-cols-5 grid-cols-1 bg-[#292929] text-white mt-2 relative">
                 <TabsTrigger value="all">All Menu</TabsTrigger>
                 <TabsTrigger value="fastFood">Fast food</TabsTrigger>
                 <TabsTrigger value="singleFood">Dish</TabsTrigger>
@@ -114,7 +114,7 @@ export default class foodPage extends React.Component {
             </div>
             {/* </Card> */}
           </TabsContent>
-          <div className="md:hidden fixed bottom-0 left-0 z-30 w-full py-8 px-16 bg-neutral-800 backdrop-blur-xl bg-opacity-50">
+          <div className="lg:hidden fixed bottom-0 left-0 z-30 w-full py-8 px-16 bg-neutral-800 backdrop-blur-xl bg-opacity-50">
             <div className="flex bg-[--primary-color] min-w-screen h-[70px] rounded-2xl text-2xl text-black items-center justify-center cursor-pointer">
               Order
             </div>

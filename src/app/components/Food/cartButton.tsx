@@ -9,7 +9,7 @@ export default class cartButton extends React.Component {
         
       <Button
         type="button"
-        className=" absolute  right-20  mt-1.5 mr-0 text-white bg-[--primary-color] hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 delay-0"
+        className=" absolute  right-20  mt-1.5 mr-0 text-white bg-[--primary-color] hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color] transition"
       >
         {/* create Cart */}
         <svg
