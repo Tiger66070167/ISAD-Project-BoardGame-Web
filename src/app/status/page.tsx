@@ -1,9 +1,7 @@
 "use client";
 
 import React from "react";
-import Descriptgame from "../components/Status/descriptgame";
 import Boardcard from "../components/Status/boardcard";
-import {Popover,PopoverContent,PopoverTrigger} from "../components/Status/popover"
 
 export default class statusPage extends React.Component {
   render() {
