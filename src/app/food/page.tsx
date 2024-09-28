@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
 import style from "./food.module.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FoodCard from "../components/Food/foodCard";
@@ -28,11 +27,11 @@ export default class foodPage extends React.Component {
           <div className="flex justify-center">
             {/* Button on PC */}
             <Select>
-              <SelectTrigger className=" justify-centerw-[300px] lg:hidden bg-[#292929] text-white bg-opacity-60 border-none hover:bg-[--primary-color]">
+              <SelectTrigger className=" justify-center w-[300px] lg:hidden bg-[#292929] text-white bg-opacity-60 border-none hover:bg-[--primary-color]">
                 <SelectValue placeholder="Categories" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectGroup className="bg-[#292929] text-white bg-opacity-60 border-none">
+              <SelectContent className="bg-[#292929] text-white bg-opacity-60 border-none">
+                <SelectGroup >
                   <SelectItem value="all">All</SelectItem>
                   <SelectItem value="fastFood">Fast food</SelectItem>
                   <SelectItem value="singlefood">Dish</SelectItem>
