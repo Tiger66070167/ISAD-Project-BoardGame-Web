@@ -50,7 +50,7 @@ export default class Nav extends React.Component {
               <Link href="/booking">Booking</Link>
             </li>
             <li className="hover:text-[--primary-color] hover:scale-110 transition hover:delay-50">
-              <Link href="/status">Status</Link>
+              <Link href="/boardGame">Board Game</Link>
             </li>
             <li className="hover:text-[--primary-color] hover:scale-110 transition hover:delay-50">
               <Link href="/food">Food</Link>
@@ -75,12 +75,15 @@ export default class Nav extends React.Component {
           <div className="justify-self-end hidden">
             <button
               className="rounded bg-[--primary-color]
-            tablet:px-2 tablet:text-base
-            laptop:px-4 laptop:text-base
-            desktop:px-6 desktop:text-lg
+            tablet:px-1 tablet:text-base
+            laptop:px-3 laptop:text-base
+            desktop:px-4 desktop:text-lg
             transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
             >
-              User
+              <div className="flex gap-3">
+                <img src="" alt="Image" />
+                User
+              </div>
             </button>
           </div>
 
@@ -123,8 +126,8 @@ export default class Nav extends React.Component {
                   </Link>
                 </li>
                 <li className="hover:text-[--primary-color] transition hover:delay-50">
-                  <Link href="/status" onClick={clickMenu}>
-                    Status
+                  <Link href="/boardGame" onClick={clickMenu}>
+                    Board Game
                   </Link>
                 </li>
                 <li className="hover:text-[--primary-color] transition hover:delay-50">

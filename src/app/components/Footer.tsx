@@ -17,10 +17,7 @@ export default class Footer extends React.Component {
           <div className="laptop:text-2xl desktop:text-3xl font-bold text-[#5865F2]">
             LOGO
             <div className="laptop:text-base desktop:text-2xl font-normal text-[#ffffff]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
-              cum nobis! Maiores, dolores tempore consequuntur corporis est nemo
-              voluptas consequatur harum pariatur assumenda recusandae
-              cupiditate eligendi sit autem, numquam doloribus.
+              This is a website for booking board games and checking the status of board games.
             </div>
           </div>
 
@@ -31,7 +28,7 @@ export default class Footer extends React.Component {
               <Link href="/booking">Booking</Link>
             </div>
             <div className="laptop:text-base desktop:text-2xl  font-normal text-[#ffffff] hover:text-[#5865F2] transition hover:delay-50">
-              <Link href="/status">Status</Link>
+              <Link href="/boardGame">Board Game</Link>
             </div>
             <div className="laptop:text-base desktop:text-2xl  font-normal text-[#ffffff] hover:text-[#5865F2] transition hover:delay-50">
               <Link href="/food">Food</Link>
