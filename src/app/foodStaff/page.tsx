@@ -1,14 +1,25 @@
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
+import { Payment, columns } from "./columns"
+import { DataTable } from "./data-table"
 
-export default function App() {
+async function getData(): Promise<Payment[]> {
+  // Fetch data from your API here.
+    return [
+        {
+        id: "728ed52f",
+        amount: 100,
+        status: "pending",
+        email: "m@example.com",
+        },
+        // ...
+    ]
+}
+
+export default async function DemoPage() {
+    const data = await getData()
+
     return (
-        <Table aria-label="Example empty table">
-        <TableHeader>
-            <TableColumn>NAME</TableColumn>
-            <TableColumn>ROLE</TableColumn>
-            <TableColumn>STATUS</TableColumn>
-        </TableHeader>
-        <TableBody emptyContent={"No rows to display."}>{[]}</TableBody>
-        </Table>
-    );
+        <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-20">
+        <DataTable columns={columns} data={data} />
+        </div>
+    )
 }
