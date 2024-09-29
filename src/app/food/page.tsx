@@ -14,32 +14,54 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { SelectPortal } from "@radix-ui/react-select";
 
-export default class foodPage extends React.Component {
+interface FoodPageState {
+  selectedTab: string;
+}
+
+export default class foodPage extends React.Component<{}, FoodPageState> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      selectedTab: "all",
+    };
+  }
+
+  handleTabChange = (value: string) => {
+    this.setState({ selectedTab: value });
+  };
+
   render() {
     return (
       // content location
       <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-6">
         <Tabs
-          defaultValue="all"
-          className="mx-auto py-16 min-w-[200px] max-w-[1400px]"
+          value={this.state.selectedTab}
+          onValueChange={this.handleTabChange} // Add onValueChange to Tabs
+          className="mx-auto py-16 min-w-full max-w-[1400px]"
         >
-          <div className="flex justify-center">
-            {/* Button on PC */}
-            <Select>
-              <SelectTrigger className=" justify-center w-[300px] lg:hidden bg-[#292929] text-white bg-opacity-60 border-none hover:bg-[--primary-color]">
-                <SelectValue placeholder="Categories"/>
+          <Select
+            value={this.state.selectedTab}
+            onValueChange={this.handleTabChange}
+          >
+            {/* Bind value and onValueChange to Select */}
+            <div className="lg:hidden block px-4">
+              <SelectTrigger className="flex w-full lg:hidden bg-[#292929] text-white bg-opacity-60 border-none hover:bg-[--primary-color]">
+                <SelectValue placeholder="Categories" />
               </SelectTrigger>
-              <SelectContent className="bg-[#292929] text-white bg-opacity-60 border-none">
-                <SelectGroup >
-                  <SelectItem value="all">All</SelectItem>
-                  <SelectItem value="fastFood">Fast food</SelectItem>
-                  <SelectItem value="singlefood">Dish</SelectItem>
-                  <SelectItem value="dessert">Snack</SelectItem>
-                  <SelectItem value="drink">Drink</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            </div>
+            <SelectContent className="bg-[#292929] text-white bg-opacity-60 border-none">
+              <SelectGroup className="flex flex-col justify-center">
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="fastFood">FastFood</SelectItem>
+                <SelectItem value="singleFood">Dish</SelectItem>
+                <SelectItem value="dessert">Snack</SelectItem>
+                <SelectItem value="drink">Drink</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <div className="flex justify-center">
             <div className="justify-center lg:block hidden">
               <TabsList className="grid min-w-[1000px] transition md:min-w-[600px] lg:grid-cols-5 md:grid-cols-5 grid-cols-1 bg-[#292929] text-white mt-2 relative">
                 <TabsTrigger value="all">All Menu</TabsTrigger>
@@ -48,9 +70,7 @@ export default class foodPage extends React.Component {
                 <TabsTrigger value="dessert">Snack</TabsTrigger>
                 <TabsTrigger value="drink">Drink</TabsTrigger>
               </TabsList>
-              {/* Select Drop Down for Mobile and Mini Screen */}
             </div>
-            {/* create button */}
             <div className="lg:block hidden">
               <CartButton></CartButton>
             </div>
@@ -68,9 +88,8 @@ export default class foodPage extends React.Component {
           {/* content size */}
           <TabsContent value="fastFood">
             {/* <Card> */}
-            {/* bg-[#292929] */}
             <div className={style["grid-layout-box"]}>
-              {[0, 0, 0, 0, 0].map(() => (
+              {[0].map(() => (
                 <div className="flex justify-center items-center">
                   <FoodCard></FoodCard>
                 </div>
@@ -80,7 +99,6 @@ export default class foodPage extends React.Component {
           </TabsContent>
           <TabsContent value="singleFood">
             {/* <Card> */}
-            {/* bg-[#292929] */}
             <div className={style["grid-layout-box"]}>
               {[0, 0, 0, 0].map(() => (
                 <div className="flex justify-center items-center">
@@ -92,7 +110,6 @@ export default class foodPage extends React.Component {
           </TabsContent>
           <TabsContent value="dessert">
             {/* <Card> */}
-            {/* bg-[#292929] */}
             <div className={style["grid-layout-box"]}>
               {[0, 0, 0].map(() => (
                 <div className="flex justify-center items-center">
@@ -104,7 +121,6 @@ export default class foodPage extends React.Component {
           </TabsContent>
           <TabsContent value="drink">
             {/* <Card> */}
-            {/* bg-[#292929] */}
             <div className={style["grid-layout-box"]}>
               {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
                 <div className="flex justify-center items-center">
@@ -112,9 +128,8 @@ export default class foodPage extends React.Component {
                 </div>
               ))}
             </div>
-            {/* </Card> */}
           </TabsContent>
-          <div className="lg:hidden fixed bottom-0 left-0 z-30 w-full py-8 px-16 bg-neutral-800 backdrop-blur-xl bg-opacity-50">
+          <div className="md:hidden fixed bottom-0 left-0 z-30 w-full py-8 px-16 bg-neutral-800 backdrop-blur-xl bg-opacity-50">
             <div className="flex bg-[--primary-color] min-w-screen h-[70px] rounded-2xl text-2xl text-black items-center justify-center cursor-pointer">
               Order
             </div>

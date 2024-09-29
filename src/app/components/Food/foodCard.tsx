@@ -8,7 +8,7 @@ export default class foodCard extends React.Component {
         <div
           className="flex flex-col justify-center items-center bg-[#292929] hover:bg-[--neutral-color] hover:border-[--primary-color] border-transparent border-2 h-[400px] w-full rounded-2xl"
           onClick={() => {
-            alert("ฮั่นแน่ https://www.instagram.com/p/C_mNEalSbfS/");
+            //alert("ฮั่นแน่ https://www.instagram.com/p/C_mNEalSbfS/");
           }}
         >
           {/* inbox picture Set */}
