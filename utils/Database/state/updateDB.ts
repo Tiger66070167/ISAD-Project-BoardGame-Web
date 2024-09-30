@@ -1,5 +1,5 @@
 import {sequence} from "./state";
-import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table"
+import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../../typeStorage/tableDatabase"
 import state from "./state";
 
 export default class update<T extends board_game | booking | food_menu | food_order | food_type | table_data | users> extends state<T>{

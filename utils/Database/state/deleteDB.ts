@@ -1,6 +1,6 @@
 import { sequence } from "./state";
 import state from "./state";
-import { board_game, booking, food_menu, food_order, food_type, table_data, users } from "../table";
+import { board_game, booking, food_menu, food_order, food_type, table_data, users } from "../../typeStorage/tableDatabase";
 
 export default class deleteDB<T extends board_game | booking | food_menu | food_order | food_type | table_data | users> extends state<T> {
     constructor() { super() }
@@ -34,3 +34,6 @@ export default class deleteDB<T extends board_game | booking | food_menu | food_
         return stringQuery;
     }
 }
+
+let date = new Date("2024-09-23 22:31:37");
+console.log(date.getHours());

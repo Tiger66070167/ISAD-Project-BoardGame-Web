@@ -1,4 +1,4 @@
-import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table"
+import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../../typeStorage/tableDatabase"
 import compare from "../enumCompare";
 
 export type table = 'board_game' | 'booking' | 'food_menu' | 'food_order' | 'food_type' | 'table_data' | 'users'

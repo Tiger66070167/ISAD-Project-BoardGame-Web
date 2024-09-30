@@ -3,9 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { checkLoginAction } from "../../../utils/core/Account/serverActionUser";
-import { redirect } from "next/navigation";
-import { useRouter } from 'next/navigation';
-
 
 class loginPage extends React.Component {
   state = {

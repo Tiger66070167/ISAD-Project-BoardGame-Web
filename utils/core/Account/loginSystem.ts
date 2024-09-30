@@ -3,7 +3,7 @@ import database from "../../Database/database";
 import compare from "../../Database/enumCompare";
 import insert from "../../Database/state/insertDB";
 import select from "../../Database/state/select";
-import { users } from "../../Database/table";
+import { users } from "../../typeStorage/tableDatabase";
 import tokenManage from "./tokenManage";
 import { cookies } from 'next/headers'
 const bcrypt = require('bcrypt')

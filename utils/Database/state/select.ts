@@ -1,6 +1,6 @@
 import {sequence} from "./state";
 import state from "./state";
-import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../table";
+import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../../typeStorage/tableDatabase";
 
 
 export default class select<T extends board_game | booking | food_menu | food_order | food_type | table_data | users | string> extends state<T> {

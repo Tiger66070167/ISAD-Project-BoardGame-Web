@@ -1,7 +1,7 @@
 import database from "../../Database/database";
 import compare from "../../Database/enumCompare";
 import update from "../../Database/state/updateDB";
-import { users } from "../../Database/table";
+import { users } from "../../typeStorage/tableDatabase";
 
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
