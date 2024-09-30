@@ -11,6 +11,8 @@
   --neutrals-color: #171717;
   --passed-color: #5cb85c;
   --incorrect-color: #D9534F;
+  --hover-incorrect-color: #ff0800;
+  --hover-primary-color: #3c4bf1;
 }
 
 body {

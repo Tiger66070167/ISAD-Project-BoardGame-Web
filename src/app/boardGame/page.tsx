@@ -6,8 +6,8 @@ import Boardcard from "../components/BoardGame/boardcard";
 export default class statusPage extends React.Component {
   render() {
     return (
-      <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-6">
-        <div className="grid grid-cols-2 pt-16 justify-center items-center">
+      <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
+        <div className="grid grid-cols-2 pt-24 justify-center items-center">
           <div className="flex justify-center">
             <h1 className="text-4xl text-[#5865F2] font-black tablet:text-2xl laptop:text-3xl desktop:text-4xl">
               Board game list

@@ -80,10 +80,12 @@ export default class Nav extends React.Component {
             desktop:px-4 desktop:text-lg
             transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
             >
-              <div className="flex gap-3">
-                <img src="" alt="Image" />
-                User
-              </div>
+              <Link href="/profile">
+                <div className="flex gap-3">
+                  <img src="" alt="Image" />
+                  User
+                </div>
+              </Link>
             </button>
           </div>
 

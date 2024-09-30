@@ -52,7 +52,7 @@ class loginPage extends React.Component {
 
             {/* Head */}
             <div>
-              <h1 className="laptop:text-3xl desktop:text-4xl laptop:my-5 desktop:my-12 font-black text-[--primary-color] flex justify-center items-center">
+              <h1 className="tablet:text-2xl laptop:text-3xl desktop:text-4xl laptop:my-5 desktop:my-12 font-black text-[--primary-color] flex justify-center items-center">
                 Login
               </h1>
             </div>
