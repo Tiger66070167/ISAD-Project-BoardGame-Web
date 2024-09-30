@@ -14,7 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SelectPortal } from "@radix-ui/react-select";
 
 interface FoodPageState {
   selectedTab: string;

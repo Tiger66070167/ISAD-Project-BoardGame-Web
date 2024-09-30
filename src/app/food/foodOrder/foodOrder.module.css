@@ -1,0 +1,8 @@
+.grid-layout-box {
+    @apply grid
+    xl:grid-rows-4 xl:px-20
+    md:grid-rows-3
+    sm:grid-rows-2
+    px-0 gap-2
+    h-full w-full bg-[#171717];
+}
