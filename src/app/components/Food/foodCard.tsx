@@ -2,8 +2,14 @@
 import { button } from "@nextui-org/theme";
 import Link from "next/link";
 import React from "react";
+import { foodMenu } from "../../../../utils/typeStorage/foodType";
+import foodFetcher from "../../../../utils/core/Food/foodFetcher";
 
-export default class foodCard extends React.Component {
+export default class foodCard extends React.Component<{name?: string, price?: number, description?: string}> {
+  constructor(props: {name?: string, price?: number, description?: string}) {
+    super(props);
+  }
+
   render() {
     return (
       <button>
@@ -21,11 +27,11 @@ export default class foodCard extends React.Component {
             {/* set name and descrip of Menu */}
             <div className="grid grid-rows-3 text-justify">
               {/* <div className=""> */}
-              <div className="text-xl  font-bold text-white ">Name</div>
+              <div className="text-xl  font-bold text-white ">{this.props.name}</div>
               {/* Add button*/}
 
-              <div className="text-xm text-white leading-10">Price</div>
-              <div className="text-xm text-white">Description</div>
+              <div className="text-xm text-white leading-10">{this.props.price}</div>
+              <div className="text-xm text-white">{this.props.description}</div>
             </div>
           </div>
         </div>

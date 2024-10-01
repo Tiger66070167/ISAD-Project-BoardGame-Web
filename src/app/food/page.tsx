@@ -14,9 +14,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { foodMenu } from "../../../utils/typeStorage/foodType";
+import foodFetcher from "../../../utils/core/Food/foodFetcher";
 
 interface FoodPageState {
-  selectedTab: string;
+  selectedTab: string,
+  allFood: Array<foodMenu>
 }
 
 export default class foodPage extends React.Component<{}, FoodPageState> {
@@ -24,8 +27,20 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
     super(props);
     this.state = {
       selectedTab: "all",
+      allFood: []
     };
   }
+
+  setAllFood(value: Array<foodMenu>) {
+    this.setState({allFood: value});
+  }
+
+  async componentDidMount() {
+      let food = new foodFetcher();
+      this.setAllFood(await food.getAllFood());
+      console.log(this.state.allFood);
+  }
+
 
   handleTabChange = (value: string) => {
     this.setState({ selectedTab: value });
@@ -77,9 +92,9 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
 
           <TabsContent value="all">
             <div className={style["grid-layout-box"]}>
-              {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
+              {this.state.allFood.map((value) => (
                 <div className="flex justify-center items-center">
-                  <FoodCard></FoodCard>
+                  <FoodCard name={value.name} price={20} description="anawat"></FoodCard>
                 </div>
               ))}
             </div>
@@ -99,9 +114,9 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
           <TabsContent value="singleFood">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {[0, 0, 0, 0].map(() => (
+              {this.state.allFood.filter((value) => value.type === 2).map((value) => (
                 <div className="flex justify-center items-center">
-                  <FoodCard></FoodCard>
+                  <FoodCard name={value.name}></FoodCard>
                 </div>
               ))}
             </div>
@@ -110,7 +125,7 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
           <TabsContent value="dessert">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {[0, 0, 0].map(() => (
+              {[0].map(() => (
                 <div className="flex justify-center items-center">
                   <FoodCard></FoodCard>
                 </div>
@@ -121,7 +136,7 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
           <TabsContent value="drink">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
+              {[0].map(() => (
                 <div className="flex justify-center items-center">
                   <FoodCard></FoodCard>
                 </div>

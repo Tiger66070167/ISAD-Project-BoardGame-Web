@@ -3,7 +3,7 @@ import fetcher from "../fetcher";
 
 export default class foodFetcher extends fetcher{
     public async getAllFood(): Promise<Array<foodMenu>> {
-        return this.getFetcher("http://localhost:3000/api/food/getFood");
+        return this.getFetcher("http://localhost:3000/api/food/getAllFood");
     }
 
     public async addFood(name: string, type: "Fast food" | "Dish" | "Snack" | "Drink") {
