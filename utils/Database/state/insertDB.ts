@@ -21,7 +21,7 @@ export default class insert<T extends board_game | booking | food_menu | food_or
                 stringQuery += `"${this.column[i]}", `;
             }
         }
-        if (typeof this.column[this.column.length - 1] === "number" || this.column[this.column.length - 1] === "default" || this.column[this.column.length - 1] === "DEFAULT") {
+        if (typeof this.column[this.column.length - 1] === "number" || this.column[this.column.length - 1] === "default" || this.column[this.column.length - 1] === "DEFAULT" || this.column[this.column.length - 1] === "null" || this.column[this.column.length - 1] === "NULL") {
             stringQuery += `${this.column[this.column.length - 1]});`;
         } else if (typeof this.column[this.column.length - 1] === "string") {
             stringQuery += `"${this.column[this.column.length - 1]}");`;

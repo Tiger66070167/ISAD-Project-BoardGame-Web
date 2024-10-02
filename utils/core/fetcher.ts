@@ -22,4 +22,16 @@ export default abstract class fetcher {
         const output = await res.json();
         console.log(output.message);
     }
+
+    protected async deleteFetcher(url: string, data: boardGame | foodMenu | foodOrder) {
+        const res = await fetch(url, {
+            method: "DELETE",
+            body: JSON.stringify(data)
+        });
+        if (!res.ok) {
+            throw new Error("Cannot fetch data");
+        }
+        const output = await res.json();
+        console.log(output.message);
+    }
 }

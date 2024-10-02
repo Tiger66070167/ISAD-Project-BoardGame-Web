@@ -6,7 +6,7 @@ export default class foodFetcher extends fetcher{
         return this.getFetcher("http://localhost:3000/api/food/getAllFood");
     }
 
-    public async addFood(name: string, type: "Fast food" | "Dish" | "Snack" | "Drink") {
+    public async addFood(name: string, type: "Fast food" | "Dish" | "Snack" | "Drink", description: string, price: number) {
         let type_num: number = 0;
         switch(type) {
             case"Fast food": type_num = 1; break;
@@ -15,7 +15,7 @@ export default class foodFetcher extends fetcher{
             case"Drink": type_num = 4; break;
         }
         try {
-            await this.postFetcher("http://localhost:3000/api/food/addFood", {name, type: type_num})
+            await this.postFetcher("http://localhost:3000/api/food/addFood", {name, type: type_num, description, price})
             return true;
         } catch (error) {
             return false;

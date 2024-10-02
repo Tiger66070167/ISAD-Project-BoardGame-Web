@@ -1,7 +1,10 @@
 export type foodMenu = {
     food_id?: number,
     name?: string,
-    type?: number
+    type?: number,
+    description?: string,
+    price?: number,
+    picture?: string
 }
 
 export type foodOrder = {
