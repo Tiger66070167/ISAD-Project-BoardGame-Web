@@ -7,8 +7,9 @@ export async function DELETE(req: Request) {
     let data: foodMenu = await req.json();
     try {
         await new database(new deleteDB().table('food_menu').where('food_id', compare.EQUAL, data.food_id!)).query();
-        return Response.json({message: "Deleted"}, {status: 204});
+        return Response.json({message: "Deleted"}, {status: 201});
     } catch (error) {
+        console.log(error);
         return Response.json({message: "Cannot delete this food"}, {status: 400});
     }
 }

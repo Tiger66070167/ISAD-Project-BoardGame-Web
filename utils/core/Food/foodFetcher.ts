@@ -30,4 +30,13 @@ export default class foodFetcher extends fetcher{
             return false;
         }
     }
+
+    public async deleteFood(food_id: number): Promise<boolean> {
+        try {
+            await this.deleteFetcher("http://localhost:3000/api/food/deleteFood", {food_id});
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
 }

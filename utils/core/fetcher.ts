@@ -5,7 +5,7 @@ export default abstract class fetcher {
     protected async getFetcher(url: string) {
         const res = await fetch(url);
         if (!res.ok) {
-            console.log("nigga");
+            throw new Error("Cannot fetch data"); 
         }
         const output = await res.json();
         return output;
