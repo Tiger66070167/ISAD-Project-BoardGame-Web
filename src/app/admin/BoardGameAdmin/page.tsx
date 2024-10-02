@@ -3,8 +3,32 @@
 import React from "react";
 import AdminCard from "../../components/BoardGame/adminCard";
 import Link from "next/link";
+import boardFetcher from "../../../../utils/core/Board_Game/boardFetcher";
+import { boardGame } from "../../../../utils/typeStorage/boardType";
 
-export default class boardGameAdminPage extends React.Component {
+interface BoardGamePageState {
+  allBoard: Array<boardGame>
+}
+
+export default class boardGameAdminPage extends React.Component<{}, BoardGamePageState> {
+
+  constructor(props: {}) {
+    super(props)
+  
+    this.state = {
+      allBoard: []
+    }
+  }
+
+  setAllBoardGame(value: Array<boardGame>) {
+    this.setState({allBoard: value});
+  }
+
+  async componentDidMount() {
+      let food = new boardFetcher();
+      this.setAllBoardGame(await food.getAllBoard());
+  }
+
   render() {
     return (
       <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
@@ -59,9 +83,9 @@ export default class boardGameAdminPage extends React.Component {
             h-full w-full
             bg-[#171717]"
           >
-            {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
+            {this.state.allBoard.map((value) => (
               <div className="flex justify-center items-center">
-                <AdminCard />
+                <AdminCard key={value.board_game_id} name={value.name} status={value.status}/>
               </div>
             ))}
           </div>

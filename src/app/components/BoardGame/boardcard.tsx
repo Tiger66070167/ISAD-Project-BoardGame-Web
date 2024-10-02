@@ -3,7 +3,12 @@
 import React from "react";
 import Image from "next/image";
 
-export default class boardcard extends React.Component {
+export default class boardCard extends React.Component<{name?: string, status?: boolean}> {
+
+  constructor(props: {name?: string, status?: boolean}) {
+    super(props)
+  }
+
   render() {
     return (
       <div className="w-[300px] shadow-2xl mt-2">
@@ -18,13 +23,13 @@ export default class boardcard extends React.Component {
               alt=""
             />
             <div className="text-xl font-bold text-white flex items-center justify-center pt-4">
-              Board game name
+              {this.props.name}
             </div>
           </div>
 
           {/* set name and descrip of Menu */}
           <div className="flex flex-col justify-start items-center">
-            <div className="text-2xl text-white">Status</div>
+            <div className={`text-2xl ${this.props.status ? 'text-[--passed-color]' : 'text-[--incorrect-color]'}`}>{this.props.status ? "Ready": "Busy"}</div>
           </div>
         </div>
       </div>

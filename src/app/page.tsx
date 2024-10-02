@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import image from "../assets/homeSegtion2.png";
+import logo from "../assets/Logo.png";
 import React from "react";
 
 export default class Home extends React.Component {
@@ -17,11 +18,9 @@ export default class Home extends React.Component {
           {/* Center Text */}
           <div
             id="home-text"
-            className="text-center place-content-center text-[--primary-color]"
+            className="flex flex-col justify-center items-center text-[--primary-color]"
           >
-            <h1 className="font-black tablet:text-2xl laptop:text-7xl desktop:text-8xl font-sans">
-              Board Game Cafe
-            </h1>
+            <Image src={logo} alt="Logo" width={500} height={500}/>
             <p className="font-medium tablet:text-base laptop:text-3xl desktop:text-4xl">
               Let's booking your board game from home
             </p>

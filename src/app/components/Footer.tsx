@@ -2,6 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import logo from "../../assets/Logo.png";
 
 export default class Footer extends React.Component {
   render() {
@@ -15,7 +17,7 @@ export default class Footer extends React.Component {
         >
           {/* Left */}
           <div className="laptop:text-2xl desktop:text-3xl font-bold text-[#5865F2]">
-            LOGO
+            <Image src={logo} alt="Logo" width={150} height={150} />
             <div className="laptop:text-base desktop:text-2xl font-normal text-[#ffffff]">
               This is a website for booking board games and checking the status of board games.
             </div>

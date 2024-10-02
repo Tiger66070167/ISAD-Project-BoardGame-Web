@@ -2,6 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import logo from "../../assets/Logo.png";
 
 export default class Nav extends React.Component {
   render() {
@@ -24,17 +26,13 @@ export default class Nav extends React.Component {
         <div
           id="navbar-container"
           className="w-full h-14 px-20
-      tablet:flex
-      laptop:grid laptop:grid-cols-3
-      justify-items items-center
+      flex justify-between items-center
       bg-[#292929] text-white font-semibold
       fixed
       top-0 left-0 z-10 "
         >
           {/* Left */}
-          <div className="place-content-start laptop:text-base tablet:hidden desktop:text-lg laptop:flex">
-            LOGO
-          </div>
+          <Image src={logo} alt="Logo" width={65} height={65} />
 
           {/* Center Laptop and Desktop */}
           <ul
@@ -92,15 +90,11 @@ export default class Nav extends React.Component {
           {/* Hamburger Menu */}
           <div
             id="ham-bar"
-            className="tablet:flex
+            className="flex
         laptop:hidden
-        tablet:justify-between
         justify-items items-center
         "
           >
-            <div className="place-content-start laptop:text-base desktop:text-3xl">
-              LOGO
-            </div>
             <div className="flex items-start">
               <ul id="menu" className="hidden absolute px-20 pb-5">
                 <div className="border-b pb-1 mb-2">
