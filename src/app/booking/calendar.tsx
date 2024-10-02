@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Calendar: React.FC = () => {
+export default function DateCard(){
   const today = new Date();
   const days: string[] = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
 
-  // สร้างอาเรย์ของวันที่
   const dateList = Array.from({ length: 7 }, (_, index) => {
     const date = new Date(today);
     date.setDate(today.getDate() + index);
@@ -14,9 +13,7 @@ const Calendar: React.FC = () => {
   return (
     <div className="flex flex-wrap justify-center p-4">
       {dateList.map((date, index) => {
-        // เช็คว่าการ์ดนี้เป็นวันนี้หรือไม่
         const isToday = date.toDateString() === today.toDateString();
-        
         return (
           <div
             key={index}
@@ -30,14 +27,4 @@ const Calendar: React.FC = () => {
       })}
     </div>
   );
-};
-
-const CenteredCalendar: React.FC = () => {
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-[--neutrals-color]">
-      <Calendar />
-    </div>
-  );
-};
-
-export default CenteredCalendar;
+}
