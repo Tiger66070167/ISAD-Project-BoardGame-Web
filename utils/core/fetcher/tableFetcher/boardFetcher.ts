@@ -1,4 +1,4 @@
-import { boardGame } from "../../typeStorage/boardType";
+import { boardGame } from "../../../typeStorage/boardType";
 import fetcher from "../fetcher";
 
 export default class boardFetcher extends fetcher {

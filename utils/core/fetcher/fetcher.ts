@@ -1,5 +1,5 @@
-import { boardGame } from "../typeStorage/boardType";
-import { foodMenu, foodOrder } from "../typeStorage/foodType";
+import { boardGame } from "../../typeStorage/boardType";
+import { foodMenu, foodOrder } from "../../typeStorage/foodType";
 
 export default abstract class fetcher {
     protected async getFetcher(url: string) {
@@ -31,6 +31,16 @@ export default abstract class fetcher {
         if (!res.ok) {
             throw new Error("Cannot fetch data");
         }
+        const output = await res.json();
+        console.log(output.message);
+    }
+
+    protected async putFetcher(url: string, data:boardGame | foodMenu | foodOrder) {
+        const res = await fetch(url, {
+            method: "PUT",
+            body: JSON.stringify(data)
+        });
+        if (!res.ok) { throw new Error("Cannot fetch data") }
         const output = await res.json();
         console.log(output.message);
     }

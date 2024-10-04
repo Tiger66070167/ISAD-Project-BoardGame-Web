@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { foodMenu } from "../../../utils/typeStorage/foodType";
-import foodFetcher from "../../../utils/core/Food/foodFetcher";
+import foodFetcher from "../../../utils/core/fetcher/tableFetcher/foodFetcher";
 
 interface FoodPageState {
   selectedTab: string,

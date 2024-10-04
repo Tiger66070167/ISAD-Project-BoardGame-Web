@@ -1,5 +1,5 @@
-import { foodMenu } from "../../typeStorage/foodType";
-import fetcher from "../fetcher";
+import { foodMenu } from "../../../typeStorage/foodType";
+import fetcher from "../../fetcher/fetcher";
 
 export default class foodFetcher extends fetcher{
     public async getAllFood(): Promise<Array<foodMenu>> {
@@ -34,6 +34,15 @@ export default class foodFetcher extends fetcher{
     public async deleteFood(food_id: number): Promise<boolean> {
         try {
             await this.deleteFetcher("http://localhost:3000/api/food/deleteFood", {food_id});
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    public async updateFood(food: foodMenu) {
+        try {
+            await this.putFetcher("http://localhost:3000/api/food/updateFood", food);
             return true;
         } catch (error) {
             return false;

@@ -1,3 +1,4 @@
+import select from "../../Database/state/select";
 import database from "../../Database/database";
 import compare from "../../Database/enumCompare";
 import update from "../../Database/state/updateDB";
@@ -24,5 +25,18 @@ export default class tokenManage {
         }
 
         return {access, refresh};
+    }
+
+    public static async checkRefreshToken(refresh: string): Promise<Boolean> {
+        try {
+            const refreshData = jwt.verify(refresh, process.env.REFRESH_TOKEN_SECRET);
+            const userToken = await new database(new select<users>('token').table('users').where('users_id', compare.EQUAL, refreshData.id)).query();
+            
+            if (refresh === userToken[0].token) { return true }
+            else { return false }
+        } catch (error) {
+            console.log("Bug at tokenManage.ts");
+            return false;
+        }
     }
 }

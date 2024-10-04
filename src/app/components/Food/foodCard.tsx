@@ -3,7 +3,7 @@ import { button } from "@nextui-org/theme";
 import Link from "next/link";
 import React from "react";
 import { foodMenu } from "../../../../utils/typeStorage/foodType";
-import foodFetcher from "../../../../utils/core/Food/foodFetcher";
+import foodFetcher from "../../../../utils/core/fetcher/tableFetcher/foodFetcher";
 
 export default class foodCard extends React.Component<{name?: string, price?: number, description?: string}> {
   constructor(props: {name?: string, price?: number, description?: string}) {

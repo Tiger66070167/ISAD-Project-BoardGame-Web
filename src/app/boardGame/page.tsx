@@ -2,7 +2,7 @@
 
 import React from "react";
 import Boardcard from "../components/BoardGame/boardcard";
-import boardFetcher from "../../../utils/core/Board_Game/boardFetcher";
+import boardFetcher from "../../../utils/core/fetcher/tableFetcher/boardFetcher";
 import { boardGame } from "../../../utils/typeStorage/boardType";
 
 interface BoardGamePageState {
