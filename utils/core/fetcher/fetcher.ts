@@ -11,10 +11,10 @@ export default abstract class fetcher {
         return output;
     }
 
-    protected async postFetcher(url:string, data: boardGame | foodMenu | foodOrder) {
+    protected async postFetcher(url:string, data: boardGame | foodMenu | foodOrder | FormData) {
         const res = await fetch(url, {
             method: "POST",
-            body: JSON.stringify(data)
+            body: (data instanceof FormData) ? data : JSON.stringify(data)
         });
         if (!res.ok) {
             throw new Error("Cannot fetch data");
@@ -23,10 +23,10 @@ export default abstract class fetcher {
         console.log(output.message);
     }
 
-    protected async deleteFetcher(url: string, data: boardGame | foodMenu | foodOrder) {
+    protected async deleteFetcher(url: string, data: boardGame | foodMenu | foodOrder | FormData) {
         const res = await fetch(url, {
             method: "DELETE",
-            body: JSON.stringify(data)
+            body: (data instanceof FormData) ? data : JSON.stringify(data)
         });
         if (!res.ok) {
             throw new Error("Cannot fetch data");
@@ -35,10 +35,10 @@ export default abstract class fetcher {
         console.log(output.message);
     }
 
-    protected async putFetcher(url: string, data:boardGame | foodMenu | foodOrder) {
+    protected async putFetcher(url: string, data:boardGame | foodMenu | foodOrder | FormData) {
         const res = await fetch(url, {
             method: "PUT",
-            body: JSON.stringify(data)
+            body: (data instanceof FormData) ? data : JSON.stringify(data)
         });
         if (!res.ok) { throw new Error("Cannot fetch data") }
         const output = await res.json();

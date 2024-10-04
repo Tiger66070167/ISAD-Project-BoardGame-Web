@@ -58,3 +58,4 @@ env
 
 # client user profile
 public/images/clientPFP/*
+public/images/menuPicture/*

@@ -1,5 +1,5 @@
 export type foodMenu = {
-    food_id?: number,
+    food_id: number,
     name?: string,
     type?: number,
     description?: string,
@@ -8,7 +8,7 @@ export type foodMenu = {
 }
 
 export type foodOrder = {
-    order_id?: number,
+    order_id: number,
     table_id?: number,
     food_id?: number,
     status?: string
