@@ -58,4 +58,7 @@ env
 
 # client user profile
 public/images/clientPFP/*
+!public/images/clientPFP/readme.md
+
 public/images/menuPicture/*
+!public/images/menuPicture/readme.md
