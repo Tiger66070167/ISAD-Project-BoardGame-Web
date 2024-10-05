@@ -1,9 +1,9 @@
 import { foodMenu } from "../../../typeStorage/foodType";
-import fetcher from "../../fetcher/fetcher";
+import fetcher from "../fetcher";
 
-export default class foodFetcher extends fetcher{
+export default class menuFetcher extends fetcher{
     public async getAllFood(): Promise<Array<foodMenu>> {
-        return this.getFetcher("http://localhost:3000/api/food/getAllFood");
+        return this.getFetcher("http://localhost:3000/api/food/menu/getAllFood");
     }
 
     public async addFood(name: string, type: "Fast food" | "Dish" | "Snack" | "Drink", description: string, price: number, picture: File) {
@@ -24,16 +24,7 @@ export default class foodFetcher extends fetcher{
         data.append("picture", picture);
 
         try {
-            await this.postFetcher("http://localhost:3000/api/food/addFood", data)
-            return true;
-        } catch (error) {
-            return false;
-        }
-    }
-
-    public async orderFood(table_id: number, food_id: number): Promise<boolean> {
-        try {
-            await this.postFetcher("http://localhost:3000/api/food/orderFood", {table_id, food_id});
+            await this.postFetcher("http://localhost:3000/api/food/menu/addFood", data)
             return true;
         } catch (error) {
             return false;
@@ -42,7 +33,7 @@ export default class foodFetcher extends fetcher{
 
     public async deleteFood(food_id: number): Promise<boolean> {
         try {
-            await this.deleteFetcher("http://localhost:3000/api/food/deleteFood", {food_id});
+            await this.deleteFetcher("http://localhost:3000/api/menu/food/deleteFood", {food_id});
             return true;
         } catch (error) {
             return false;
@@ -68,7 +59,7 @@ export default class foodFetcher extends fetcher{
         if(picture) data.append("picture", picture);
  
         try {
-            await this.putFetcher("http://localhost:3000/api/food/updateFood", data);
+            await this.putFetcher("http://localhost:3000/api/food/menu/updateFood", data);
             return true;
         } catch (error) {
             return false;

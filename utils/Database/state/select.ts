@@ -26,15 +26,15 @@ export default class select<T extends board_game | booking | food_menu | food_or
                 for (let i = 0; i < arrayWhere.length - 1; i++) {
                     if (typeof arrayWhere[i].check === "string") {
                         stringQuery += `${arrayWhere[i].column} ${arrayWhere[i].compare} "${arrayWhere[i].check}" AND`;
-                    } else if (typeof arrayWhere[i].check === "number") {
-                        stringQuery += `${arrayWhere[i].column} ${arrayWhere[i].compare} ${arrayWhere[i].check} AND`;
+                    } else if (typeof arrayWhere[i].check === "number" || typeof arrayWhere[i].check === "boolean") {
+                        stringQuery += `${arrayWhere[i].column} ${arrayWhere[i].compare} ${arrayWhere[i].check} AND `;
                     }
                 }
                 if (typeof arrayWhere[arrayWhere.length - 1].check === "string") {
                     stringQuery += `${arrayWhere[arrayWhere.length - 1].column} ${arrayWhere[arrayWhere.length - 1].compare
                         } "${arrayWhere[arrayWhere.length - 1].check}" `;
                 } else if (
-                    typeof arrayWhere[arrayWhere.length - 1].check === "number"
+                    typeof arrayWhere[arrayWhere.length - 1].check === "number" || typeof arrayWhere[arrayWhere.length - 1].check === "boolean"
                 ) {
                     stringQuery += `${arrayWhere[arrayWhere.length - 1].column} ${arrayWhere[arrayWhere.length - 1].compare
                         } ${arrayWhere[arrayWhere.length - 1].check} `;

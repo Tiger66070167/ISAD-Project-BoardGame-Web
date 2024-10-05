@@ -1,7 +1,7 @@
-import database from "../../../../../utils/Database/database";
-import compare from "../../../../../utils/Database/enumCompare";
-import deleteDB from "../../../../../utils/Database/state/deleteDB";
-import { foodMenu } from "../../../../../utils/typeStorage/foodType";
+import database from "../../../../../../utils/Database/database";
+import compare from "../../../../../../utils/Database/enumCompare";
+import deleteDB from "../../../../../../utils/Database/state/deleteDB";
+import { foodMenu } from "../../../../../../utils/typeStorage/foodType";
 
 export async function DELETE(req: Request) {
     let data: foodMenu = await req.json();

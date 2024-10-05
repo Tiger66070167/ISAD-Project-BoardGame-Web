@@ -1,7 +1,7 @@
-import pictureManager from "../../../../../utils/core/pictureManager/pictureManager";
-import database from "../../../../../utils/Database/database";
-import insert from "../../../../../utils/Database/state/insertDB";
-import { food_menu } from "../../../../../utils/typeStorage/tableDatabase";
+import pictureManager from "../../../../../../utils/core/pictureManager/pictureManager";
+import database from "../../../../../../utils/Database/database";
+import insert from "../../../../../../utils/Database/state/insertDB";
+import { food_menu } from "../../../../../../utils/typeStorage/tableDatabase";
 
  export async function POST(req: Request) {
     const data = await req.formData();

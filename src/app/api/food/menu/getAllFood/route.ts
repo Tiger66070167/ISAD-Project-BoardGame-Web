@@ -1,5 +1,5 @@
-import database from "../../../../../utils/Database/database";
-import select from "../../../../../utils/Database/state/select";
+import database from "../../../../../../utils/Database/database";
+import select from "../../../../../../utils/Database/state/select";
 
 export async function GET() {
     try {

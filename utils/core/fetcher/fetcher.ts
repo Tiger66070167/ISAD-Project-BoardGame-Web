@@ -35,7 +35,7 @@ export default abstract class fetcher {
         console.log(output.message);
     }
 
-    protected async putFetcher(url: string, data:boardGame | foodMenu | foodOrder | FormData) {
+    protected async putFetcher(url: string, data: boardGame | foodMenu | foodOrder | FormData) {
         const res = await fetch(url, {
             method: "PUT",
             body: (data instanceof FormData) ? data : JSON.stringify(data)
@@ -43,5 +43,15 @@ export default abstract class fetcher {
         if (!res.ok) { throw new Error("Cannot fetch data") }
         const output = await res.json();
         console.log(output.message);
+    }
+
+    protected async patchFetcher(url: string, data: boardGame | foodMenu | foodOrder | FormData) {
+        const res = await fetch(url, {
+            method: "PATCH",
+            body: (data instanceof FormData) ? data : JSON.stringify(data)
+        });
+        if (!res.ok) { throw new Error("Cannot fetch data") }
+        const output = await res.json();
+        console.log(output.message); 
     }
 }

@@ -1,9 +1,9 @@
-import pictureManager from "../../../../../utils/core/pictureManager/pictureManager";
-import database from "../../../../../utils/Database/database";
-import compare from "../../../../../utils/Database/enumCompare";
-import select from "../../../../../utils/Database/state/select";
-import update from "../../../../../utils/Database/state/updateDB";
-import { food_menu } from "../../../../../utils/typeStorage/tableDatabase";
+import pictureManager from "../../../../../../utils/core/pictureManager/pictureManager";
+import database from "../../../../../../utils/Database/database";
+import compare from "../../../../../../utils/Database/enumCompare";
+import select from "../../../../../../utils/Database/state/select";
+import update from "../../../../../../utils/Database/state/updateDB";
+import { food_menu } from "../../../../../../utils/typeStorage/tableDatabase";
 
 
 export async function PUT(req: Request) {

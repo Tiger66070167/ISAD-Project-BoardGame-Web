@@ -5,7 +5,7 @@ export type table = 'board_game' | 'booking' | 'food_menu' | 'food_order' | 'foo
 export type sequence = {
     column: string,
     compare: compare,
-    check: string | number;
+    check: string | number | boolean;
 }
 
 export default abstract class state<T extends board_game | booking | food_menu | food_order | food_type | table_data | users | string> {
@@ -22,7 +22,7 @@ export default abstract class state<T extends board_game | booking | food_menu |
         return this;
     }
 
-    public where(column: T, compare: compare, check: string | number): state<T> {
+    public where(column: T, compare: compare, check: string | number | boolean): state<T> {
         this.allSequence.push({column, compare, check});
         return this;
     }

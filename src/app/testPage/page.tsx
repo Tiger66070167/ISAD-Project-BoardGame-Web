@@ -16,7 +16,6 @@ export default function Test() {
             body: tmp
         });
         console.log((await res.json()).message);
-        console.log("nah uh"); 
     }
 
     return (
