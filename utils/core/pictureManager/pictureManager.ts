@@ -1,9 +1,11 @@
 import fs from "node:fs/promises";
 import crypto from 'crypto';
+import { image } from "@nextui-org/theme";
+import { buffer } from "stream/consumers";
 
 export default class pictureManager {
     public static async savePicture(file: File, folderPath: string): Promise<string> {
-        let fileType = "." + file.name.split('.')[1];
+        let fileType = "." + file.name.split('.').at(-1);
 
         let name = this.randomName();
 
@@ -26,6 +28,13 @@ export default class pictureManager {
         }
         
     }
+
+    public static async readPicture(path: string): Promise<File> {
+        let read = await fs.readFile(path)
+        let blob = new Blob([read]);
+        let file: File = new File([blob], path.split("/").at(-1)!, {type: "image/" + path.split("/").at(-1)?.split(".").at(-1)});
+        return file;
+    } 
 
     private static randomName() {
         return crypto.randomBytes(8).toString('hex');

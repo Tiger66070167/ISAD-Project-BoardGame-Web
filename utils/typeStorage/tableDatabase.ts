@@ -1,4 +1,4 @@
-export type board_game = 'board_game_id' | 'name' | 'description' | 'picture' | 'status';
+export type board_game = 'board_game_id' | 'name' | 'picture' | 'status';
 
 export type booking = 'booking_id' | 'user_id' | 'table_id' | 'booking_from' | 'booking_to';
 

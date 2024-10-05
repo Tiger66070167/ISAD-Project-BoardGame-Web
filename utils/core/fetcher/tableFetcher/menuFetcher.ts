@@ -2,8 +2,18 @@ import { foodMenu } from "../../../typeStorage/foodType";
 import fetcher from "../fetcher";
 
 export default class menuFetcher extends fetcher{
-    public async getAllFood(): Promise<Array<foodMenu>> {
-        return this.getFetcher("http://localhost:3000/api/food/menu/getAllFood");
+    public async getAllFood(): Promise<Array<any>> {
+        const data: any[] = Array.from(await this.getFetcher("http://localhost:3000/api/food/menu/getAllFood"));
+        try {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].picture != null) {
+                    data[i] = {...data[i], picture: await this.postFetcher("http://localhost:3000/api/utility/pictureRequest", {food_id: 12, picture: data[i].picture})}
+                }
+            }
+            return data;
+        } catch (error) {
+            return []
+        }
     }
 
     public async addFood(name: string, type: "Fast food" | "Dish" | "Snack" | "Drink", description: string, price: number, picture: File) {
