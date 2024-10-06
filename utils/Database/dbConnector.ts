@@ -15,8 +15,8 @@ export default class dbConnector {
             user: process.env.DB_USER,
             password: process.env.DB_PASS,
             database: process.env.DB_DATABASE,
+            port: parseInt(process.env.DB_PORT!),
             multipleStatements: true,
-            connectTimeout: 1000000
         });
         return this.connection;
     }

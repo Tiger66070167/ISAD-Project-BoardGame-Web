@@ -1,7 +1,5 @@
 import fs from "node:fs/promises";
 import crypto from 'crypto';
-import { image } from "@nextui-org/theme";
-import { buffer } from "stream/consumers";
 
 export default class pictureManager {
     public static async savePicture(file: File, folderPath: string): Promise<string> {

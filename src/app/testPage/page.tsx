@@ -5,12 +5,19 @@ import menuFetcher from "../../../utils/core/fetcher/tableFetcher/menuFetcher";
 export default function Test() {
 
     async function uploadPic() {
-        const file = document.querySelector("input")!;
+        const file: HTMLInputElement = document.querySelector("input")!;
         const button = document.querySelector(".change");
         const img: HTMLImageElement = document.querySelector('.image')!;
-        let a = new menuFetcher();
-        await a.updateFood(26, "Shinoa", undefined, undefined, undefined, file.files![0]);
-        img.src = URL.createObjectURL(file.files![0]);
+        
+        let a = new FormData();
+        a.append("pic", file.files![0]);
+        let req = await fetch("http://localhost:3000/api/testApi", {
+            method: "POST",
+            body: a
+        });
+        let b = await req.json();
+        console.log(b.message);
+        img.src = b.message;
     }
 
     return (
