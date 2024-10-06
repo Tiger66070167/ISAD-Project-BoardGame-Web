@@ -1,32 +1,16 @@
 'use client'
+import boardFetcher from "../../../utils/core/fetcher/tableFetcher/boardFetcher";
+import menuFetcher from "../../../utils/core/fetcher/tableFetcher/menuFetcher";
 
 export default function Test() {
-
-
-    async function fet() {
-        const file = document.querySelector("input")!;
-        const button = document.querySelector(".change");
-        const img: HTMLImageElement = document.querySelector('.image')!;
-        let tmp = new FormData();
-        tmp.append("pic", file.files![0]);
-        let res = await fetch("http://localhost:3000/api/testApi", {
-            method: "POST",
-            body: tmp
-        });
-        let come = await res.formData();
-        let a = come.get("pic") as File;
-        let sto = { file: a };
-        return sto;
-    }
 
     async function uploadPic() {
         const file = document.querySelector("input")!;
         const button = document.querySelector(".change");
         const img: HTMLImageElement = document.querySelector('.image')!;
-        console.log("client file: ", file.files![0]);
-
-        let sto = await fet();
-        img.src = URL.createObjectURL(sto.file);
+        let a = new menuFetcher();
+        await a.updateFood(26, "Shinoa", undefined, undefined, undefined, file.files![0]);
+        img.src = URL.createObjectURL(file.files![0]);
     }
 
     return (

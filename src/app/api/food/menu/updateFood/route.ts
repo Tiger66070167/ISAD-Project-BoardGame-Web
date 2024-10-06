@@ -22,13 +22,14 @@ export async function PUT(req: Request) {
     if (description) change.change('description', description);
     if (price) change.change('price', parseInt(price));
     if (picture) {
-        let path = await pictureManager.savePicture(picture, 'public/images/menuPicture');
+        let path = await pictureManager.savePicture(picture, '/images/menuPicture');
         change.change('picture', path);
     }
 
     change.table('food_menu').where('food_id', compare.EQUAL, food_id);
     try {
         let oldPath = await new database(new select<food_menu>('picture').table('food_menu').where('food_id', compare.EQUAL, food_id), change).query();
+        
         await pictureManager.deletePicture(oldPath[0].picture);
         return Response.json({message: `Updated food ${food_id}`}, {status: 201});
     }catch (error) {

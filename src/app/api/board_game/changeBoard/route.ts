@@ -5,6 +5,8 @@ import update from "../../../../../utils/Database/state/updateDB";
 import { boardGame } from "../../../../../utils/typeStorage/boardType";
 import { board_game } from "../../../../../utils/typeStorage/tableDatabase";
 
+
+// ! This is not functional yet, please stay away from this, this is absolute mess right now, don't touch this don't use this 
 export async function PATCH(req: Request) {
     let type = req.headers.get('content-type');
 
