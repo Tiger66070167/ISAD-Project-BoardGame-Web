@@ -1,5 +1,4 @@
 'use client'
-import boardFetcher from "../../../utils/core/fetcher/tableFetcher/boardFetcher";
 import menuFetcher from "../../../utils/core/fetcher/tableFetcher/menuFetcher";
 
 export default function Test() {
@@ -11,8 +10,8 @@ export default function Test() {
         
         let a = new FormData();
         a.append("pic", file.files![0]);
-        let c = new boardFetcher();
-        await c.changeBoard(7, "Super nigga adventure power 2");
+        let c = new menuFetcher();
+        await c.addFood("Anawat", 'Dish', "I don't know can't think of anything better than this", 1000000, file.files![0]);
         img.src = URL.createObjectURL(file.files![0]);
     }
 

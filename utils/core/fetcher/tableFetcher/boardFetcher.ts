@@ -3,7 +3,12 @@ import fetcher from "../fetcher";
 
 export default class boardFetcher extends fetcher {
     public async getAllBoard(): Promise<Array<boardGame>> {
-        return this.getFetcher("http://localhost:3000/api/board_game/getAllBoard");
+        try {
+            const data = await this.getFetcher("http://localhost:3000/api/board_game/getAllBoard");
+            return data;
+        } catch (error) {
+            return [];
+        }
     }
 
     public async changeStatus(board_game_id: number, status: boolean): Promise<boolean> {
@@ -54,5 +59,14 @@ export default class boardFetcher extends fetcher {
             return false;
         }
         
+    }
+
+    public async getBoard(board_game_id: number) {
+        try {
+            let data = await this.getFetcher(`http://localhost:3000/api/board_game/${board_game_id}/getBoard`);
+            return data;
+        } catch (error) {
+            return [];
+        }
     }
 }

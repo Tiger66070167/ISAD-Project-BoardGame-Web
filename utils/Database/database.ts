@@ -25,7 +25,7 @@ export default class database{
             const conn = await dbConnector.getConnection();
             if (isSelect) {
                 let output: any = await conn.query(stringQuery);
-                return (this.state.length > 1) ? output[0][0] : output[0];
+                return Array.from((this.state.length > 1) ? output[0][0] : output[0]);
             } else {
                 await conn.query(stringQuery);
             }
