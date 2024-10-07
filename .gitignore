@@ -62,3 +62,6 @@ public/images/clientPFP/*
 
 public/images/menuPicture/*
 !public/images/menuPicture/readme.md
+
+public/images/boardGamePicture/*
+!public/images/boardGamePicture/readme.md

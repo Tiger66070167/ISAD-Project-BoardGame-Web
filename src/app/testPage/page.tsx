@@ -11,13 +11,9 @@ export default function Test() {
         
         let a = new FormData();
         a.append("pic", file.files![0]);
-        let req = await fetch("http://localhost:3000/api/testApi", {
-            method: "POST",
-            body: a
-        });
-        let b = await req.json();
-        console.log(b.message);
-        img.src = b.message;
+        let c = new boardFetcher();
+        await c.changeBoard(7, "Super nigga adventure power 2");
+        img.src = URL.createObjectURL(file.files![0]);
     }
 
     return (
