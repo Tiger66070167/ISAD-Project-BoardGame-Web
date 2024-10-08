@@ -38,7 +38,7 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
   async componentDidMount() {
       let food = new foodFetcher();
       this.setAllFood(await food.getAllFood());
-      console.log(this.state.allFood);
+      // console.log(this.state.allFood);
   }
 
 
@@ -47,19 +47,26 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
   };
 
   render() {
+    const { allFood} = this.state;
+
+    if (!allFood.length) {
+      return (
+        <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[--primary-color]"></div>
+        </div>
+      );
+    }
     return (
-      // content location
       <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-6">
         <Tabs
           value={this.state.selectedTab}
-          onValueChange={this.handleTabChange} // Add onValueChange to Tabs
+          onValueChange={this.handleTabChange} 
           className="mx-auto py-16 min-w-full max-w-[1400px]"
         >
           <Select
             value={this.state.selectedTab}
             onValueChange={this.handleTabChange}
           >
-            {/* Bind value and onValueChange to Select */}
             <div className="lg:hidden block px-4">
               <SelectTrigger className="flex w-full lg:hidden bg-[#292929] text-white bg-opacity-60 border-none hover:bg-[--primary-color]">
                 <SelectValue placeholder="Categories" />
@@ -69,8 +76,8 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
               <SelectGroup className="flex flex-col justify-center">
                 <SelectItem value="all">All</SelectItem>
                 <SelectItem value="fastFood">FastFood</SelectItem>
-                <SelectItem value="singleFood">Dish</SelectItem>
-                <SelectItem value="dessert">Snack</SelectItem>
+                <SelectItem value="Dish">Dish</SelectItem>
+                <SelectItem value="Snack">Snack</SelectItem>
                 <SelectItem value="drink">Drink</SelectItem>
               </SelectGroup>
             </SelectContent>
@@ -80,8 +87,8 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
               <TabsList className="grid min-w-[1000px] transition md:min-w-[600px] lg:grid-cols-5 md:grid-cols-5 grid-cols-1 bg-[#292929] text-white mt-2 relative">
                 <TabsTrigger value="all">All Menu</TabsTrigger>
                 <TabsTrigger value="fastFood">Fast food</TabsTrigger>
-                <TabsTrigger value="singleFood">Dish</TabsTrigger>
-                <TabsTrigger value="dessert">Snack</TabsTrigger>
+                <TabsTrigger value="Dish">Dish</TabsTrigger>
+                <TabsTrigger value="Snack">Snack</TabsTrigger>
                 <TabsTrigger value="drink">Drink</TabsTrigger>
               </TabsList>
             </div>
@@ -94,7 +101,7 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
             <div className={style["grid-layout-box"]}>
               {this.state.allFood.map((value) => (
                 <div className="flex justify-center items-center">
-                  <FoodCard name={value.name} price={20} description="anawat"></FoodCard>
+                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
                 </div>
               ))}
             </div>
@@ -103,31 +110,31 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
           <TabsContent value="fastFood">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {[0].map(() => (
+              {this.state.allFood.filter((value) => value.type === 'Fast food').map((value) => (
                 <div className="flex justify-center items-center">
-                  <FoodCard></FoodCard>
+                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
                 </div>
               ))}
             </div>
             {/* </Card> */}
           </TabsContent>
-          <TabsContent value="singleFood">
+          <TabsContent value="Dish">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {this.state.allFood.filter((value) => value.type === 2).map((value) => (
+              {this.state.allFood.filter((value) => value.type === 'Dish').map((value) => (
                 <div className="flex justify-center items-center">
-                  <FoodCard name={value.name}></FoodCard>
+                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
                 </div>
               ))}
             </div>
             {/* </Card> */}
           </TabsContent>
-          <TabsContent value="dessert">
+          <TabsContent value="Snack">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {[0].map(() => (
+              {this.state.allFood.filter((value) => value.type === 'Snack').map((value) => (
                 <div className="flex justify-center items-center">
-                  <FoodCard></FoodCard>
+                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
                 </div>
               ))}
             </div>
@@ -136,9 +143,9 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
           <TabsContent value="drink">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {[0].map(() => (
+              {this.state.allFood.filter((value) => value.type === 'Drink').map((value) => (
                 <div className="flex justify-center items-center">
-                  <FoodCard></FoodCard>
+                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
                 </div>
               ))}
             </div>
