@@ -10,4 +10,4 @@ export type food_type = 'type_id' | 'type_name';
 
 export type table_data = 'table_id' | 'name' | 'use_from' | 'use_to';
 
-export type users = 'users_id' | 'username' | 'role' | 'email' | 'password' | 'created_at' | 'token';
+export type users = 'users_id' | 'username' | 'role' | 'email' | 'password' | 'created_at' | 'token' | 'picture' | 'first_name' | 'last_name' | 'phone';

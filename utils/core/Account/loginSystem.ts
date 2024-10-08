@@ -21,7 +21,7 @@ export default class loginSystem {
         const passwordHash = await bcrypt.hash(password, 10);
 
         try {
-            await new database(new insert('default', username, 'customer', email, passwordHash, this.formatDate(new Date()), 'null').table("users")).query();
+            await new database(new insert('default', username, 'customer', email, passwordHash, this.formatDate(new Date()), 'null', "default", 'null', 'null', 'null').table("users")).query();
         } catch (error) {
             console.log("Cannot create user, bug at user.ts"); //TODO: maybe delete this
             return false;
@@ -33,7 +33,7 @@ export default class loginSystem {
         try {
             const result: any = await new database(new select<users>('email', 'password', 'users_id', 'role').table('users').where('email', compare.EQUAL, email)).query();
 
-            if (bcrypt.compare(password, result[0].password)) {
+            if (await bcrypt.compare(password, result[0].password)) {
                 let output: {access: string, refresh: string} = await tokenManage.getNewToken(result[0].users_id, result[0].role);
                 cookie.set('token', output.access);
                 cookie.set('askNew', output.refresh);

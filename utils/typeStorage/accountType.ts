@@ -6,4 +6,8 @@ export type accountData = {
     password?: string,
     created_at?: Date,
     token?: string
+    picture?: string,
+    first_name?: string,
+    last_name?: string,
+    phone?: string
 }

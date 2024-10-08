@@ -1,3 +1,4 @@
+import { accountData } from "../../typeStorage/accountType";
 import { boardGame } from "../../typeStorage/boardType";
 import { foodMenu, foodOrder } from "../../typeStorage/foodType";
 
@@ -11,7 +12,7 @@ export default abstract class fetcher {
         return output;
     } 
 
-    protected async postFetcher(url:string, data: boardGame | foodMenu | foodOrder | FormData) {
+    protected async postFetcher(url:string, data: accountData | boardGame | foodMenu | foodOrder | FormData | any) {
         const res = await fetch(url, {
             method: "POST",
             body: (data instanceof FormData) ? data : JSON.stringify(data)
@@ -23,7 +24,7 @@ export default abstract class fetcher {
         return output;
     }
 
-    protected async deleteFetcher(url: string, data: boardGame | foodMenu | foodOrder | FormData) {
+    protected async deleteFetcher(url: string, data: accountData | boardGame | foodMenu | foodOrder | FormData | any) {
         const res = await fetch(url, {
             method: "DELETE",
             body: (data instanceof FormData) ? data : JSON.stringify(data)
@@ -35,7 +36,7 @@ export default abstract class fetcher {
         return output; 
     }
 
-    protected async putFetcher(url: string, data: boardGame | foodMenu | foodOrder | FormData) {
+    protected async putFetcher(url: string, data: accountData | boardGame | foodMenu | foodOrder | FormData | any ) {
         const res = await fetch(url, {
             method: "PUT",
             body: (data instanceof FormData) ? data : JSON.stringify(data)
@@ -45,7 +46,7 @@ export default abstract class fetcher {
         return output; 
     }
 
-    protected async patchFetcher(url: string, data: boardGame | foodMenu | foodOrder | FormData) {
+    protected async patchFetcher(url: string, data: accountData | boardGame | foodMenu | foodOrder | FormData | any) {
         const res = await fetch(url, {
             method: "PATCH",
             body: (data instanceof FormData) ? data : JSON.stringify(data)
