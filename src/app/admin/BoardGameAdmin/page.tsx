@@ -3,7 +3,7 @@
 import React from "react";
 import AdminCard from "../../components/BoardGame/adminCard";
 import Link from "next/link";
-import boardFetcher from "../../../../utils/core/Board_Game/boardFetcher";
+import boardFetcher from "../../../../utils/core/fetcher/tableFetcher/boardFetcher";
 import { boardGame } from "../../../../utils/typeStorage/boardType";
 
 interface BoardGamePageState {

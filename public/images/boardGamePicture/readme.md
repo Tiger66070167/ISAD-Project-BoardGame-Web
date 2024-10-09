@@ -1,0 +1,1 @@
+use to store board game picture

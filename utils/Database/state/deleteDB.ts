@@ -14,16 +14,16 @@ export default class deleteDB<T extends board_game | booking | food_menu | food_
             stringQuery += "WHERE ";
             for (let i = 0; i < arrayWhere.length - 1; i++) {
                 if (typeof arrayWhere[i].check === "string") {
-                    stringQuery += `${arrayWhere[i].column} ${arrayWhere[i].compare} "${arrayWhere[i].check}" AND`;
-                } else if (typeof arrayWhere[i].check === "number") {
-                    stringQuery += `${arrayWhere[i].column} ${arrayWhere[i].compare} ${arrayWhere[i].check} AND`;
+                    stringQuery += `${arrayWhere[i].column} ${arrayWhere[i].compare} "${arrayWhere[i].check}" AND `;
+                } else if (typeof arrayWhere[i].check === "number" || typeof arrayWhere[i].check === "boolean") {
+                    stringQuery += `${arrayWhere[i].column} ${arrayWhere[i].compare} ${arrayWhere[i].check} AND `;
                 }
             }
             if (typeof arrayWhere[arrayWhere.length - 1].check === "string") {
                 stringQuery += `${arrayWhere[arrayWhere.length - 1].column} ${arrayWhere[arrayWhere.length - 1].compare
                     } "${arrayWhere[arrayWhere.length - 1].check}" `;
             } else if (
-                typeof arrayWhere[arrayWhere.length - 1].check === "number"
+                typeof arrayWhere[arrayWhere.length - 1].check === "number" || typeof arrayWhere[arrayWhere.length - 1].check === "boolean"
             ) {
                 stringQuery += `${arrayWhere[arrayWhere.length - 1].column} ${arrayWhere[arrayWhere.length - 1].compare
                     } ${arrayWhere[arrayWhere.length - 1].check} `;
@@ -34,6 +34,3 @@ export default class deleteDB<T extends board_game | booking | food_menu | food_
         return stringQuery;
     }
 }
-
-let date = new Date("2024-09-23 22:31:37");
-console.log(date.getHours());

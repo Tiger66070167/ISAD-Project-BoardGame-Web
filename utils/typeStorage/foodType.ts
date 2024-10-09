@@ -1,15 +1,17 @@
 export type foodMenu = {
-    food_id?: number,
+    food_id: number,
     name?: string,
-    type?: number,
+    type?: number | string,
     description?: string,
     price?: number,
     picture?: string
 }
 
 export type foodOrder = {
-    order_id?: number,
+    order_id: number,
     table_id?: number,
     food_id?: number,
-    status?: string
+    status?: string,
+    confirm?: boolean,
+    amount?: number
 }

@@ -55,3 +55,14 @@ next-env.d.ts
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
 env
+
+# client user profile
+public/images/clientPFP/*
+!public/images/clientPFP/userDefault.jpg
+!public/images/clientPFP/readme.md
+
+public/images/menuPicture/*
+!public/images/menuPicture/readme.md
+
+public/images/boardGamePicture/*
+!public/images/boardGamePicture/readme.md
