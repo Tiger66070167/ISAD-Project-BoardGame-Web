@@ -39,7 +39,7 @@ export default function TimeTable(){
 
     return (
         <>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center p-3 max-w-4xl">
             <div className="flex flex-wrap justify-center">
             {periods.map(
                 (each, index) => (<TimeCard key={index}p={each} />)
