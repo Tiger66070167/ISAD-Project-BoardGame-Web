@@ -45,7 +45,7 @@ export default class menuFetcher extends fetcher{
 
     public async deleteFood(food_id: number): Promise<boolean> {
         try {
-            await this.deleteFetcher("http://localhost:3000/api/menu/food/deleteFood", {food_id});
+            await this.deleteFetcher("http://localhost:3000/api/food/menu/deleteFood", {food_id});
             return true;
         } catch (error) {
             return false;
