@@ -3,5 +3,5 @@ export type bookingData = {
     user_id: number,
     table_id: number,
     period_id: number,
-    date?: string
+    date: string
 }
