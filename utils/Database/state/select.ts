@@ -1,9 +1,9 @@
 import {sequence} from "./state";
 import state from "./state";
-import {board_game, booking, food_menu, food_order, food_type, table_data, users} from "../../typeStorage/tableDatabase";
+import {board_game, booking, booking_period, food_menu, food_order, food_type, table_data, users} from "../../typeStorage/tableDatabase";
 
 
-export default class select<T extends board_game | booking | food_menu | food_order | food_type | table_data | users | string> extends state<T> {
+export default class select<T extends board_game | booking | food_menu | food_order | food_type | table_data | users | booking_period | string> extends state<T> {
     private column: Array<string>;
 
     constructor(...column: T[]) {

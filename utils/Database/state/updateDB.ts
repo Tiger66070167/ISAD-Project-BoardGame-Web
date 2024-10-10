@@ -1,8 +1,8 @@
 import { sequence } from "./state";
-import { board_game, booking, food_menu, food_order, food_type, table_data, users } from "../../typeStorage/tableDatabase"
+import { board_game, booking, booking_period, food_menu, food_order, food_type, table_data, users } from "../../typeStorage/tableDatabase"
 import state from "./state";
 
-export default class update<T extends board_game | booking | food_menu | food_order | food_type | table_data | users> extends state<T> {
+export default class update<T extends board_game | booking | food_menu | food_order | food_type | table_data | users | booking_period> extends state<T> {
     private difference: Array<{ current: T; change: string | number | boolean; }>;
 
     constructor() {
