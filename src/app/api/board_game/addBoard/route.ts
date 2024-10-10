@@ -11,10 +11,11 @@ export async function POST(req: Request) {
     let path: string;
     try {
         if (picture) {
-            path= await pictureManager.savePicture(picture, "images/boardGamePicture/");
+            path = await pictureManager.savePicture(picture, "images/boardGamePicture/");
         } else {throw new Error("Cannot save this picture")}
 
-        await new database(new insert('default', name, path, 1).table('board_game')).query();
+
+        await new database(new insert('default', name, path, true).table('board_game')).query();
         return Response.json({message: "added board game"}, {status: 201});
     } catch (error) {
         return Response.json({message: "fail to insert board game"}, {status: 400});

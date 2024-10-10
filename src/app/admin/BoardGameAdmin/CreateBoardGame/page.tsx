@@ -1,21 +1,44 @@
 "use client";
 
-import React, { Component } from "react";
+import React, { Component, FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { boardGame } from "../../../../../utils/typeStorage/boardType";
+import boardFetcher from "../../../../../utils/core/fetcher/tableFetcher/boardFetcher";
 
-export default class createBoardGame extends Component {
+export default class createBoardGame extends Component<{ data: boardGame }> {
+  constructor(props: { data: boardGame }) {
+    super(props);
+  }
+
+  async createBoard(event: any) {
+    event.preventDefault();
+    
+    let board = new boardFetcher();
+    await board.addBoard(event.target.elements.boardName.value, event.target.elements.picture.files[0]);
+
+    let image: HTMLImageElement = document.querySelector(".image")!;
+    image.src = URL.createObjectURL(event.target.elements.picture.files[0]);
+
+    window.history.back();
+  }
+
+  changePic() {
+    let image: HTMLImageElement = document.querySelector(".image")!;
+    let file: HTMLInputElement = document.querySelector(".pic")!;
+    image.src = URL.createObjectURL(file.files![0]);
+  }
+
   render() {
     return (
       <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
         <div className="flex justify-center items-center tablet:pt-16 laptop:pt-20 desktop:pt-28  desktop:pb-22">
           <div className="shadow-md rounded-lg bg-[#303030] flex flex-col pt-8 w-96 desktop:w-[500px] h-auto pb-12">
-
             <div className="tablet:text-2xl laptop:text-3xl desktop:text-4xl tablet:mt-2 laptop:mt-5 desktop:mt-7 font-black text-[--primary-color] flex justify-center items-center mb-5">
               Create Board Game
             </div>
 
-            <form className="flex flex-col items-center gap-y-10">
+            <form className="flex flex-col items-center gap-y-10" onSubmit={this.createBoard}>
               {/* Name */}
               <div className="flex flex-col items-center w-full tablet:px-10 laptop:px-10 desktop:px-16">
                 <label className="tablet:text-lg laptop:text-xl desktop:text-2xl font-semibold">
@@ -23,6 +46,7 @@ export default class createBoardGame extends Component {
                 </label>
                 <input
                   type="text"
+                  name="boardName"
                   placeholder="Enter board game name"
                   className="text-[#bababa] sm:text-sm
                 bg-[#303030]
@@ -36,7 +60,7 @@ export default class createBoardGame extends Component {
               {/* Image */}
               <div className="">
                 <Image
-                  className="object-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
+                  className="image object-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
                   src=""
                   alt=""
                 />
@@ -44,7 +68,7 @@ export default class createBoardGame extends Component {
                   <label className="laptop:text-xl desktop:text-2xl font-semibold">
                     Choose Image
                   </label>
-                  <input type="file" className="w-56" />
+                  <input onChange={this.changePic.bind(this)} name="picture" type="file" className="pic w-56" />
                 </div>
               </div>
 
@@ -62,6 +86,7 @@ export default class createBoardGame extends Component {
                   </button>
                 </Link>
                 <button
+                  type="submit"
                   className="tablet:px-3 tablet:py-1
                   laptop:px-3 laptop:py-1
                   desktop:px-8 desktop:py-2

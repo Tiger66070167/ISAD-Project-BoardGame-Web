@@ -6,20 +6,24 @@ import Image from "next/image";
 import logo from "../../assets/Logo.png";
 
 export default class Nav extends React.Component {
-  render() {
-    function clickHam() {
-      let event = document.getElementById("menu");
-      event?.className === "hidden absolute px-20 pb-5"
-        ? (event.className += " menu-active")
-        : (event!.className = "hidden absolute px-20 pb-5");
-    }
+  private clickHam() {
+    let event = document.getElementById("menu");
+    event?.className === "hidden absolute px-20 pb-5"
+      ? (event.className += " menu-active")
+      : (event!.className = "hidden absolute px-20 pb-5");
+  }
 
-    function clickMenu() {
-      let event = document.getElementById("menu");
-      event?.className === "hidden absolute px-20 pb-5 menu-active"
-        ? (event.className = "hidden absolute px-20 pb-5")
-        : 0;
-    }
+  private clickMenu() {
+    let event = document.getElementById("menu");
+    event?.className === "hidden absolute px-20 pb-5 menu-active"
+      ? (event.className = "hidden absolute px-20 pb-5")
+      : 0;
+  }
+
+  render() {
+
+    let clickHam = this.clickHam;
+    let clickMenu = this.clickMenu;
 
     return (
       <nav>
