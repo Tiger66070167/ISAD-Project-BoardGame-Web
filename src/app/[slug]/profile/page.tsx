@@ -73,8 +73,7 @@ export default class profilePage extends React.Component<{ params: { slug: numbe
       }
 
       if (!outcome) { this.setError(true) }
-      this.setAccount(await account.getAccount(this.state.account.users_id));
-      this.setProfile(null);
+      window.location.reload();
     }
 
 

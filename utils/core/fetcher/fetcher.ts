@@ -21,7 +21,11 @@ export default abstract class fetcher {
             throw new Error("Cannot fetch data");
         }
         let output = await res.json();
-        return output;
+        if (!output.message) {
+            return output;
+        } else {
+            console.log(output.message);
+        }
     }
 
     protected async deleteFetcher(url: string, data: accountData | boardGame | foodMenu | foodOrder | FormData | any) {
@@ -33,7 +37,11 @@ export default abstract class fetcher {
             throw new Error("Cannot fetch data");
         }
         let output = await res.json();
-        return output; 
+        if (!output.message) {
+            return output;
+        } else {
+            console.log(output.message);
+        } 
     }
 
     protected async putFetcher(url: string, data: accountData | boardGame | foodMenu | foodOrder | FormData | any ) {
@@ -43,7 +51,11 @@ export default abstract class fetcher {
         });
         if (!res.ok) { throw new Error("Cannot fetch data") }
         let output = await res.json();
-        return output; 
+        if (!output.message) {
+            return output;
+        } else {
+            console.log(output.message);
+        }
     }
 
     protected async patchFetcher(url: string, data: accountData | boardGame | foodMenu | foodOrder | FormData | any) {
@@ -53,6 +65,10 @@ export default abstract class fetcher {
         });
         if (!res.ok) { throw new Error("Cannot fetch data") }
         let output = await res.json();
-        return output;
+        if (!output.message) {
+            return output;
+        } else {
+            console.log(output.message);
+        }
     }
 }

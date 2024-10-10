@@ -11,3 +11,10 @@ export type accountData = {
     last_name?: string,
     phone?: string
 }
+
+export type userInfo = {
+    id: number,
+    username: string,
+    profile: string,
+    role: string
+}

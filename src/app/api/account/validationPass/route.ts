@@ -17,7 +17,6 @@ export async function PATCH(req: Request) {
             throw new Error("Wrong password")
         }
     } catch (error) {
-        console.log(error);
         return Response.json({message: "Cannot change this password"}, {status: 401});
     }
 }

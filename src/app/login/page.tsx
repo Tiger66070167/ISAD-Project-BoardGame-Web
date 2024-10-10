@@ -31,6 +31,7 @@ class loginPage extends React.Component {
     if (!user.value && !pass.value) { this.setError(true); } 
     else {
       if (!await checkLoginAction(user.value, pass.value)) { this.setError(true) }
+      else {window.location.replace('http://localhost:3000/');}
     }
     user.value = '';
     pass.value = '';

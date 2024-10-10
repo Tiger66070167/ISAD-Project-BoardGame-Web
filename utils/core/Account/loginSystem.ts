@@ -7,7 +7,6 @@ import { users } from "../../typeStorage/tableDatabase";
 import tokenManage from "./tokenManage";
 import { cookies } from 'next/headers'
 const bcrypt = require('bcrypt')
-
 const cookie = cookies();
 
 export default class loginSystem {
@@ -31,10 +30,10 @@ export default class loginSystem {
 
     public static async checkLogin(email: string, password: string): Promise<boolean> {
         try {
-            const result: any = await new database(new select<users>('email', 'password', 'users_id', 'role').table('users').where('email', compare.EQUAL, email)).query();
+            const result: any = await new database(new select<users>('email', 'password', 'users_id', 'role', 'picture', 'username').table('users').where('email', compare.EQUAL, email)).query();
 
             if (await bcrypt.compare(password, result[0].password)) {
-                let output: {access: string, refresh: string} = await tokenManage.getNewToken(result[0].users_id, result[0].role);
+                let output: {access: string, refresh: string} = await tokenManage.getNewToken({user_id: result[0].users_id, username: result[0].username, picture: result[0].picture, user_role: result[0].role});
                 cookie.set('token', output.access);
                 cookie.set('askNew', output.refresh);
             } else {
@@ -44,6 +43,6 @@ export default class loginSystem {
             console.log(`Can't find ${email} in our database`); //TODO: maybe delete this
             return false;
         }
-        redirect('/');
+        return true;
     }
 }

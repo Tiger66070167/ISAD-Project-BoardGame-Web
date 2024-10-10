@@ -1,3 +1,4 @@
+import { userInfo } from "../../../typeStorage/accountType";
 import fetcher from "../fetcher";
 
 export default class accountFetcher extends fetcher {
@@ -44,5 +45,29 @@ export default class accountFetcher extends fetcher {
         } catch (error) {
             return false;
         }
+    }
+
+    public async checkToken() {
+        let allCookie: string[] = document.cookie.split(";");
+        let cookie = new Map();
+        allCookie.forEach((noSplit) => {
+            let [key, value] = noSplit.split("=");
+            cookie.set(key.trim(), value);
+        })
+        let access = cookie.get("token");
+        let refresh = cookie.get("askNew");
+
+        if (access && refresh) {
+            try {
+                let data: userInfo = await this.postFetcher("http://localhost:3000/api/account/checkToken", {access, refresh});
+                return data;
+            } catch (error) {
+                return null;
+            }
+        }  
+        else {
+            return null;
+        }
+
     }
 }
