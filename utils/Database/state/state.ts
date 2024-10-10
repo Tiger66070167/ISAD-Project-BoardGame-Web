@@ -1,7 +1,7 @@
 import {board_game, booking, booking_period, food_menu, food_order, food_type, table_data, users} from "../../typeStorage/tableDatabase"
 import compare from "../enumCompare";
 
-export type table = 'board_game' | 'booking' | 'food_menu' | 'food_order' | 'food_type' | 'table_data' | 'users'
+export type table = 'board_game' | 'booking' | 'food_menu' | 'food_order' | 'food_type' | 'table_data' | 'users' | 'booking_period'
 export type sequence = {
     column: string,
     compare: compare,
