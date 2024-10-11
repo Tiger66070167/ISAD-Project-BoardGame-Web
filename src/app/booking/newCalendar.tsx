@@ -49,20 +49,14 @@ export default function NewCalendar(){
     now.setHours(0, 0, 0, 0);
     const context = useContext(bookingContext);
     const [monthState, setMonthState] = useState(0);
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    const [selectedDate, setSelectedDate] = useState<Date>();
     
 
     let currentMonthDates = getCalendarPageDate(now.getMonth(), now.getFullYear());
     let nextMonthDates = getCalendarPageDate(now.getMonth()+1, now.getFullYear());
 
     const calendarList = [currentMonthDates, nextMonthDates];
-    let todayPeriodWithTable : periodWithTable[] = context.allPeriod.map((eachP) => (
-        {
-            period: eachP,
-            tables: context.allTable
-        }
-    ));
-    const [selectedDatePeriod, setSelectedDatePeriod] = useState<periodWithTable[]>(todayPeriodWithTable);
+    const [selectedDatePeriod, setSelectedDatePeriod] = useState<periodWithTable[]>();
     return (
         <>
         <div className="border m-5 w-full h-full max-w-6xl">
@@ -113,16 +107,16 @@ export default function NewCalendar(){
                     className={`border h-24 ${!isValid ? "text-gray-500": "bg-[--neutrals-color]"}`}>
 
                         <button 
-                        onClick={() => {setSelectedDate(date); setSelectedDatePeriod(availablePeriodWithTable)}} 
+                        onClick={() => {setSelectedDate(date); setSelectedDatePeriod(availablePeriodWithTable);}} 
                         disabled={isValid ? false : true} 
-                        className={`size-full ${(date.getTime() === selectedDate.getTime()) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>
+                        className={`size-full ${(selectedDate && selectedDate.getTime() === date.getTime())? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>
 
                             <div 
                             className={"text-lg text-start size-full "+(isToday ? "text-black bg-white": "")}>
                                 {date.getDate()}<br></br>
                                 {isToday ? " TODAY": ""}
                                 <br />
-                                {availablePeriodWithTable.length<=4? "FULL": ""}
+                                {availablePeriodWithTable.length<=0? "FULL": ""}
                             </div>
                         </button>
                     </div>
