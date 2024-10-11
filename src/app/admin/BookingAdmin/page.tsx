@@ -79,6 +79,20 @@ export default class BookingPage extends React.Component<{}, BookingPageState> {
   renderContent() {
     return (
       <div className="min-h-screen min-w-screen pt-[56px] bg-[--neutrals-color] flex flex-col items-center">
+        {
+            this.state.allBooking.map(
+                (b) => {
+                    return (
+                        <div key={b.booking_id} className="border rounded-md w-9/12 text-black bg-white m-5">
+                            <p>Booking id: {b.booking_id.toString()}</p>
+                            <p>Table: {b.table_id}</p>
+                            <p>Period: {b.period_id}</p>
+                            <p>Date: {b.date}</p>
+                        </div>
+                    );
+                }
+            )
+        }
       </div>
     );
   }
