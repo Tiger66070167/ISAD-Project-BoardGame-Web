@@ -88,7 +88,7 @@ export default class bookingFetcher extends fetcher {
 //////////////////////////////////////////////
     public async getBookingTable(table_id: number): Promise<Array<tableData>>{
         try {
-            let data = await this.getFetcher(`http://localhost:3000/api/booking/period/${table_id}/getBookingTable`);
+            let data = await this.getFetcher(`http://localhost:3000/api/booking/table/${table_id}/getBookingTable`);
             return data;
         }catch(error){
             return [];
@@ -102,17 +102,31 @@ export default class bookingFetcher extends fetcher {
             return [];
         }
     }
-    public async addBookingTable(table_name: string, table_description: string): Promise<boolean> {
+    public async addBookingTable(table_name: string, table_description: string, picture: File): Promise<boolean> {
+        let data = new FormData();
+        data.append('table_name', table_name);
+        data.append('table_description', table_description);
+        data.append('picture', picture);
         try{
-            await this.postFetcher("http://localhost:3000/api/booking/table/addBookingTable", {table_name, table_description});
+            await this.postFetcher("http://localhost:3000/api/booking/table/addBookingTable", data);
             return true;
         }catch (error){
             return false;
         }
     }
-    public async changeBookingTable(table_id: number, table_name: string, table_description: string): Promise<boolean> {
+    public async changeBookingTable(table_id: number, table_name?: string, table_description?: string, picture?: File): Promise<boolean> {
         try {
-            await this.patchFetcher("http://localhost:3000/api/booking/period/changeBookingTable", {table_id, table_name, table_description});
+            if(!picture){
+                await this.patchFetcher("http://localhost:3000/api/booking/table/changeBookingTable", {table_id, table_name, table_description});
+            }else{
+                let tmp = new FormData();
+                tmp.append("table_id", String(table_id));
+                if (table_name) tmp.append("table_name", table_name);
+                tmp.append("picture", picture);
+
+                await this.patchFetcher("http://localhost:3000/api/booking/table/changeTablePic", tmp);
+            }
+            
             return true;
         } catch (error) {
             return false;
@@ -120,7 +134,7 @@ export default class bookingFetcher extends fetcher {
     }
     public async deleteBookingTable(table_id: number): Promise<boolean> {
         try{
-            await this.deleteFetcher("http://localhost:3000/api/booking/period/deleteBookingTable", {table_id});
+            await this.deleteFetcher("http://localhost:3000/api/booking/table/deleteBookingTable", {table_id});
             return true;
         }catch (error){
             return false;
