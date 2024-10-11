@@ -4,8 +4,28 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../assets/Logo.png";
+import { userInfo } from "../../../utils/typeStorage/accountType";
+import accountFetcher from "../../../utils/core/fetcher/tableFetcher/accountFetcher";
 
-export default class Nav extends React.Component {
+export default class Nav extends React.Component<{}, { data: userInfo | null }> {
+
+  constructor(props: {}) {
+    super(props)
+
+    this.state = { data: null }
+  }
+
+  // state change
+  setData(value: userInfo) { this.setState({ data: value }); }
+
+  async componentDidMount() {
+    let account: accountFetcher = new accountFetcher();
+    let info = await account.checkToken();
+    if (info) {
+      this.setData(info);
+    }
+  }
+
   private clickHam() {
     let event = document.getElementById("menu");
     event?.className === "hidden absolute px-20 pb-5"
@@ -60,9 +80,10 @@ export default class Nav extends React.Component {
           </ul>
 
           {/* Right */}
-          <div className="justify-self-end tablet:hidden laptop:flex">
-            <button
+          <div className="justify-self-end tablet:hidden laptop:flex h-[100%] items-center">
+            {(!this.state.data) ? <button
               className="rounded bg-[--primary-color]
+              h-[50%]
             tablet:px-2 tablet:text-base
             laptop:px-4 laptop:text-base
             desktop:px-6 desktop:text-lg
@@ -71,24 +92,22 @@ export default class Nav extends React.Component {
             >
               <Link href="/login">Sign in</Link>
             </button>
-          </div>
-
-          {/* After Login */}
-          <div className="justify-self-end hidden">
-            <button
-              className="rounded bg-[--primary-color]
+              :
+              <button
+                className="rounded bg-[--primary-color]
+                h-[50%]
             tablet:px-1 tablet:text-base
             laptop:px-3 laptop:text-base
             desktop:px-4 desktop:text-lg
             transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
-            >
-              <Link href="/profile">
-                <div className="flex gap-3">
-                  <img src="" alt="Image" />
-                  User
-                </div>
-              </Link>
-            </button>
+              >
+                <Link href={`/${this.state.data.id}/profile`}>
+                  <div className="h-[100%] image flex gap-3 items-center overflow-hidden">
+                    <img className="h-[100%] rounded-full" src={this.state.data!.profile} alt="Image" />
+                    <p className="text-nowrap">{this.state.data.username}</p>
+                  </div>
+                </Link>
+              </button>}
           </div>
 
           {/* Hamburger Menu */}
@@ -102,18 +121,31 @@ export default class Nav extends React.Component {
             <div className="flex items-start">
               <ul id="menu" className="hidden absolute px-20 pb-5">
                 <div className="border-b pb-1 mb-2">
-                  <button
+                  {(!this.state.data) ? <button
                     className="rounded bg-[--primary-color]
-                tablet:px-2 tablet:text-base
-                laptop:px-4 laptop:text-base
-                desktop:px-6 desktop:py-1 desktop:text-3xl
-                transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
+            tablet:px-2 tablet:text-base
+            laptop:px-4 laptop:text-base
+            desktop:px-6 desktop:text-lg
+            transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
                     type="button"
                   >
-                    <Link href="/login" onClick={clickMenu}>
-                      Sign in
-                    </Link>
+                    <Link href="/login">Sign in</Link>
                   </button>
+                    :
+                    <button
+                      className="rounded bg-[--primary-color]
+            tablet:px-1 tablet:text-base
+            laptop:px-3 laptop:text-base
+            desktop:px-4 desktop:text-lg
+            transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
+                    >
+                      <Link href={`/${this.state.data.id}/profile`}>
+                        <div className="h-[2rem] image flex gap-3 items-center overflow-hidden">
+                          <img className="h-[100%] rounded-full" src={this.state.data!.profile} alt="Image" />
+                          <p className="text-nowrap">{this.state.data.username}</p>
+                        </div>
+                      </Link>
+                    </button>}
                 </div>
                 <li className="hover:text-[--primary-color] transition hover:delay-50">
                   <Link href="/" onClick={clickMenu}>
