@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client";
 
 import React, {createContext} from "react";
@@ -69,23 +68,3 @@ export default class bookingPage extends React.Component<{}, BookingPageState> {
     );
   }
 }
-=======
-"use client";
-
-import React from "react";
-import Calendar from './calendar';
-import TimeTable from "./timeTable";
-import Table from "./table";
-
-import NewCalendar from "./newCalendar";
-
-export default class bookingPage extends React.Component {
-  render() {
-    return (
-        <div className="min-h-screen min-w-screen mt-[56px] bg-[--neutrals-color] flex flex-col items-center">
-            <NewCalendar />
-        </div>  
-    );
-  }
-}
->>>>>>> 94017b906a6d929025bda466ec23f5487371b159
