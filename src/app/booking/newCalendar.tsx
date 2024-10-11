@@ -1,5 +1,13 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { bookingContext } from "./page";
 import NewTimeTable from "./newTimeTable";
+import { periodData } from "../../../utils/typeStorage/periodType";
+import { tableData } from "../../../utils/typeStorage/tableType";
+
+export type periodWithTable = {
+    period: periodData;
+    tables: tableData[];
+}
 
 function getCalendarPageDate(month: number, year: number): Date[]{
     const lastDateOfCurrentMonth = new Date(year, month+1, 0);
@@ -32,53 +40,97 @@ function getCalendarPageDate(month: number, year: number): Date[]{
     return dateList;
 }
 
+
+
 export default function NewCalendar(){
-        const monthTable = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const dayTable = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        let now =  new Date();
-        now.setHours(0, 0, 0, 0);
-        const [monthState, setMonthState] = useState(0);
-        const [selectedDate, setSelectedDate] = useState(new Date());
+    const monthTable = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const dayTable = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let now =  new Date();
+    now.setHours(0, 0, 0, 0);
+    const context = useContext(bookingContext);
+    const [monthState, setMonthState] = useState(0);
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    
 
-        let currentMonthDates = getCalendarPageDate(now.getMonth(), now.getFullYear());
-        let nextMonthDates = getCalendarPageDate(now.getMonth()+1, now.getFullYear());
+    let currentMonthDates = getCalendarPageDate(now.getMonth(), now.getFullYear());
+    let nextMonthDates = getCalendarPageDate(now.getMonth()+1, now.getFullYear());
 
-        const calendarList = [currentMonthDates, nextMonthDates];
-        return (
-            <>
-            <div className="border m-5 w-full h-full max-w-6xl">
-                <div className="grid grid-cols-2 w-full h-10">
-                    <button onClick={() => setMonthState(0)} className={`border ${(monthState === 0) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>{monthTable[now.getMonth()]}</button>
-                    <button onClick={() => setMonthState(1)} className={`border ${(monthState === 1) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>{monthTable[(now.getMonth()+1)%12]}</button>
-                </div>
-                <div className="grid grid-cols-7 w-full">
-                    {dayTable.map((day) => {
-                        return (
-                            <div key={day} className="border text-center bg-white text-black">
-                                {day}
-                            </div>
-                        );
-                        })}
+    const calendarList = [currentMonthDates, nextMonthDates];
+    let todayPeriodWithTable : periodWithTable[] = context.allPeriod.map((eachP) => (
+        {
+            period: eachP,
+            tables: context.allTable
+        }
+    ));
+    const [selectedDatePeriod, setSelectedDatePeriod] = useState<periodWithTable[]>(todayPeriodWithTable);
+    return (
+        <>
+        <div className="border m-5 w-full h-full max-w-6xl">
+            <div className="grid grid-cols-2 w-full h-10">
+                <button onClick={() => setMonthState(0)} className={`border ${(monthState === 0) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>{monthTable[now.getMonth()]}</button>
+                <button onClick={() => setMonthState(1)} className={`border ${(monthState === 1) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>{monthTable[(now.getMonth()+1)%12]}</button>
+            </div>
+            <div className="grid grid-cols-7 w-full">
+                {dayTable.map((day) => {
+                    return (
+                        <div key={day} className="border text-center bg-white text-black">
+                            {day}
+                        </div>
+                    );
+                })}
 
-                    {calendarList[monthState].map((date) => {
-                        let isToday = (date.toDateString() == now.toDateString());
-                        let isValid = (date>now && date<=new Date(now.getFullYear(), now.getMonth()+2, 0));
-                        return (
-                        <div key={date.toLocaleDateString()} className={`border h-24 ${!isValid ? "text-gray-500": "bg-[--neutrals-color]"}`}>
-                            <button onClick={() => setSelectedDate(date)} 
-                            disabled={isValid ? false : true} 
-                            className={`size-full ${(date.getTime() === selectedDate.getTime()) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>
-                                <div className={"text-lg text-start size-full "+(isToday ? "text-black bg-white": "")}>
+                {calendarList[monthState].map((date) => {
+                    // create list of period and tables
+                    let todayPeriodWithTable : periodWithTable[] = context.allPeriod.map((eachP) => (
+                        {
+                            period: eachP,
+                            tables: context.allTable
+                        }
+                    ));
+                    // filter for only booking today(date)
+                    let todayBooking = context.allBooking.filter((eachBooking) => (date.toISOString() === eachBooking.date));
+                    // check foreach todaybooking and filter out table in each period that is occur in todaybooking
+                    todayBooking.forEach((eachBooking) => {
+                        todayPeriodWithTable.forEach((periodWithTables, index, arr) => {
+
+                            let booking_period_id = eachBooking.period_id;
+                            let this_period_id = periodWithTables.period.period_id;
+
+                            if(booking_period_id === this_period_id && periodWithTables.tables.length>0){
+                                arr[index].tables = periodWithTables.tables.filter((table) => 
+                                    (table.table_id!=eachBooking.table_id));// left only table that not mention in this booking
+                            }
+                        })
+                    });
+
+                    let availablePeriodWithTable = todayPeriodWithTable.filter((periodAndTable) => (periodAndTable.tables.length>0));// periodWithTable that had atleast 1 table left
+                    let isToday = (date.getTime() === now.getTime());
+                    let isValid = (date>now && date<=new Date(now.getFullYear(), now.getMonth()+2, 0) && availablePeriodWithTable.length>0);
+
+                    return (
+                    <div 
+                    key={date.toLocaleDateString()} 
+                    className={`border h-24 ${!isValid ? "text-gray-500": "bg-[--neutrals-color]"}`}>
+
+                        <button 
+                        onClick={() => {setSelectedDate(date); setSelectedDatePeriod(availablePeriodWithTable)}} 
+                        disabled={isValid ? false : true} 
+                        className={`size-full ${(date.getTime() === selectedDate.getTime()) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>
+
+                            <div 
+                            className={"text-lg text-start size-full "+(isToday ? "text-black bg-white": "")}>
                                 {date.getDate()}<br></br>
                                 {isToday ? " TODAY": ""}
-                                </div>
-                            </button>
-                        </div>
-                        );
-                    })}
-                </div>
+                                <br />
+                                {availablePeriodWithTable.length<=4? "FULL": ""}
+                            </div>
+                        </button>
+                    </div>
+                    );
+                })}
             </div>
-            <NewTimeTable date={selectedDate}/>
-            </>
-        );
+        </div>
+        <NewTimeTable date={selectedDate} periodWithTable={selectedDatePeriod}/>
+        </>
+    );
 }
