@@ -17,37 +17,50 @@ export default function NewTimeTable({ date, periodWithTable }: Prop) {
         setSelectedPeriod(undefined);
     }, [date]);
 
-    if (date !== undefined && periodWithTable !== undefined)
+    if (!date || !periodWithTable) {
         return (
-            <>
-                <div className="border w-full h-full m-5 max-w-6xl ">
-                    <div className="border text-center bg-white text-black">
-                        {date.toDateString()}
-                        <br />
-                    </div>
-                    <div className="grid grid-cols-4 w-full">
-                        {periodWithTable.map((pwt) => {
-                            const isSelected = selectedPeriod?.period.period_id === pwt.period.period_id;
-                            return (
-                                <button
-                                    key={pwt.period.period_id + "" + date.toDateString()}
-                                    onClick={() => setSelectedPeriod(pwt)}
-                                    className={`border text-center h-10 ${isSelected ? 'bg-[--primary-color] text-white' : ''}`}
-                                >
-                                    {pwt.period.start} - {pwt.period.end}
-                                </button>
-                            );
-                        })}
-                    </div>
-                </div>
-                <NewTable tableList={selectedPeriod?.tables} />
-            </>
-        );
-    else return (
-        <div className="border w-full h-full m-5 max-w-6xl text-center">
-            <div className="text-3xl">
-                Please select date
+            <div className="border w-full h-full m-5 max-w-6xl text-center">
+                <div className="text-3xl">Please select a date</div>
             </div>
-        </div>
+        );
+    }
+
+    return (
+        <>
+            <div className="border w-full h-full m-5 max-w-6xl">
+                <div className="border text-center bg-white text-black">
+                    {date.toDateString()}
+                    <br />
+                </div>
+                <div className="grid grid-cols-4 w-full">
+                    {periodWithTable.map((pwt) => (
+                        <PeriodButton 
+                            key={pwt.period.period_id}
+                            period={pwt.period}
+                            isSelected={selectedPeriod?.period.period_id === pwt.period.period_id}
+                            onSelect={() => setSelectedPeriod(pwt)}
+                        />
+                    ))}
+                </div>
+            </div>
+            <NewTable tableList={selectedPeriod?.tables} period={selectedPeriod?.period} date={date} />
+        </>
     );
 }
+
+interface PeriodButtonProps {
+    period: periodData;
+    isSelected: boolean;
+    onSelect: () => void;
+}
+
+const PeriodButton: React.FC<PeriodButtonProps> = ({ period, isSelected, onSelect }) => {
+    return (
+        <button
+            onClick={onSelect}
+            className={`border text-center h-10 ${isSelected ? 'bg-[--primary-color] text-white' : ''}`}
+        >
+            {period.start} - {period.end}
+        </button>
+    );
+};

@@ -1,6 +1,6 @@
 "use client";
 
-import React, {createContext} from "react";
+import React, { createContext } from "react";
 import NewCalendar from "./newCalendar";
 import { bookingData } from "../../../utils/typeStorage/bookingType";
 import { periodData } from "../../../utils/typeStorage/periodType";
@@ -14,57 +14,76 @@ interface BookingContextType {
 }
 
 interface BookingPageState {
-  allBooking: Array<bookingData>
-  allPeriod: Array<periodData>
-  allTable: Array<tableData>
+  allBooking: Array<bookingData>;
+  allPeriod: Array<periodData>;
+  allTable: Array<tableData>;
   loading: boolean;
 }
 
-export const bookingContext = createContext<BookingContextType>({allBooking: [], allPeriod: [], allTable: []});
+export const bookingContext = createContext<BookingContextType>({
+  allBooking: [],
+  allPeriod: [],
+  allTable: [],
+});
 
-export default class bookingPage extends React.Component<{}, BookingPageState> {
+export default class BookingPage extends React.Component<{}, BookingPageState> {
+  private bookingFetcher: bookingFetcher;
 
-  constructor(props: {}){
+  constructor(props: {}) {
     super(props);
 
     this.state = {
       allBooking: [],
       allPeriod: [],
       allTable: [],
-      loading: true
-    }
-  }
+      loading: true,
+    };
 
-  setAllBooking(value: Array<bookingData>){
-    this.setState({allBooking: value});
-  }
-  setAllPeriod(value: Array<periodData>){
-    this.setState({allPeriod: value});
-  }
-  setAllTable(value: Array<tableData>){
-    this.setState({allTable: value});
+    this.bookingFetcher = new bookingFetcher();
   }
 
   async componentDidMount() {
-    let bookf = new bookingFetcher();
-    this.setAllBooking(await bookf.getAllBooking());
-    this.setAllPeriod(await bookf.getAllBookingPeriod());
-    this.setAllTable(await bookf.getAllBookingTable());
-    this.setState({ loading: false });
+    await this.fetchBookingData();
+  }
+
+  private async fetchBookingData() {
+    try {
+      const [bookings, periods, tables] = await Promise.all([
+        this.bookingFetcher.getAllBooking(),
+        this.bookingFetcher.getAllBookingPeriod(),
+        this.bookingFetcher.getAllBookingTable(),
+      ]);
+      this.setState({
+        allBooking: bookings,
+        allPeriod: periods,
+        allTable: tables,
+        loading: false,
+      });
+    } catch (error) {
+      console.error("Error fetching booking data:", error);
+      // Handle error appropriately here
+    }
+  }
+
+  renderLoading() {
+    return (
+      <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[--primary-color]"></div>
+      </div>
+    );
+  }
+
+  renderContent() {
+    return (
+      <div className="min-h-screen min-w-screen pt-[56px] bg-[--neutrals-color] flex flex-col items-center">
+        <bookingContext.Provider value={{ allBooking: this.state.allBooking, allPeriod: this.state.allPeriod, allTable: this.state.allTable }}>
+          <NewCalendar />
+        </bookingContext.Provider>
+      </div>
+    );
   }
 
   render() {
-    if (this.state.loading) {
-      return (<div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
-      <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[--primary-color]"></div>
-    </div>);
-    }
-    return (
-        <div className="min-h-screen min-w-screen pt-[56px] bg-[--neutrals-color] flex flex-col items-center">
-          <bookingContext.Provider value={{allBooking: this.state.allBooking, allPeriod: this.state.allPeriod, allTable: this.state.allTable}}>
-            <NewCalendar />
-          </bookingContext.Provider>
-        </div>  
-    );
+    return this.state.loading ? this.renderLoading() : this.renderContent();
   }
 }
