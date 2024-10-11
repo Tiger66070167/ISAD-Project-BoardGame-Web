@@ -8,8 +8,8 @@ export async function POST(req: Request) {
         let [access, refresh] = await tokenManage.checkToken(data.access, data.refresh);
         let info;
         if (access && refresh) {
-            cookie.set('token', access);
-            cookie.set('askNew', refresh);
+            cookie.set('token', access, {sameSite: "strict"});
+            cookie.set('askNew', refresh, {sameSite: "strict"});
 
             info = await tokenManage.getAccess(access);
         } else {

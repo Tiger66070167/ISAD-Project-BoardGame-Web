@@ -34,8 +34,8 @@ export default class loginSystem {
 
             if (await bcrypt.compare(password, result[0].password)) {
                 let output: {access: string, refresh: string} = await tokenManage.getNewToken({user_id: result[0].users_id, username: result[0].username, picture: result[0].picture, user_role: result[0].role});
-                cookie.set('token', output.access);
-                cookie.set('askNew', output.refresh);
+                cookie.set('token', output.access, {sameSite: 'strict'});
+                cookie.set('askNew', output.refresh, {sameSite: 'strict'});
             } else {
                 return false;
             }

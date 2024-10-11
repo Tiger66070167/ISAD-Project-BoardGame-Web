@@ -40,7 +40,7 @@ export default class profilePage extends React.Component<{ params: { slug: numbe
   setLoad(value: boolean) { this.setState({ load: value }); }
   setProfile(file: File | null) { this.setState({ profile: file }); }
   setError(value: boolean) { this.setState({ error: value }); }
-  setChangePass(value: boolean) { this.setState({changePass: value}); }
+  setChangePass(value: boolean) { this.setState({ changePass: value }); }
 
   async componentDidMount(): Promise<void> {
     this.setUp()
@@ -53,7 +53,6 @@ export default class profilePage extends React.Component<{ params: { slug: numbe
     this.setAccount(await account.getAccount(this.state.account.users_id));
 
     let image: HTMLImageElement = document.querySelector(".profile")!;
-    console.log(this.state.account);
     image.src = this.state.account.picture!;
     this.setLoad(false);
   }
@@ -93,12 +92,31 @@ export default class profilePage extends React.Component<{ params: { slug: numbe
       let account: accountFetcher = new accountFetcher();
       outcome = await account.updateAccount(this.state.account.users_id, undefined, undefined, undefined, firstname.value, lastname.value, phone.value);
 
-      if (!outcome) {this.setError(true)}
+      if (!outcome) { this.setError(true) }
       this.setAccount(await account.getAccount(this.state.account.users_id));
     }
 
     this.setLoad(false);
     this.setPersonalEdit(false);
+  }
+
+  private deleteCookie(del: string) {
+    let arrayCookie: string[] = document.cookie.split(";");
+    let mapCookie: Map<string, string> = new Map();
+    arrayCookie.forEach((word) => {
+      let [key, value] = word.split("=");
+      mapCookie.set(key.trim(), value.trim());
+    })
+
+    mapCookie.forEach((value, key) => {
+      if (key === del) document.cookie = `${key}=; path=/; Max-Age=0; SameSite=strict;`;
+    });
+  }
+
+  public handleLogout() {
+    this.deleteCookie("askNew");
+    this.deleteCookie("token");
+    location.replace("http://localhost:3000");
   }
 
   public handlePic() {
@@ -145,12 +163,19 @@ export default class profilePage extends React.Component<{ params: { slug: numbe
                   {profile ? "Save" : "Edit"}
                 </button>
 
-               {/* change password button */}
-               <button className="absolute bottom-10 right-10 border-solid border-2 border-white px-[1vw] py-[0.5vh] opacity-50 rounded-md"
-                  onClick={() => { this.setChangePass(true) }}
-                >
-                  Change password
-                </button> 
+                {/* change password button */}
+                <div className="absolute bottom-10 right-10 flex gap-[1vw]">
+                  <button className="border-solid border-2 border-white px-[1vw] py-[0.5vh] opacity-50 rounded-md"
+                    onClick={() => { this.setChangePass(true) }}
+                  >
+                    Change password
+                  </button>
+                  <button className="border-solid border-2 border-white px-[1vw] py-[0.5vh] opacity-50 rounded-md"
+                    onClick={this.handleLogout.bind(this)}
+                  >
+                    Logout
+                  </button>
+                </div>
 
                 {/* profile picture */}
                 {profile ?
