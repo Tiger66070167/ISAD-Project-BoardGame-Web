@@ -1,11 +1,10 @@
 "use client";
 
 import React, { createContext } from "react";
-import NewCalendar from "./newCalendar";
-import { bookingData } from "../../../utils/typeStorage/bookingType";
-import { periodData } from "../../../utils/typeStorage/periodType";
-import { tableData } from "../../../utils/typeStorage/tableType";
-import bookingFetcher from "../../../utils/core/fetcher/tableFetcher/bookingFetcher";
+import { bookingData } from "../../../../utils/typeStorage/bookingType";
+import { periodData } from "../../../../utils/typeStorage/periodType";
+import { tableData } from "../../../../utils/typeStorage/tableType";
+import bookingFetcher from "../../../../utils/core/fetcher/tableFetcher/bookingFetcher";
 
 interface BookingContextType {
   allBooking: Array<bookingData>;
@@ -80,9 +79,6 @@ export default class BookingPage extends React.Component<{}, BookingPageState> {
   renderContent() {
     return (
       <div className="min-h-screen min-w-screen pt-[56px] bg-[--neutrals-color] flex flex-col items-center">
-        <bookingContext.Provider value={{ allBooking: this.state.allBooking, allPeriod: this.state.allPeriod, allTable: this.state.allTable }}>
-          <NewCalendar />
-        </bookingContext.Provider>
       </div>
     );
   }
