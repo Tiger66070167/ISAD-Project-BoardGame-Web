@@ -3,9 +3,10 @@ import NewTimeTable from "./newTimeTable";
 
 function getCalendarPageDate(month: number, year: number): Date[]{
     const lastDateOfCurrentMonth = new Date(year, month+1, 0);
+    lastDateOfCurrentMonth.setHours(0, 0, 0, 0);
     const lastSundayOfPreviousMonth = new Date(year, month, 1);
-    lastDateOfCurrentMonth.setHours(0,0 ,0 ,0);
-    lastSundayOfPreviousMonth.setHours(0,0 ,0 ,0);
+    lastSundayOfPreviousMonth.setHours(0, 0, 0, 0);
+    
     lastSundayOfPreviousMonth.setDate(0);
 
     while (lastSundayOfPreviousMonth.getDay() !== 0) {
@@ -48,7 +49,7 @@ export default function NewCalendar(){
             <div className="border m-5 w-full h-full max-w-6xl">
                 <div className="grid grid-cols-2 w-full h-10">
                     <button onClick={() => setMonthState(0)} className={`border ${(monthState === 0) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>{monthTable[now.getMonth()]}</button>
-                    <button onClick={() => setMonthState(1)} className={`border ${(monthState === 1) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>{monthTable[(now.getMonth()+1)%11]}</button>
+                    <button onClick={() => setMonthState(1)} className={`border ${(monthState === 1) ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>{monthTable[(now.getMonth()+1)%12]}</button>
                 </div>
                 <div className="grid grid-cols-7 w-full">
                     {dayTable.map((day) => {
@@ -58,6 +59,7 @@ export default function NewCalendar(){
                             </div>
                         );
                         })}
+
                     {calendarList[monthState].map((date) => {
                         let isToday = (date.toDateString() == now.toDateString());
                         let isValid = (date>now && date<=new Date(now.getFullYear(), now.getMonth()+2, 0));
