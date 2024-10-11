@@ -5,11 +5,7 @@ import update from "../../Database/state/updateDB";
 import { users } from "../../typeStorage/tableDatabase";
 import { userInfo } from "../../typeStorage/accountType";
 import { cookies } from "next/headers";
-
-
-
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
 export default class tokenManage {
     public constructor() { }
@@ -64,7 +60,7 @@ export default class tokenManage {
                 return false;
             }
         } catch (error) {
-            console.log("Bug at tokenManage.ts");
+
             return false;
         }
     }
@@ -77,9 +73,6 @@ export default class tokenManage {
                 let { access, refresh } = await this.getNewToken(await this.getRefresh(oldRefresh));
                 return [access, refresh];
             } else {
-                cookie.delete("askNew");
-                cookie.delete("token");
-                
                 throw new Error("Invalid token");
             }
         } else {

@@ -17,6 +17,9 @@ export async function POST(req: Request) {
         }
         return Response.json(info, { status: 201 });
     } catch (error) {
+        cookie.delete("askNew");
+        cookie.delete("token");
+
         return Response.json({ message: "Something isn't right" }, { status: 401 });
     }
 }

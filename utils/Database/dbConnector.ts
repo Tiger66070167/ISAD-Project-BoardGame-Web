@@ -1,6 +1,5 @@
 import { PoolOptions } from 'mysql2';
 import mysql, { Pool, PoolConnection } from 'mysql2/promise';
-const dotenv = require("dotenv").config()
 
 
 export default class dbConnector {

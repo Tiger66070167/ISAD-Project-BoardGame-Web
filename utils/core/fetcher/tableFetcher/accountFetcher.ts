@@ -47,15 +47,17 @@ export default class accountFetcher extends fetcher {
         }
     }
 
-    public async checkToken() {
-        let allCookie: string[] = document.cookie.split(";");
-        let cookie = new Map();
-        allCookie.forEach((noSplit) => {
-            let [key, value] = noSplit.split("=");
-            cookie.set(key.trim(), value);
-        })
-        let access = cookie.get("token");
-        let refresh = cookie.get("askNew");
+    public async checkToken(access?:string, refresh?: string) {
+        if (!access && !refresh) {
+            let allCookie: string[] = document.cookie.split(";");
+            let cookie = new Map();
+            allCookie.forEach((noSplit) => {
+                let [key, value] = noSplit.split("=");
+                cookie.set(key.trim(), value);
+            })
+            access = cookie.get("token");
+            refresh = cookie.get("askNew");
+        }
 
         if (access && refresh) {
             try {

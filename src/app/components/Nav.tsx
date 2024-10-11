@@ -101,7 +101,7 @@ export default class Nav extends React.Component<{}, { data: userInfo | null }> 
             desktop:px-4 desktop:text-lg
             transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
               >
-                <Link href={`/${this.state.data.id}/profile`}>
+                <Link href={`/profile/${this.state.data.id}`}>
                   <div className="h-[100%] image flex gap-3 items-center overflow-hidden">
                     <img className="h-[100%] rounded-full" src={this.state.data!.profile} alt="Image" />
                     <p className="text-nowrap">{this.state.data.username}</p>
@@ -139,7 +139,7 @@ export default class Nav extends React.Component<{}, { data: userInfo | null }> 
             desktop:px-4 desktop:text-lg
             transition hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color]"
                     >
-                      <Link href={`/${this.state.data.id}/profile`}>
+                      <Link href={`/profile/${this.state.data.id}`}>
                         <div className="h-[2rem] image flex gap-3 items-center overflow-hidden">
                           <img className="h-[100%] rounded-full" src={this.state.data!.profile} alt="Image" />
                           <p className="text-nowrap">{this.state.data.username}</p>
