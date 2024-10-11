@@ -102,7 +102,7 @@ export default function NewTable({ tableList, period, date }: Prop) {
                     />
                 </>
             ) : (
-                <div className="border w-full h-full m-5 max-w-6xl text-center">
+                <div className="border rounded-md max-w-6xl text-center">
                     <div className="text-3xl">
                         Please select your time period
                     </div>

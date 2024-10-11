@@ -19,8 +19,8 @@ export default function NewTimeTable({ date, periodWithTable }: Prop) {
 
     if (!date || !periodWithTable) {
         return (
-            <div className="border w-full h-full m-5 max-w-6xl text-center">
-                <div className="text-3xl">Please select a date</div>
+            <div className="border w-full h-full m-5 max-w-6xl text-center rounded-md">
+                <div className="w-full text-3xl">Please select a date</div>
             </div>
         );
     }
