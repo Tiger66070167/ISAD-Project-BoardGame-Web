@@ -1,7 +1,15 @@
 "use client";
 import React from "react";
+// interface foodOrderProps{
+//   name?: string;
+//   price?: number;
+//   description?: string;
+//   pic?: string;
+//   orderFood:[]
+// }
 
 export default class orderCard extends React.Component {
+
   render() {
     return (
       <div className="w-full">

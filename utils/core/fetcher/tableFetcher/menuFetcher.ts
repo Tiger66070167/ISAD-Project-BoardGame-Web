@@ -24,7 +24,7 @@ export default class menuFetcher extends fetcher{
         }
     }
  
-    public async addFood(name: string, type: "Fast food" | "Dish" | "Snack" | "Drink", description: string, price: number, picture: File) {
+    public async addFood(name: string, type: string, description: string, price: number, picture: File) {
         let type_num: number = menuFetcher.getType(type as string) as number;
         
         let data = new FormData();

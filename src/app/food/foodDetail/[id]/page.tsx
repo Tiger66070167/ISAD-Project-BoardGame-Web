@@ -1,13 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { foodMenu } from "../../../../../utils/typeStorage/foodType";
 import foodFetcher from "../../../../../utils/core/fetcher/tableFetcher/menuFetcher";
 
 interface getAlreadyFood {
   menuFood: foodMenu | null;
   quantity: number;
+  foodOrders: { id: number; quantity: number }[];
 }
-
 export default class foodDetail extends React.Component<
   { params: { id: number } },
   getAlreadyFood
@@ -17,6 +17,7 @@ export default class foodDetail extends React.Component<
     this.state = {
       menuFood: null,
       quantity: 1,
+      foodOrders: [],
     };
   }
 
@@ -42,10 +43,19 @@ export default class foodDetail extends React.Component<
     }
   };
 
+  orderFood = () => {
+    this.setState((prevState) => ({
+      foodOrders: [
+        ...prevState.foodOrders,
+        { id: this.props.params.id, quantity: prevState.quantity },
+      ],
+    }));
+    console.log(this.state.foodOrders);
+  };
   render() {
     const { menuFood, quantity } = this.state;
 
-    if (!menuFood) { 
+    if (!menuFood) {
       return (
         <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
           <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[--primary-color]"></div>
@@ -58,7 +68,17 @@ export default class foodDetail extends React.Component<
         <div className=" bg-[#292929] w-[500px] h-[600px] rounded-2xl text-center">
           <div className="pt-3 text-[20px] text-center">{menuFood.name}</div>
           <div className=" w-80 h-[200px] mx-auto">
-            <div className="bg-[url('../assets/homeSegtion2.png')] w-full h-full bg-center object-scale-down rounded-xl"></div>
+            <div className="w-full h-full bg-center object-scale-down rounded-xl">
+              {menuFood.picture && (
+                <img
+                  src={menuFood.picture}
+                  alt={menuFood.name || "Food Image"}
+                  className=" object-scale-down w-full h-full rounded-xl"
+                  sizes="100vw"
+                  style={{ objectFit: "cover" }}
+                />
+              )}
+            </div>
           </div>
           <div className=" text-center text-[25px] h-[80px]">
             <div>Price</div>
@@ -92,11 +112,14 @@ export default class foodDetail extends React.Component<
               +
             </button>
           </div>
-          <div className=" bottom-0 left-0 z-30 w-full py-8 px-16 bg-black backdrop-blur-xl bg-opacity-50 rounded-b-2xl">
+          <button
+            className=" bottom-0 left-0 z-30 w-full py-8 px-16 bg-black backdrop-blur-xl bg-opacity-50 rounded-b-2xl"
+            onClick={this.orderFood}
+          >
             <div className="flex bg-[--primary-color] min-w-screen h-[70px] rounded-2xl text-2xl text-black items-center justify-center cursor-pointer hover:scale-105">
               Order
             </div>
-          </div>
+          </button>
         </div>
       </div>
     );

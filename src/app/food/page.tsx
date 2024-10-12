@@ -18,8 +18,9 @@ import { foodMenu } from "../../../utils/typeStorage/foodType";
 import foodFetcher from "../../../utils/core/fetcher/tableFetcher/menuFetcher";
 
 interface FoodPageState {
-  selectedTab: string,
-  allFood: Array<foodMenu>
+  selectedTab: string;
+  allFood: Array<foodMenu>;
+  foodOrders: { id: number; quantity: number }[];
 }
 
 export default class foodPage extends React.Component<{}, FoodPageState> {
@@ -27,27 +28,28 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
     super(props);
     this.state = {
       selectedTab: "all",
-      allFood: []
+      allFood: [],
+      foodOrders: [],
+
     };
   }
 
   setAllFood(value: Array<foodMenu>) {
-    this.setState({allFood: value});
+    this.setState({ allFood: value });
   }
 
   async componentDidMount() {
-      let food = new foodFetcher();
-      this.setAllFood(await food.getAllFood());
-      // console.log(this.state.allFood);
+    let food = new foodFetcher();
+    this.setAllFood(await food.getAllFood());
+    // console.log(this.state.allFood);
   }
-
 
   handleTabChange = (value: string) => {
     this.setState({ selectedTab: value });
   };
 
   render() {
-    const { allFood} = this.state;
+    const { allFood } = this.state;
 
     if (!allFood.length) {
       return (
@@ -60,7 +62,7 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
       <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-6">
         <Tabs
           value={this.state.selectedTab}
-          onValueChange={this.handleTabChange} 
+          onValueChange={this.handleTabChange}
           className="mx-auto py-16 min-w-full max-w-[1400px]"
         >
           <Select
@@ -101,7 +103,13 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
             <div className={style["grid-layout-box"]}>
               {this.state.allFood.map((value) => (
                 <div className="flex justify-center items-center">
-                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
+                  <FoodCard
+                    id={value.food_id}
+                    name={value.name}
+                    price={value.price}
+                    description={value.description}
+                    pic={value.picture}
+                  ></FoodCard>
                 </div>
               ))}
             </div>
@@ -110,44 +118,76 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
           <TabsContent value="fastFood">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {this.state.allFood.filter((value) => value.type === 'Fast food').map((value) => (
-                <div className="flex justify-center items-center">
-                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
-                </div>
-              ))}
+              {this.state.allFood
+                .filter((value) => value.type === "Fast food")
+                .map((value) => (
+                  <div className="flex justify-center items-center">
+                    <FoodCard
+                      id={value.food_id}
+                      name={value.name}
+                      price={value.price}
+                      description={value.description}
+                      pic={value.picture}
+                    ></FoodCard>
+                  </div>
+                ))}
             </div>
             {/* </Card> */}
           </TabsContent>
           <TabsContent value="Dish">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {this.state.allFood.filter((value) => value.type === 'Dish').map((value) => (
-                <div className="flex justify-center items-center">
-                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
-                </div>
-              ))}
+              {this.state.allFood
+                .filter((value) => value.type === "Dish")
+                .map((value) => (
+                  <div className="flex justify-center items-center">
+                    <FoodCard
+                      id={value.food_id}
+                      name={value.name}
+                      price={value.price}
+                      description={value.description}
+                      pic={value.picture}
+                    ></FoodCard>
+                  </div>
+                ))}
             </div>
             {/* </Card> */}
           </TabsContent>
           <TabsContent value="Snack">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {this.state.allFood.filter((value) => value.type === 'Snack').map((value) => (
-                <div className="flex justify-center items-center">
-                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
-                </div>
-              ))}
+              {this.state.allFood
+                .filter((value) => value.type === "Snack")
+                .map((value) => (
+                  <div className="flex justify-center items-center">
+                    <FoodCard
+                      id={value.food_id}
+                      name={value.name}
+                      price={value.price}
+                      description={value.description}
+                      pic={value.picture}
+                    ></FoodCard>
+                  </div>
+                ))}
             </div>
             {/* </Card> */}
           </TabsContent>
           <TabsContent value="drink">
             {/* <Card> */}
             <div className={style["grid-layout-box"]}>
-              {this.state.allFood.filter((value) => value.type === 'Drink').map((value) => (
-                <div className="flex justify-center items-center">
-                  <FoodCard id={value.food_id} name={value.name} price={value.price} description={value.description}></FoodCard>
-                </div>
-              ))}
+              {this.state.allFood
+                .filter((value) => value.type === "Drink")
+                .map((value) => (
+                  <div className="flex justify-center items-center">
+                    <FoodCard
+                      id={value.food_id}
+                      name={value.name}
+                      price={value.price}
+                      description={value.description}
+                      pic={value.picture}
+                    ></FoodCard>
+                  </div>
+                ))}
             </div>
           </TabsContent>
           <div className="md:hidden fixed bottom-0 left-0 z-30 w-full py-8 px-16 bg-neutral-800 backdrop-blur-xl bg-opacity-50">
