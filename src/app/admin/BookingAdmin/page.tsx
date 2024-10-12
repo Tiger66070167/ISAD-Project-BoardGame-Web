@@ -68,6 +68,7 @@ export default class BookingPage extends React.Component<{}, BookingPageState> {
     }
   }
 
+
   renderLoading() {
     return (
       <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
@@ -77,17 +78,34 @@ export default class BookingPage extends React.Component<{}, BookingPageState> {
   }
 
   renderContent() {
+    let isProcessing = false;
+    const handleDelete = async (id:number) => {
+      isProcessing = true;
+      await new bookingFetcher().deleteBooking(id);
+      window.location.reload()
+    }
     return (
       <div className="min-h-screen min-w-screen pt-[56px] bg-[--neutrals-color] flex flex-col items-center">
         {
             this.state.allBooking.map(
                 (b) => {
                     return (
-                        <div key={b.booking_id} className="border rounded-md w-9/12 text-black bg-white m-5">
+                        <div key={b.booking_id} className="border rounded-md border-black w-9/12 text-black bg-white m-5 flex justify-between">
+                          <div>
                             <p>Booking id: {b.booking_id.toString()}</p>
+                            <p>User: {b.user_id}</p>
                             <p>Table: {b.table_id}</p>
                             <p>Period: {b.period_id}</p>
-                            <p>Date: {b.date}</p>
+                            <p>Date: {b.date.split("T")[0]}</p>
+                          </div>
+                          <div className="w-[30%]">
+                            <button className="border rounded-md w-full h-1/2 bg-[--incorrect-color] hover:bg-[--hover-incorrect-color]"
+                              onClick={() => handleDelete(b.booking_id)}
+                              disabled={isProcessing!}
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </div>
                     );
                 }
