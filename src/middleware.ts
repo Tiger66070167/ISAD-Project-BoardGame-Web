@@ -17,6 +17,14 @@ export async function middleware(req: NextRequest) {
             let account = new accountFetcher();
             let data = await account.checkToken(oldAccess.value, oldRefresh.value);
             if (!req.url.split("/").includes("" + data?.id)) { return NextResponse.redirect(new URL("/", req.url)) }
+        } else if (req.nextUrl.pathname === "/booking") {
+            let account = new accountFetcher();
+            let data = await account.checkToken(oldAccess.value, oldRefresh.value);
+            if (data?.role === "admin") {return NextResponse.redirect(new URL("/admin/BookingAdmin", req.url))}
+        } else if (req.nextUrl.pathname === "/boardGame") {
+            let account = new accountFetcher();
+            let data = await account.checkToken(oldAccess.value, oldRefresh.value);
+            if (data?.role === "admin") {return NextResponse.redirect(new URL("/admin/BoardGameAdmin", req.url))}
         }
         // if (req.nextUrl.pathname === ("/")) {
         //     let account = new accountFetcher();

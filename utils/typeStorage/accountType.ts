@@ -13,7 +13,7 @@ export type accountData = {
 }
 
 export type userInfo = {
-    id: number,
+    user_id: number,
     username: string,
     profile: string,
     role: string

@@ -24,8 +24,9 @@ export default class createBoardGame extends Component<{ data: boardGame }> {
   }
 
   changePic() {
-    let image: HTMLImageElement = document.querySelector(".image")!;
+    let image: HTMLImageElement = document.querySelector(".boardImage")!;
     let file: HTMLInputElement = document.querySelector(".pic")!;
+
     image.src = URL.createObjectURL(file.files![0]);
   }
 
@@ -59,9 +60,9 @@ export default class createBoardGame extends Component<{ data: boardGame }> {
 
               {/* Image */}
               <div className="">
-                <Image
-                  className="image object-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
-                  src=""
+                <img
+                  className="boardImage object-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
+                  src="/images/boardGamePicture/boardgame.jpeg"
                   alt=""
                 />
                 <div className="mt-5 flex flex-col justify-center items-center">

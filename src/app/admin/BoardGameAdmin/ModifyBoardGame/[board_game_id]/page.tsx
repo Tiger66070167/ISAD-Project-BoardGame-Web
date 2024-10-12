@@ -3,10 +3,53 @@
 import React, { Component } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Loading from "@/app/components/utilities/Load";
+import { boardGame } from "../../../../../../utils/typeStorage/boardType";
+import boardFetcher from "../../../../../../utils/core/fetcher/tableFetcher/boardFetcher";
 
-export default class createBoardGame extends Component {
+export default class createBoardGame extends Component<{params: {board_game_id: number}}, {data: boardGame | null ,loading: boolean}> {
+  constructor(props: {params: {board_game_id: number}}) {
+    super(props);
+
+    this.state = {
+      data: null,
+      loading: false
+    }
+
+  }
+
+  setLoading(value: boolean) {
+    this.setState({loading: value});
+  }
+  setData(value: boardGame) {
+    this.setState({data: value});
+  }
+
+  componentDidMount(): void {
+    this.setup();
+  }
+
+  public async setup() {
+    this.setLoading(true);
+
+    let board: boardFetcher = new boardFetcher();
+    this.setData(await board.getBoard(this.props.params.board_game_id));
+
+    this.setLoading(false)
+  }
+
+  public handleChange() {
+    this.setLoading(true);
+
+    
+
+    
+  }
+
   render() {
     return (
+      <>
+      {(this.state.loading) && <Loading />}
       <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
         <div className="flex justify-center items-center tablet:pt-16 laptop:pt-20 desktop:pt-28  desktop:pb-22">
           <div className="shadow-md rounded-lg bg-[#303030] flex flex-col pt-8 w-96 desktop:w-[500px] h-auto pb-12">
@@ -23,6 +66,7 @@ export default class createBoardGame extends Component {
                 </label>
                 <input
                   type="text"
+                  defaultValue={this.state.data?.name}
                   placeholder="Enter board game name"
                   className="text-[#bababa] sm:text-sm
                 bg-[#303030]
@@ -35,9 +79,9 @@ export default class createBoardGame extends Component {
 
               {/* Image */}
               <div className="">
-                <Image
+                <img
                   className="object-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
-                  src=""
+                  src={this.state.data?.picture || "/images/boardGamePicture/boardgame.jpeg"}
                   alt=""
                 />
                 <div className="mt-5 flex flex-col justify-center items-center">
@@ -75,6 +119,7 @@ export default class createBoardGame extends Component {
           </div>
         </div>
       </div>
+      </>
     );
   }
 }

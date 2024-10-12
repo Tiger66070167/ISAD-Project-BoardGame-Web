@@ -72,10 +72,10 @@ export default class adminCard extends React.Component<
               hover:bg-[--hover-primary-color] duration-300"
               onClick={this.changeStatusHandler.bind(this)}
             >
-              Chage Status
+              Change Status
             </button>
             <div className="flex gap-x-5">
-              <Link href="/admin/BoardGameAdmin/ModifyBoardGame">
+              <Link href={`/admin/BoardGameAdmin/ModifyBoardGame/${this.props.data.board_game_id}`}>
                 <button
                   className="px-5 py-1
                 bg-[--secondary-color] rounded
