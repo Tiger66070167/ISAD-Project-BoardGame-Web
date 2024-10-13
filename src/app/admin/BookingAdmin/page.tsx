@@ -90,20 +90,20 @@ export default class BookingPage extends React.Component<{}, BookingPageState> {
             this.state.allBooking.map(
                 (b) => {
                     return (
-                        <div key={b.booking_id} className="border rounded-md border-black w-9/12 text-black bg-white m-5 flex justify-between">
-                          <div>
+                        <div key={b.booking_id} className="border rounded-md border-black w-9/12 text-black bg-[#303030] m-5 flex justify-between">
+                          <div className="text-white pl-10 py-5">
                             <p>Booking id: {b.booking_id.toString()}</p>
                             <p>User: {b.user_id}</p>
                             <p>Table: {b.table_id}</p>
                             <p>Period: {b.period_id}</p>
                             <p>Date: {b.date.split("T")[0]}</p>
                           </div>
-                          <div className="w-[30%]">
-                            <button className="border rounded-md w-full h-1/2 bg-[--incorrect-color] hover:bg-[--hover-incorrect-color]"
+                          <div className="flex justify-center py-10 pr-10">
+                            <button className="rounded-md w-32 bg-[--secondary-color] hover:bg-[--passed-color] duration-200"
                               onClick={() => handleDelete(b.booking_id)}
                               disabled={isProcessing!}
                             >
-                              Delete
+                              Complete
                             </button>
                           </div>
                         </div>

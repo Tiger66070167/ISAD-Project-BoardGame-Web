@@ -19,7 +19,7 @@ export default function NewTimeTable({ date, periodWithTable }: Prop) {
 
     if (!date || !periodWithTable) {
         return (
-            <div className="border w-full h-full m-5 max-w-6xl text-center rounded-md">
+            <div className="border border-black bg-[#303030] w-full h-full m-5 max-w-6xl text-center rounded-md">
                 <div className="w-full text-3xl">Please select a date</div>
             </div>
         );
@@ -27,8 +27,8 @@ export default function NewTimeTable({ date, periodWithTable }: Prop) {
 
     return (
         <>
-            <div className="border w-full h-full m-5 max-w-6xl">
-                <div className="border text-center bg-white text-black">
+            <div className="border border-black w-full h-full m-5 max-w-6xl">
+                <div className="border border-black text-center bg-[#303030] text-white">
                     {date.toDateString()}
                     <br />
                 </div>
@@ -58,7 +58,7 @@ const PeriodButton: React.FC<PeriodButtonProps> = ({ period, isSelected, onSelec
     return (
         <button
             onClick={onSelect}
-            className={`border text-center h-10 ${isSelected ? 'bg-[--primary-color] text-white' : ''}`}
+            className={`border border-black text-center h-10 ${isSelected ? 'bg-[--primary-color] text-black' : ''}`}
         >
             {period.start} - {period.end}
         </button>

@@ -16,7 +16,7 @@ function TableCard(){
     return (
         <>
         <div className=" m-2 w-11/12 h-24 rounded-lg shadow-lg text-center flex flex-col justify-center items-center 
-              bg-[#292929] text-white">
+              bg-[#303030] text-white">
         </div>
         </>
     );

@@ -90,22 +90,22 @@ export default function NewCalendar() {
 
     return (
         <>
-            <div className="border m-5 w-full h-full max-w-6xl">
-                <div className="grid grid-cols-2 w-full h-10">
+            <div className=" m-5 w-full h-full max-w-6xl">
+                <div className=" grid grid-cols-2 w-full h-10">
                     <button 
                         onClick={() => setMonthState(0)} 
-                        className={`border ${monthState === 0 ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>
+                        className={`border border-black ${monthState === 0 ? "bg-[--primary-color] text-black" : "bg-[#303030]"}`}>
                         {monthTable[now.getMonth()]}
                     </button>
                     <button 
                         onClick={() => setMonthState(1)} 
-                        className={`border ${monthState === 1 ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>
+                        className={`border border-black ${monthState === 1 ? "bg-[--primary-color] text-black" : "bg-[#303030]"}`}>
                         {monthTable[(now.getMonth() + 1) % 12]}
                     </button>
                 </div>
                 <div className="grid grid-cols-7 w-full">
                     {dayTable.map(day => (
-                        <div key={day} className="border text-center bg-white text-black">
+                        <div key={day} className="border border-black text-center bg-[#444444] text-white">
                             {day}
                         </div>
                     ))}
@@ -139,12 +139,12 @@ export default function NewCalendar() {
                         return (
                             <div 
                                 key={date.toLocaleDateString()} 
-                                className={`border h-24 ${!isValid ? "text-gray-500" : "bg-[--neutrals-color]"}`}>
+                                className={`border border-black h-24 ${!isValid ? "text-gray-500" : "bg-[--neutrals-color]"}`}>
                                 <button 
                                     onClick={() => isValid && handleDateSelection(date)} 
                                     disabled={!isValid} 
-                                    className={`size-full ${selectedDate?.getTime() === date.getTime() ? "bg-[--primary-color]" : "bg-[--neutrals-color]"}`}>
-                                    <div className={`text-lg text-start size-full ${isToday ? "text-black bg-white" : ""}`}>
+                                    className={`size-full ${selectedDate?.getTime() === date.getTime() ? "bg-[--primary-color] text-black" : "bg-[--neutrals-color]"}`}>
+                                    <div className={`pl-2 text-lg text-start size-full ${isToday ? "text-black bg-[--primary-color]" : ""}`}>
                                         {date.getDate()}<br />
                                         {isToday ? " TODAY" : ""}
                                         <br />
