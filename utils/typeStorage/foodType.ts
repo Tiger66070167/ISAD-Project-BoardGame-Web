@@ -9,8 +9,8 @@ export type foodMenu = {
 
 export type foodOrder = {
     order_id: number,
-    table_id?: number,
-    food_id?: number,
+    table_id: number,
+    food_id: number,
     status?: string,
     amount?: number
 }

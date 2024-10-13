@@ -1,14 +1,8 @@
 "use client";
 import React from "react";
-// interface foodOrderProps{
-//   name?: string;
-//   price?: number;
-//   description?: string;
-//   pic?: string;
-//   orderFood:[]
-// }
+import { foodMenu } from "../../../../utils/typeStorage/foodType";
 
-export default class orderCard extends React.Component {
+export default class orderCard extends React.Component<{info: foodMenu, quantity: number, delete: Function}> {
 
   render() {
     return (
@@ -22,33 +16,35 @@ export default class orderCard extends React.Component {
           >
             {/* inbox picture Set */}
             <div className="w-[400px] mx-0 top-0  mb-3">
-              <div className="bg-[url('../assets/boardgame.jpeg')] bg-center object-scale-down h-48 w-full rounded-2xl overflow-hidden shadow-md"></div>
+              <img src={this.props.info.picture} className="bg-center object-scale-down h-48 w-full rounded-2xl overflow-hidden shadow-md"></img>
             </div>
             {/* set name and descrip of Menu */}
             <div className="grid grid-cols-2  w-full">
               <div className="grid grid-rows-3 text-justify mx-6 mt-5">
                 {/* <div className=""> */}
-                <div className="text-3xl  font-bold text-white ">Name</div>
+                <div className="text-3xl  font-bold text-white ">{this.props.info.name}</div>
                 {/* Add button*/}
 
-                <div className="text-lg text-white">Description</div>
+                <div className="text-lg text-white">{this.props.info.description}</div>
               </div>
               <div className="grid grid-cols-3">
                 <div className="grid justify-center items-center mt-4 text-3xl ">
                   Quatity
                   <div className="text-center leading-3 w-[100px] h-[80px] text-3xl mt-5">
-                    20
+                    {this.props.quantity}
                   </div>
                 </div>
                 <div className="grid justify-center items-center mt-4 text-3xl ">
                   Price
-                  <div className="flex leading-3 w-[100px] h-[80px] text-3xl mt-5">
-                    20
+                  <div className="flex leading-3 w-[100px] h-[80px] text-3xl mt-5 overflow-ellipsis">
+                    {this.props.info.price! * this.props.quantity}
                   </div>
                 </div>
-                <button className="flex w-full rounded-2xl  justify-center items-center text-3xl hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1">
+                <button 
+                onClick={() => {this.props.delete(this.props.info.food_id)}}
+                className="flex w-full rounded-2xl  justify-center items-center text-3xl hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1">
                   <div className="flex justify-center w-full h-full bg-[#191919] rounded-2xl items-center">
-                    แก้ไข
+                    ลบ
                   </div>
                 </button>
               </div>
@@ -65,7 +61,7 @@ export default class orderCard extends React.Component {
           >
             {/* Image */}
             <div className="relative w-full h-[200px]">
-              <div className="absolute top-0 left-0 w-full h-full bg-[url('../assets/boardgame.jpeg')] bg-center bg-cover rounded-2xl overflow-hidden shadow-md"></div>
+              <img src={this.props.info.picture} className="absolute top-0 left-0 w-full h-full bg-center bg-cover rounded-2xl overflow-hidden shadow-md" />
             </div>
 
             {/* Content */}
@@ -84,8 +80,8 @@ export default class orderCard extends React.Component {
                 </div>
               </div>
 
-              <button className="w-full mt-4 rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 py-2 px-4 text-white font-bold hover:opacity-80">
-                แก้ไข
+              <button onClick={() => {this.props.delete(this.props.info.food_id)}} className="w-full mt-4 rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 py-2 px-4 text-white font-bold hover:opacity-80">
+                ลบ
               </button>
             </div>
           </div>

@@ -1,38 +1,17 @@
 "use client";
 import React from "react";
-import { foodMenu } from "../../../../../utils/typeStorage/foodType";
-import foodFetcher from "../../../../../utils/core/fetcher/tableFetcher/menuFetcher";
+import { foodMenu } from "../../../utils/typeStorage/foodType";
+import Popup from "@/app/components/utilities/Popup";
 
 interface getAlreadyFood {
-  menuFood: foodMenu | null;
   quantity: number;
-  foodOrders: { id: number; quantity: number }[];
 }
-export default class foodDetail extends React.Component<
-  { params: { id: number } },
-  getAlreadyFood
-> {
-  constructor(props: { params: { id: number } }) {
+export default class FoodDetail extends React.Component<{ info: foodMenu, close: Function, order: Function }, getAlreadyFood> {
+  constructor(props: { info: foodMenu, close: Function, order: Function }) {
     super(props);
     this.state = {
-      menuFood: null,
       quantity: 1,
-      foodOrders: [],
     };
-  }
-
-  setFood(value: foodMenu) {
-    this.setState({ menuFood: value });
-  }
-
-  async componentDidMount() {
-    let food = new foodFetcher();
-    try {
-      const loadedFood = await food.getFood(this.props.params.id);
-      this.setFood(loadedFood);
-    } catch (error) {
-      console.error("Error fetching food:", error);
-    }
   }
 
   handleQuantityChange = (action: string) => {
@@ -43,36 +22,24 @@ export default class foodDetail extends React.Component<
     }
   };
 
-  orderFood = () => {
-    this.setState((prevState) => ({
-      foodOrders: [
-        ...prevState.foodOrders,
-        { id: this.props.params.id, quantity: prevState.quantity },
-      ],
-    }));
-    console.log(this.state.foodOrders);
-  };
+  handleOrder() {
+    this.props.order(this.props.info, this.state.quantity);
+
+    this.props.close();
+  }
+
   render() {
-    const { menuFood, quantity } = this.state;
-
-    if (!menuFood) {
-      return (
-        <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[--primary-color]"></div>
-        </div>
-      );
-    }
-
     return (
-      <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
-        <div className=" bg-[#292929] w-[500px] h-[600px] rounded-2xl text-center">
-          <div className="pt-3 text-[20px] text-center">{menuFood.name}</div>
+      <Popup>
+        <div className=" bg-[#292929] w-[500px] h-[600px] rounded-2xl text-center relative">
+          <button onClick={() => {this.props.close()}} className="absolute right-[3%] top-[1%] p-[2%]">X</button>
+          <div className="pt-3 text-[20px] text-center">{this.props.info.name}</div>
           <div className=" w-80 h-[200px] mx-auto">
             <div className="w-full h-full bg-center object-scale-down rounded-xl">
-              {menuFood.picture && (
+              {this.props.info.picture && (
                 <img
-                  src={menuFood.picture}
-                  alt={menuFood.name || "Food Image"}
+                  src={this.props.info.picture}
+                  alt={this.props.info.name || "Food Image"}
                   className=" object-scale-down w-full h-full rounded-xl"
                   sizes="100vw"
                   style={{ objectFit: "cover" }}
@@ -82,12 +49,12 @@ export default class foodDetail extends React.Component<
           </div>
           <div className=" text-center text-[25px] h-[80px]">
             <div>Price</div>
-            {menuFood && menuFood.price ? menuFood.price : "-"}
+            {this.props.info && this.props.info.price ? this.props.info.price : "-"}
           </div>
           <div className="h-[80px] text-[25px] ">
             Sum Price
             <div>
-              {menuFood && menuFood.price ? menuFood.price * quantity : "-"}
+              {this.props.info && this.props.info.price ? this.props.info.price * this.state.quantity : "-"}
             </div>
           </div>
 
@@ -101,7 +68,7 @@ export default class foodDetail extends React.Component<
               -
             </button>
             <div className="flex justify-center text-[60px] bg-neutral-900  backdrop-blur-xl bg-opacity-50 h-[100px] rounded-t-xl border-gray-400 border-2">
-              <div className="flex text-white ">{quantity}</div>
+              <div className="flex text-white ">{this.state.quantity}</div>
             </div>
             <button
               className="flex items-center justify-center text-[60px] bg-neutral-900 rounded-xl w-[100px] h-[80px] self-center mx-auto hover:border-[--primary-color] hover:border-2"
@@ -114,14 +81,14 @@ export default class foodDetail extends React.Component<
           </div>
           <button
             className=" bottom-0 left-0 z-30 w-full py-8 px-16 bg-black backdrop-blur-xl bg-opacity-50 rounded-b-2xl"
-            onClick={this.orderFood}
+            onClick={this.handleOrder.bind(this)}
           >
             <div className="flex bg-[--primary-color] min-w-screen h-[70px] rounded-2xl text-2xl text-black items-center justify-center cursor-pointer hover:scale-105">
               Order
             </div>
           </button>
         </div>
-      </div>
+      </Popup>
     );
   }
 }

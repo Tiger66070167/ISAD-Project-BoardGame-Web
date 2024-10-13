@@ -5,7 +5,7 @@ export default class Popup extends React.Component<{children: JSX.Element}> {
 
     render() {
         return (
-           <div className="w-[100vw] h-[100vh] bg-[rgb(0,0,0,0.7)] fixed flex justify-center items-center z-10">
+           <div className="w-[100vw] h-[100vh] bg-[rgb(0,0,0,0.7)] fixed top-0 right-0 flex justify-center items-center z-10">
                 {this.props.children}
            </div>  
         );

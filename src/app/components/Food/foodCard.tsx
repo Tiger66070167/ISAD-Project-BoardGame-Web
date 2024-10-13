@@ -1,31 +1,37 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import Image from "next/image";
+import { foodMenu } from "../../../../utils/typeStorage/foodType";
+import FoodDetail from "@/app/food/FoodDetail";
 
-interface FoodCardProps {
-  id?: number;
-  name?: string;
-  price?: number;
-  description?: string;
-  pic?: string;
-}
+export default class foodCard extends React.Component<{info: foodMenu, orderFood: Function}, {showOrder: boolean}> {
+  constructor(props: {info: foodMenu, orderFood: Function}) {
+    super(props)
 
-export default class foodCard extends React.Component<FoodCardProps> {
+    this.state = {
+      showOrder: false
+    }
+  }
+
+  setShowOrder(value: boolean) {this.setState({showOrder: value});}
+  handleClose() {
+    this.setShowOrder(false);
+  }
+  
   render() {
-    const { id, name, price, description, pic } = this.props;
-    console.log(pic)
+    const { food_id, name, price, description, picture } = this.props.info;
     return (
-      <button>
-        <Link href={`/food/foodDetail/${id}`}>
+      <>
+      {this.state.showOrder && <FoodDetail info={this.props.info} close={this.handleClose.bind(this)} order={this.props.orderFood} />}
+      <button onClick={() => {this.setShowOrder(true)}}>
           <div className="w-[300px] shadow-2xl mt-2">
             <div className="flex flex-col justify-center items-center bg-[#292929] hover:bg-[--neutral-color] hover:border-[--primary-color] border-transparent border-2 h-[400px] w-full rounded-2xl">
               {/* inbox picture Set */}
               <div className="w-64 mx-auto top-0  mb-3">
                 <div className="bg-center object-scale-down h-48 w-full rounded-2xl overflow-hidden shadow-md">
-                {pic && (
+                {picture && (
                     <img
-                      src={pic}
+                      src={picture}
                       alt={name || "Food Image"}
                      className=" object-scale-down w-full h-full"
                       sizes="100vw"
@@ -51,8 +57,8 @@ export default class foodCard extends React.Component<FoodCardProps> {
               </div>
             </div>
           </div>
-        </Link>
       </button>
+      </>
     );
   }
 }
