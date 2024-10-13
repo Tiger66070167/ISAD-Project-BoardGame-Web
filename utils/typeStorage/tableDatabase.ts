@@ -6,7 +6,7 @@ export type booking_period = 'period_id' | 'start' | 'end';
 
 export type food_menu = 'food_id' | 'name' | 'type' | 'description' | 'price' | 'picture';
 
-export type food_order = 'order_id' | 'table_id' | 'food_id' | 'status';
+export type food_order = 'order_id' | 'table_id' | 'food_id' | 'status' | 'amount';
 
 export type food_type = 'type_id' | 'type_name';
 

@@ -12,6 +12,5 @@ export type foodOrder = {
     table_id?: number,
     food_id?: number,
     status?: string,
-    confirm?: boolean,
     amount?: number
 }
