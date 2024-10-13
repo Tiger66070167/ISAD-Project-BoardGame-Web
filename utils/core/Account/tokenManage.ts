@@ -5,6 +5,7 @@ import update from "../../Database/state/updateDB";
 import { users } from "../../typeStorage/tableDatabase";
 import { userInfo } from "../../typeStorage/accountType";
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 export default class tokenManage {
     public constructor() { }
@@ -17,7 +18,7 @@ export default class tokenManage {
             role: data.role!,
         };
         const access: string = jwt.sign(userInfo, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: "5s",
+            expiresIn: "1h",
         });
         const refresh: string = jwt.sign(
             userInfo,
@@ -46,14 +47,13 @@ export default class tokenManage {
                     .table("users")
                     .where("users_id", compare.EQUAL, refreshData.user_id)
             ).query();
-
+            
             if (refresh === userToken[0].token) {
                 return true;
             } else {
                 return false;
             }
         } catch (error) {
-
             return false;
         }
     }

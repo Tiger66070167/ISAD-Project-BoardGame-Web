@@ -8,9 +8,10 @@ export async function POST(req: Request) {
         let [access, refresh] = await tokenManage.checkToken(data.access, data.refresh);
         let info;
         if (access && refresh) {
+            
             cookie.set('token', access, {sameSite: "strict"});
             cookie.set('askNew', refresh, {sameSite: "strict"});
-
+            
             info = await tokenManage.getAccess(access);
         } else {
             throw new Error("Can't find this token");
@@ -19,7 +20,6 @@ export async function POST(req: Request) {
     } catch (error) {
         cookie.delete("askNew");
         cookie.delete("token");
-
         return Response.json({ message: "Something isn't right" }, { status: 401 });
     }
 }

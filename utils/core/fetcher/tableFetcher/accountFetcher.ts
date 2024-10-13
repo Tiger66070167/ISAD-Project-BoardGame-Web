@@ -14,7 +14,7 @@ export default class accountFetcher extends fetcher {
     public async updateAccount(users_id: number, username?: string, password?: string, picture?: File, first_name?: string, last_name?: string, phone?: string) {
         if (picture) {
             let tmp = new FormData();
-            tmp.append("users_id", ''+users_id);
+            tmp.append("users_id", '' + users_id);
             if (username) tmp.append("username", username);
             if (password) tmp.append("password", password);
             tmp.append("picture", picture);
@@ -30,7 +30,7 @@ export default class accountFetcher extends fetcher {
             }
         } else {
             try {
-                await this.patchFetcher("http://localhost:3000/api/account/changeAccountJson", {users_id, username, password, first_name, last_name, phone})
+                await this.patchFetcher("http://localhost:3000/api/account/changeAccountJson", { users_id, username, password, first_name, last_name, phone })
                 return true;
             } catch (error) {
                 return false;
@@ -40,14 +40,14 @@ export default class accountFetcher extends fetcher {
 
     public async changePass(users_id: number, realPass: string, current: string, newPass: string) {
         try {
-            await this.patchFetcher("http://localhost:3000/api/account/validationPass", {users_id, realPass, current, newPass});
+            await this.patchFetcher("http://localhost:3000/api/account/validationPass", { users_id, realPass, current, newPass });
             return true;
         } catch (error) {
             return false;
         }
     }
 
-    public async checkToken(access?:string, refresh?: string) {
+    public async checkToken(access?: string, refresh?: string) {
         if (!access && !refresh) {
             let allCookie: string[] = document.cookie.split(";");
             let cookie = new Map();
@@ -61,12 +61,12 @@ export default class accountFetcher extends fetcher {
 
         if (access && refresh) {
             try {
-                let data: userInfo = await this.postFetcher("http://localhost:3000/api/account/checkToken", {access, refresh});
+                let data: userInfo = await this.postFetcher("http://localhost:3000/api/account/checkToken", { access, refresh });
                 return data;
             } catch (error) {
                 return null;
             }
-        }  
+        }
         else {
             return null;
         }

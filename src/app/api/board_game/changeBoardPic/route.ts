@@ -18,6 +18,7 @@ export async function PATCH(req: Request) {
     let path: string;
     if (picture) {
         path = await pictureManager.savePicture(picture, "/images/boardGamePicture");
+        change.change('picture', path);
     }
 
     try {

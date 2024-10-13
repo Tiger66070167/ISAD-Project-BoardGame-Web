@@ -1,7 +1,6 @@
 "use client";
 
-import React, { Component } from "react";
-import Image from "next/image";
+import React, { Component, FormEvent } from "react";
 import Link from "next/link";
 import Loading from "@/app/components/utilities/Load";
 import { boardGame } from "../../../../../../utils/typeStorage/boardType";
@@ -38,12 +37,26 @@ export default class createBoardGame extends Component<{params: {board_game_id: 
     this.setLoading(false)
   }
 
-  public handleChange() {
+  public async handleChange(e: FormEvent) {
+    e.preventDefault();
     this.setLoading(true);
 
-    
+    console.log("in");
 
+    const name: HTMLInputElement = document.querySelector(".name")!;
+    const getPic: HTMLInputElement = document.querySelector(".getPic")!;
+
+    let board: boardFetcher = new boardFetcher();
+    await board.changeBoard(this.props.params.board_game_id, name.value, getPic.files![0]);
+
+    location.replace("http://localhost:3000/admin/BoardGameAdmin");
+  }
+
+  private changePic() {
+    const getPic: HTMLInputElement = document.querySelector(".getPic")!;
+    const pic: HTMLImageElement = document.querySelector(".pic")!;
     
+    pic.src = URL.createObjectURL(getPic.files![0]);
   }
 
   render() {
@@ -58,7 +71,7 @@ export default class createBoardGame extends Component<{params: {board_game_id: 
               Modify Board Game
             </div>
 
-            <form className="flex flex-col items-center gap-y-10">
+            <form onSubmit={this.handleChange.bind(this)} className="flex flex-col items-center gap-y-10">
               {/* Name */}
               <div className="flex flex-col items-center w-full tablet:px-10 laptop:px-10 desktop:px-16">
                 <label className="tablet:text-lg laptop:text-xl desktop:text-2xl font-semibold">
@@ -68,7 +81,7 @@ export default class createBoardGame extends Component<{params: {board_game_id: 
                   type="text"
                   defaultValue={this.state.data?.name}
                   placeholder="Enter board game name"
-                  className="text-[#bababa] sm:text-sm
+                  className="name text-[#bababa] sm:text-sm
                 bg-[#303030]
                 mt-1 px-3 py-2
                 w-full
@@ -80,7 +93,7 @@ export default class createBoardGame extends Component<{params: {board_game_id: 
               {/* Image */}
               <div className="">
                 <img
-                  className="object-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
+                  className="pic object-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
                   src={this.state.data?.picture || "/images/boardGamePicture/boardgame.jpeg"}
                   alt=""
                 />
@@ -88,7 +101,7 @@ export default class createBoardGame extends Component<{params: {board_game_id: 
                   <label className="laptop:text-xl desktop:text-2xl font-semibold">
                     Choose Image
                   </label>
-                  <input type="file" className="w-56" />
+                  <input onChange={this.changePic.bind(this)} type="file" className="getPic w-56" />
                 </div>
               </div>
 
