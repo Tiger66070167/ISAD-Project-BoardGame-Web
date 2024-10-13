@@ -78,7 +78,7 @@ export default class statusPage extends React.Component<
             h-full w-full
             bg-[#171717]"
           >
-            {this.state.allBoard.map((value) => (
+            {this.state.output.map((value) => (
               <div className="flex justify-center items-center">
                 <Boardcard
                   key={value.board_game_id}
