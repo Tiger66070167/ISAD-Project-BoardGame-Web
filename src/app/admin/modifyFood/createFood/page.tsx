@@ -17,7 +17,7 @@ interface CreateFoodMenuState {
   selectedMenuType: string;
 }
 export default class createFoodMenu extends Component<{ data: foodMenu }> {
-  state: CreateFoodMenuState = { selectedMenuType: ""} 
+  state: CreateFoodMenuState = { selectedMenuType: "" };
   constructor(props: { data: foodMenu }) {
     super(props);
     this.createFood = this.createFood.bind(this);
@@ -26,28 +26,36 @@ export default class createFoodMenu extends Component<{ data: foodMenu }> {
   }
 
   async createFood(event: any) {
-    
     event.preventDefault();
 
     console.log(event.target.elements.menuName.value);
-    console.log(this.state.selectedMenuType); 
+    console.log(this.state.selectedMenuType);
     console.log(event.target.elements.menuDescription.value);
     console.log(event.target.elements.menuPrice.value);
     console.log(event.target.elements.picture.files[0]);
 
     let food = new foodFetcher();
-    await food.addFood(
-      event.target.elements.menuName.value,
-      this.state.selectedMenuType,
-      event.target.elements.menuDescription.value,
-      event.target.elements.menuPrice.value,
-      event.target.elements.picture.files[0]
-    );
+    if (
+      !event.target.elements.menuName.value ||
+      !this.state.selectedMenuType ||
+      !event.target.elements.menuDescription.value ||
+      !event.target.elements.menuPrice.value ||
+      !event.target.elements.picture.files[0]
+    ) {
+      alert("Please insert all the information");
+    } else {
+      await food.addFood(
+        event.target.elements.menuName.value,
+        this.state.selectedMenuType,
+        event.target.elements.menuDescription.value,
+        event.target.elements.menuPrice.value,
+        event.target.elements.picture.files[0]
+      );
+      window.history.back();
+    }
 
     let image: HTMLImageElement = document.querySelector(".image")!;
     image.src = URL.createObjectURL(event.target.elements.picture.files[0]);
-
-    window.history.back();
   }
 
   changePic() {
@@ -150,7 +158,9 @@ export default class createFoodMenu extends Component<{ data: foodMenu }> {
                     <label className="tablet:text-lg laptop:text-xl desktop:text-2xl font-semibold">
                       Menu Type
                     </label>
-                    <Select  onValueChange={this.handleMenuTypeChange.bind(this)}>
+                    <Select
+                      onValueChange={this.handleMenuTypeChange.bind(this)}
+                    >
                       <div className="w-full mt-2">
                         <SelectTrigger className="flex w-full  bg-[#292929] text-[#bababa] bg-opacity-60 border-none hover:bg-[--primary-color]">
                           <SelectValue placeholder="select food type" />
@@ -171,7 +181,7 @@ export default class createFoodMenu extends Component<{ data: foodMenu }> {
 
               {/* Button */}
               <div className="flex gap-x-5 justify-center items-center">
-                <Link href="/food/modifyFood/">
+                <Link href="/admin/modifyFood/">
                   <button
                     className="tablet:px-3 tablet:py-1
                     laptop:px-3 laptop:py-1

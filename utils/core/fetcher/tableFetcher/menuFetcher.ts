@@ -52,7 +52,7 @@ export default class menuFetcher extends fetcher{
         }
     }
 
-    public async updateFood(food_id: number, name?: string, type?: "Fast food" | "Dish" | "Snack" | "Drink", description?: string, price?: number, picture?: File) {
+    public async updateFood(food_id: number, name?: string, type?: string, description?: string, price?: number, picture?: File) {
         const type_num = menuFetcher.getType(type as string);
 
         let data = new FormData();
