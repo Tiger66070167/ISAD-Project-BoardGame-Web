@@ -19,4 +19,12 @@ export default class orderFetcher extends fetcher {
             return false;
         }
     }
+    public async getOrder(): Promise<foodOrder[]> {
+        try {
+            const data = await this.getFetcher("http://localhost:3000/api/food/order/getOrder");
+            return data as foodOrder[];
+        } catch (error) {
+            return [];
+        }
+    }
 }
