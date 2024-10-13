@@ -18,6 +18,7 @@ export async function PATCH(req: Request) {
     if (data.first_name != undefined) {change.change('first_name', data.first_name)}
     if (data.last_name != undefined) {change.change('last_name', data.last_name)}
     if (data.phone != undefined) {change.change('phone', data.phone)}
+    if (data.booked != undefined) {change.change('booked', data.booked)}
 
 
     try {

@@ -16,6 +16,7 @@ export async function PATCH(req: Request) {
     let first_name: string = data.get("first_name") as string;
     let last_name: string = data.get("last_name") as string;
     let phone: string = data.get("phone") as string;
+    let booked: boolean = data.get("booked") as string === "true";
 
     let change: update<users> = new update();
     if (username) {change.change('username', username)}
@@ -30,6 +31,7 @@ export async function PATCH(req: Request) {
     if (first_name) {change.change("first_name", first_name);}
     if (last_name) {change.change('last_name', last_name)}
     if (phone) {change.change('phone', phone)}
+    if (booked) {change.change('booked', booked)}
 
     try {
         let path = (await new database(new select<users>('picture').table('users').where('users_id', compare.EQUAL, users_id), change.table('users').where('users_id', compare.EQUAL, users_id)).query())[0].picture;

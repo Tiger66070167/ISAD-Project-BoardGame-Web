@@ -23,6 +23,10 @@ export async function middleware(req: NextRequest) {
             let account = new accountFetcher();
             let data = await account.checkToken(oldAccess.value, oldRefresh.value);
             if (data?.role === "admin") {return NextResponse.redirect(new URL("/admin/BoardGameAdmin", req.url))}
+        } else if (req.nextUrl.pathname.startsWith("/food")) {
+            let account = new accountFetcher();
+            let data = await account.checkToken(oldAccess.value, oldRefresh.value);
+            if (data?.role === "admin") {return NextResponse.redirect(new URL("/admin/modifyFood", req.url))}
         }
     };
     return NextResponse.rewrite(req.nextUrl);

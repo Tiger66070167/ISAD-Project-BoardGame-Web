@@ -11,7 +11,7 @@ export default class accountFetcher extends fetcher {
         }
     }
 
-    public async updateAccount(users_id: number, username?: string, password?: string, picture?: File, first_name?: string, last_name?: string, phone?: string) {
+    public async updateAccount(users_id: number, username?: string, password?: string, picture?: File, first_name?: string, last_name?: string, phone?: string, booked?: boolean) {
         if (picture) {
             let tmp = new FormData();
             tmp.append("users_id", '' + users_id);
@@ -21,6 +21,7 @@ export default class accountFetcher extends fetcher {
             if (first_name) tmp.append("first_name", first_name);
             if (last_name) tmp.append("last_name", last_name);
             if (phone) tmp.append("phone", phone);
+            if (booked) tmp.append("booked", booked+'');
 
             try {
                 await this.patchFetcher("http://localhost:3000/api/account/changeAccountFormData", tmp);
@@ -30,7 +31,7 @@ export default class accountFetcher extends fetcher {
             }
         } else {
             try {
-                await this.patchFetcher("http://localhost:3000/api/account/changeAccountJson", { users_id, username, password, first_name, last_name, phone })
+                await this.patchFetcher("http://localhost:3000/api/account/changeAccountJson", { users_id, username, password, first_name, last_name, phone, booked })
                 return true;
             } catch (error) {
                 return false;

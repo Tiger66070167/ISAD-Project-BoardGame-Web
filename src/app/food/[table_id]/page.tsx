@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import style from "./foodEdit.module.css";
+import style from "./stylesheets/food.module.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import AdminFoodCard from "../../components/Food/adminFoodCard";
+import FoodCard from "../../components/Food/foodCard";
+import CartButton from "../../components/Food/cartButton";
 import {
   Select,
   SelectContent,
@@ -15,30 +16,62 @@ import {
 } from "@/components/ui/select";
 import { foodMenu } from "../../../../utils/typeStorage/foodType";
 import foodFetcher from "../../../../utils/core/fetcher/tableFetcher/menuFetcher";
-import Link from "next/link";
+import FoodOrder from "./FoodOrder";
 
 interface FoodPageState {
   selectedTab: string;
   allFood: Array<foodMenu>;
+  foodOrders: {menu: foodMenu, quantity: number}[];
+  showBasket: boolean;
 }
 
-export default class foodPage extends React.Component<{}, FoodPageState> {
-  constructor(props: {}) {
+export default class foodPage extends React.Component<{param: {table_id: number}}, FoodPageState> {
+  constructor(props: {param: {table_id: number}}) {
     super(props);
     this.state = {
       selectedTab: "all",
       allFood: [],
+      foodOrders: [],
+      showBasket: false
     };
   }
 
-  setAllFood(value: Array<foodMenu>) {
-    this.setState({ allFood: value });
+  setAllFood(value: Array<foodMenu>) {this.setState({ allFood: value });}
+  setShowBasket(value: boolean) {this.setState({showBasket: value});}
+  setFoodOrders(value: {menu: foodMenu, quantity: number}[]) {this.setState({foodOrders: value});}
+
+  addOrder(menu: foodMenu, quantity: number) {
+    let newOrder: {menu: foodMenu, quantity: number}[] = [];
+    let founded = false;
+    this.state.foodOrders.forEach((order) => {
+      if (order.menu.food_id === menu.food_id) {
+        newOrder.push({menu, quantity});
+        founded = true;
+      } else {
+        newOrder.push(order);
+      }
+    })
+    if (!founded) {
+      newOrder.push({menu, quantity})
+    }
+
+    this.setFoodOrders(newOrder);
+  }
+
+  handleDelete(food_id: number) {
+    let newOrder: {menu: foodMenu, quantity: number}[] = [];
+    this.state.foodOrders.forEach((value) => {
+      if (value.menu.food_id !== food_id) {
+        newOrder.push(value);
+      }
+    })
+
+    this.setFoodOrders(newOrder);
   }
 
   async componentDidMount() {
     let food = new foodFetcher();
     this.setAllFood(await food.getAllFood());
-    console.log(this.state.allFood);
   }
 
   handleTabChange = (value: string) => {
@@ -55,24 +88,15 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
         </div>
       );
     }
+
     return (
-      <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-16">
-        <div className="flex flex-row">
-          <div className=" mx-auto text-center text-[8vh]">
-            Select Menu to Edit
-          </div>
-        </div>
-        <div className="flex mx-auto justify-center items-center w-[160px] h-[50px] mb-3">
-          <Link href="/admin/modifyFood/createFood">
-            <button className="hover:border-2 bg-[#292929]  hover:border-[--primary-color] rounded-xl w-[160px] h-[50px]">
-              Create Menu
-            </button>
-          </Link>
-        </div>
+      <>
+      {this.state.showBasket && <FoodOrder table_id={this.props.param.table_id} foodOrders={this.state.foodOrders} enable={this.setShowBasket.bind(this)} delete={this.handleDelete.bind(this)} />}
+      <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-6">
         <Tabs
           value={this.state.selectedTab}
           onValueChange={this.handleTabChange}
-          className="mx-auto py-0 mt-0 min-w-full max-w-[1400px]"
+          className="mx-auto py-16 min-w-full max-w-[1400px]"
         >
           <Select
             value={this.state.selectedTab}
@@ -103,19 +127,19 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
                 <TabsTrigger value="drink">Drink</TabsTrigger>
               </TabsList>
             </div>
+            <div className="lg:block hidden">
+              <CartButton show={this.setShowBasket.bind(this)} amount={this.state.foodOrders.length}></CartButton>
+            </div>
           </div>
 
           <TabsContent value="all">
             <div className={style["grid-layout-box"]}>
               {this.state.allFood.map((value) => (
-                <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                <div className="flex justify-center items-center" key={value.food_id}>
+                  <FoodCard
+                    info={value}
+                    orderFood={this.addOrder.bind(this)}
+                  ></FoodCard>
                 </div>
               ))}
             </div>
@@ -127,14 +151,11 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
               {this.state.allFood
                 .filter((value) => value.type === "Fast food")
                 .map((value) => (
-                  <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                  <div className="flex justify-center items-center" key={value.food_id}>
+                    <FoodCard
+                      info={value}
+                      orderFood={this.addOrder.bind(this)}
+                    ></FoodCard>
                   </div>
                 ))}
             </div>
@@ -146,14 +167,11 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
               {this.state.allFood
                 .filter((value) => value.type === "Dish")
                 .map((value) => (
-                  <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                  <div className="flex justify-center items-center" key={value.food_id}>
+                    <FoodCard
+                      info={value}
+                      orderFood={this.addOrder.bind(this)}
+                    ></FoodCard>
                   </div>
                 ))}
             </div>
@@ -165,14 +183,11 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
               {this.state.allFood
                 .filter((value) => value.type === "Snack")
                 .map((value) => (
-                  <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                  <div className="flex justify-center items-center" key={value.food_id}>
+                    <FoodCard
+                      info={value}
+                      orderFood={this.addOrder.bind(this)}
+                    ></FoodCard>
                   </div>
                 ))}
             </div>
@@ -184,14 +199,11 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
               {this.state.allFood
                 .filter((value) => value.type === "Drink")
                 .map((value) => (
-                  <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                  <div className="flex justify-center items-center" key={value.food_id}>
+                    <FoodCard
+                      info={value}
+                      orderFood={this.addOrder.bind(this)}
+                    ></FoodCard>
                   </div>
                 ))}
             </div>
@@ -203,6 +215,7 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
           </div>
         </Tabs>
       </div>
+      </>
     );
   }
 }

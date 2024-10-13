@@ -1,5 +1,5 @@
 export type periodData = {
     period_id: number,
-    start: string,
-    end: string
+    start: Date,
+    end: Date
 }

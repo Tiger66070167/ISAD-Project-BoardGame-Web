@@ -81,7 +81,7 @@ export function DataTable<TData extends TableData, TValue>({
               ))}
               <TableCell>
                 <button
-                  onClick={() => handleDelete(row.original as foodOrder)}
+                  onClick={() => handleDelete(row.original as unknown as foodOrder)}
                   className="bg-red-500 text-white px-4 py-1 rounded"
                 >
                   Delete

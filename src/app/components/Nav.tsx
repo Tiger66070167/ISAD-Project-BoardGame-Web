@@ -85,9 +85,9 @@ export default class Nav extends React.Component<{}, { data: userInfo | null, lo
               <li className="hover:text-[--primary-color] hover:scale-110 transition hover:delay-50">
                 <Link href="/boardGame">Board Game</Link>
               </li>
-              <li className="hover:text-[--primary-color] hover:scale-110 transition hover:delay-50">
-                <Link href="/food">Food</Link>
-              </li>
+              {this.state.data?.role === "admin" && <li className="hover:text-[--primary-color] hover:scale-110 transition hover:delay-50">
+                <Link href="/admin/modifyFood">Food</Link>
+              </li>}
             </ul>
 
             {/* Right */}
@@ -173,11 +173,12 @@ export default class Nav extends React.Component<{}, { data: userInfo | null, lo
                       Board Game
                     </Link>
                   </li>
-                  <li className="hover:text-[--primary-color] transition hover:delay-50">
-                    <Link href="/food" onClick={clickMenu}>
+
+                  {this.state.data?.role === "admin" && <li className="hover:text-[--primary-color] transition hover:delay-50">
+                    <Link href="/admin/modifyFood" onClick={clickMenu}>
                       Food
                     </Link>
-                  </li>
+                  </li>}
                 </ul>
               </div>
               <button

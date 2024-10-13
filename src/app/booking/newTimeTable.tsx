@@ -60,7 +60,7 @@ const PeriodButton: React.FC<PeriodButtonProps> = ({ period, isSelected, onSelec
             onClick={onSelect}
             className={`border border-black text-center h-10 ${isSelected ? 'bg-[--primary-color] text-black' : ''}`}
         >
-            {period.start} - {period.end}
+            {period.start+''} - {period.end+''}
         </button>
     );
 };

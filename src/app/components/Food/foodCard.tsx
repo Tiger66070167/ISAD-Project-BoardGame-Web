@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { foodMenu } from "../../../../utils/typeStorage/foodType";
-import FoodDetail from "@/app/food/FoodDetail";
+let FoodDetail = require(`@/app/food/[table_id]/FoodDetail`);
 
 export default class foodCard extends React.Component<{info: foodMenu, orderFood: Function}, {showOrder: boolean}> {
   constructor(props: {info: foodMenu, orderFood: Function}) {

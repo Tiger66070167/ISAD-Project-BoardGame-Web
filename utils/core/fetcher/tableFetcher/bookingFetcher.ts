@@ -4,12 +4,12 @@ import { tableData } from "../../../typeStorage/tableType";
 import fetcher from "../fetcher";
 
 export default class bookingFetcher extends fetcher {
-    public async getBooking(booking_id: number): Promise<Array<bookingData>> {
+    public async getBooking(user_id: number): Promise<bookingData | null> {
         try {
-            let data = await this.getFetcher(`http://localhost:3000/api/booking/${booking_id}/getBooking`);
+            let data = await this.getFetcher(`http://localhost:3000/api/booking/${user_id}/getBooking`);
             return data;
         }catch(error){
-            return [];
+            return null;
         }
     }
     public async getAllBooking(): Promise<Array<any>> {
@@ -86,12 +86,12 @@ export default class bookingFetcher extends fetcher {
         }
     }
 //////////////////////////////////////////////
-    public async getBookingTable(table_id: number): Promise<Array<tableData>>{
+    public async getBookingTable(table_id: number): Promise<tableData | null>{
         try {
             let data = await this.getFetcher(`http://localhost:3000/api/booking/Table/${table_id}/getBookingTable`);
             return data;
         }catch(error){
-            return [];
+            return null;
         }
     }
     public async getAllBookingTable(): Promise<Array<tableData>>{
