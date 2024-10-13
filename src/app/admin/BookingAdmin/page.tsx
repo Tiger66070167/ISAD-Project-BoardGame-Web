@@ -85,18 +85,21 @@ export default class BookingPage extends React.Component<{}, BookingPageState> {
       window.location.reload()
     }
     return (
-      <div className="min-h-screen min-w-screen pt-[56px] bg-[--neutrals-color] flex flex-col items-center">
+      <div className="min-h-screen min-w-screen pt-24 bg-[--neutrals-color] flex flex-col items-center">
+        <h1 className="text-[--primary-color] tablet:text-2xl laptop:text-3xl desktop:text-4xl font-black">
+          Customer Booking Info
+        </h1>
         {
             this.state.allBooking.map(
                 (b) => {
                     return (
                         <div key={b.booking_id} className="border rounded-md border-black w-9/12 text-black bg-[#303030] m-5 flex justify-between">
-                          <div className="text-white pl-10 py-5">
-                            <p>Booking id: {b.booking_id.toString()}</p>
-                            <p>User: {b.user_id}</p>
-                            <p>Table: {b.table_id}</p>
-                            <p>Period: {b.period_id}</p>
-                            <p>Date: {b.date.split("T")[0]}</p>
+                          <div className="text-white tablet:text-base laptop:text-xl desktop:text-2xl pl-10 py-5">
+                            <p>Booking id : {b.booking_id.toString()}</p>
+                            <p>User : {b.user_id}</p>
+                            <p>Table : {b.table_id}</p>
+                            <p>Period : {b.period_id}</p>
+                            <p>Date : {b.date.split("T")[0]}</p>
                           </div>
                           <div className="flex justify-center py-10 pr-10">
                             <button className="rounded-md w-32 bg-[--secondary-color] hover:bg-[--passed-color] duration-200"
