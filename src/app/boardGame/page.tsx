@@ -6,26 +6,46 @@ import boardFetcher from "../../../utils/core/fetcher/tableFetcher/boardFetcher"
 import { boardGame } from "../../../utils/typeStorage/boardType";
 
 interface BoardGamePageState {
-  allBoard: Array<boardGame>
+  allBoard: Array<boardGame>;
+  output: Array<boardGame>;
 }
 
-export default class statusPage extends React.Component<{}, BoardGamePageState> {
-
+export default class statusPage extends React.Component<
+  {},
+  BoardGamePageState
+> {
   constructor(props: {}) {
-    super(props)
-  
+    super(props);
+
     this.state = {
-      allBoard: []
-    }
+      allBoard: [],
+      output: [],
+    };
   }
 
   setAllBoardGame(value: Array<boardGame>) {
-    this.setState({allBoard: value});
+    this.setState({ allBoard: value });
+  }
+
+  setOutput(value: Array<boardGame>) {
+    this.setState({ output: value });
   }
 
   async componentDidMount() {
-      let food = new boardFetcher();
-      this.setAllBoardGame(await food.getAllBoard());
+    let food = new boardFetcher();
+    let tmp = await food.getAllBoard();
+    this.setAllBoardGame(tmp);
+    this.setOutput(tmp);
+  }
+
+  handleSearch() {
+    let search: HTMLInputElement = document.querySelector(".search")!;
+    let word = search.value;
+    this.setOutput(
+      this.state.allBoard.filter((board) =>
+        board.name?.toLowerCase().includes(word.toLowerCase())
+      )
+    );
   }
 
   render() {
@@ -40,9 +60,10 @@ export default class statusPage extends React.Component<{}, BoardGamePageState> 
 
           <div className="flex justify-center gap-3">
             <input
+              onChange={this.handleSearch.bind(this)}
               type="text"
               placeholder="search board game"
-              className="text-[#000000] mt-1 px-3 py-2 border-b shadow-sm border-slate-300 tablet:w-56 sm:w-72 w-96 rounded-lg sm:text-sm focus:outline-none"
+              className="search text-[#000000] mt-1 px-3 py-2 border-b shadow-sm border-slate-300 tablet:w-56 sm:w-72 w-96 rounded-lg sm:text-sm focus:outline-none"
             />
           </div>
         </div>
@@ -59,7 +80,11 @@ export default class statusPage extends React.Component<{}, BoardGamePageState> 
           >
             {this.state.allBoard.map((value) => (
               <div className="flex justify-center items-center">
-                <Boardcard key={value.board_game_id} name={value.name} status={value.status}></Boardcard>
+                <Boardcard
+                  key={value.board_game_id}
+                  name={value.name}
+                  status={value.status}
+                ></Boardcard>
               </div>
             ))}
           </div>
