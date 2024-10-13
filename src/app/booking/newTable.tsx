@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { tableData } from "../../../utils/typeStorage/tableType";
 import bookingFetcher from "../../../utils/core/fetcher/tableFetcher/bookingFetcher";
 import { periodData } from "../../../utils/typeStorage/periodType";
+import accountFetcher from "../../../utils/core/fetcher/tableFetcher/accountFetcher";
 
 interface Prop {
   period?: periodData;
@@ -30,9 +31,14 @@ const Modal: React.FC<ModalProps> = ({
 
   const handleConfirm = async () => {
     if (!isLoading) {
+
+      let data = await new accountFetcher().checkToken();
+
+      if (!data) window.location.replace("http://localhost:3000/login");
+
       date.setDate(date.getDate() + 1);
       await new bookingFetcher().addBooking(
-        13,
+        data!.user_id,
         table.table_id,
         period.period_id,
         date.toISOString().split("T")[0]
@@ -57,7 +63,6 @@ const Modal: React.FC<ModalProps> = ({
         </h2>
         <img
           src={
-            table.table_pic ||
             "https://www.glitz.co.th/wp-content/uploads/2022/06/hercules-series-9-x-40-antique-rustic-solid-pine-folding-farm-table-xa-f-108x40-gg-2_lighter.jpg"
           }
           alt="Table picture"
@@ -155,7 +160,6 @@ const TableButton: React.FC<TableButtonProps> = ({ table, onClick }) => (
   >
     <img
       src={
-        table.table_pic ||
         "https://www.glitz.co.th/wp-content/uploads/2022/06/hercules-series-9-x-40-antique-rustic-solid-pine-folding-farm-table-xa-f-108x40-gg-2_lighter.jpg"
       }
       alt="Table picture"

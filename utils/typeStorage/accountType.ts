@@ -9,7 +9,8 @@ export type accountData = {
     picture?: string,
     first_name?: string,
     last_name?: string,
-    phone?: string
+    phone?: string,
+    booked?: boolean
 }
 
 export type userInfo = {

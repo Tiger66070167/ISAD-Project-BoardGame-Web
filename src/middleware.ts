@@ -10,7 +10,6 @@ export async function middleware(req: NextRequest) {
         if (req.nextUrl.pathname.startsWith('/admin') ||
             req.nextUrl.pathname.startsWith('profile')
         ) { return NextResponse.redirect(new URL("/", req.url)); }
-        else if (req.nextUrl.pathname.startsWith('/food/foodDetail')) { return NextResponse.redirect(new URL("/login", req.url)); }
     } else {
         if (req.nextUrl.pathname.startsWith('/profile')) {
             let account = new accountFetcher();

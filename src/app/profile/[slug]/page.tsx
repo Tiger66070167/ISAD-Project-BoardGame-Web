@@ -72,6 +72,9 @@ export default class profilePage extends React.Component<{ params: { slug: numbe
       }
 
       if (!outcome) { this.setError(true) }
+
+      if (!await account.getNewToken()) {this.setError(true);}
+
       window.location.reload();
     }
 

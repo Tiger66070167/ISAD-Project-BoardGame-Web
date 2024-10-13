@@ -20,9 +20,10 @@ export default class loginSystem {
         const passwordHash = await bcrypt.hash(password, 10);
 
         try {
-            await new database(new insert('default', username, 'customer', email, passwordHash, this.formatDate(new Date()), 'null', "default", 'null', 'null', 'null').table("users")).query();
+            await new database(new insert('default', username, 'customer', email, passwordHash, this.formatDate(new Date()), 'null', "default", 'null', 'null', 'null', 'default').table("users")).query();
         } catch (error) {
-            console.log("Cannot create user, bug at user.ts"); //TODO: maybe delete this
+            console.log(error);
+            console.log("Cannot create user, bug at loginSystem.ts"); //TODO: maybe delete this
             return false;
         }
         return true;

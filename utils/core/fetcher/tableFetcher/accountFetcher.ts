@@ -72,4 +72,21 @@ export default class accountFetcher extends fetcher {
         }
 
     }
+
+    public async getNewToken() {
+        let allCookie: string[] = document.cookie.split(";");
+        let cookie = new Map();
+        allCookie.forEach((noSplit) => {
+            let [key, value] = noSplit.split("=");
+            cookie.set(key.trim(), value);
+        })
+        let refresh = cookie.get("askNew");
+
+        try {
+            await this.postFetcher("http://localhost:3000/api/account/getNewToken", {refresh});
+            return true
+        } catch (error) {
+            return false;
+        }
+    }
 }
