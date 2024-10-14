@@ -35,16 +35,17 @@ const Modal: React.FC<ModalProps> = ({
       let data = await new accountFetcher().checkToken();
 
       if (!data) window.location.replace("http://localhost:3000/login");
-
-      date.setDate(date.getDate() + 1);
-      await new bookingFetcher().addBooking(
-        data!.user_id,
-        table.table_id,
-        period.period_id,
-        date.toISOString().split("T")[0]
-      );
-      onClose();
-      window.location.reload(); // Refresh the page
+      else {
+        date.setDate(date.getDate() + 1);
+        await new bookingFetcher().addBooking(
+          data!.user_id,
+          table.table_id,
+          period.period_id,
+          date.toISOString().split("T")[0]
+        );
+        onClose();
+        window.location.reload(); // Refresh the page
+      }
     }
   };
 

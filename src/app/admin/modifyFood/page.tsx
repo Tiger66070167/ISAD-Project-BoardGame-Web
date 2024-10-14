@@ -62,10 +62,15 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
             Select Menu to Edit
           </div>
         </div>
-        <div className="flex mx-auto justify-center items-center w-[160px] h-[50px] mb-3">
+        <div className="flex mx-auto justify-center items-center w-[160px] h-[50px] mb-3 gap-[1vw]">
           <Link href="/admin/modifyFood/createFood">
             <button className="hover:border-2 bg-[#292929]  hover:border-[--primary-color] rounded-xl w-[160px] h-[50px]">
               Create Menu
+            </button>
+          </Link>
+          <Link href={"/admin/foodStaff"}>
+            <button className="hover:border-2 bg-[#292929]  hover:border-[--primary-color] rounded-xl w-[160px] h-[50px]">
+              Check order
             </button>
           </Link>
         </div>
@@ -128,13 +133,13 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
                 .filter((value) => value.type === "Fast food")
                 .map((value) => (
                   <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                    <AdminFoodCard
+                      id={value.food_id}
+                      name={value.name}
+                      price={value.price}
+                      description={value.description}
+                      picture={value.picture}
+                    ></AdminFoodCard>
                   </div>
                 ))}
             </div>
@@ -147,13 +152,13 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
                 .filter((value) => value.type === "Dish")
                 .map((value) => (
                   <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                    <AdminFoodCard
+                      id={value.food_id}
+                      name={value.name}
+                      price={value.price}
+                      description={value.description}
+                      picture={value.picture}
+                    ></AdminFoodCard>
                   </div>
                 ))}
             </div>
@@ -166,13 +171,13 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
                 .filter((value) => value.type === "Snack")
                 .map((value) => (
                   <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                    <AdminFoodCard
+                      id={value.food_id}
+                      name={value.name}
+                      price={value.price}
+                      description={value.description}
+                      picture={value.picture}
+                    ></AdminFoodCard>
                   </div>
                 ))}
             </div>
@@ -185,13 +190,13 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
                 .filter((value) => value.type === "Drink")
                 .map((value) => (
                   <div className="flex justify-center items-center">
-                  <AdminFoodCard
-                    id={value.food_id}
-                    name={value.name}
-                    price={value.price}
-                    description={value.description}
-                    picture={value.picture}
-                  ></AdminFoodCard>
+                    <AdminFoodCard
+                      id={value.food_id}
+                      name={value.name}
+                      price={value.price}
+                      description={value.description}
+                      picture={value.picture}
+                    ></AdminFoodCard>
                   </div>
                 ))}
             </div>

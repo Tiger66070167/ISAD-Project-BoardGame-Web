@@ -1,8 +1,7 @@
 "use client";
-import Link from "next/link";
 import React from "react";
 import { foodMenu } from "../../../../utils/typeStorage/foodType";
-let FoodDetail = require(`@/app/food/[table_id]/FoodDetail`);
+import FoodDetail from "@/app/food/[table_id]/FoodDetail";
 
 export default class foodCard extends React.Component<{info: foodMenu, orderFood: Function}, {showOrder: boolean}> {
   constructor(props: {info: foodMenu, orderFood: Function}) {
@@ -14,6 +13,7 @@ export default class foodCard extends React.Component<{info: foodMenu, orderFood
   }
 
   setShowOrder(value: boolean) {this.setState({showOrder: value});}
+  
   handleClose() {
     this.setShowOrder(false);
   }
@@ -47,7 +47,6 @@ export default class foodCard extends React.Component<{info: foodMenu, orderFood
                   {name}
                 </div>
                 {/* Add button*/}
-
                 <div className="text-xm text-white leading-10 text-center">
                   {price}
                 </div>

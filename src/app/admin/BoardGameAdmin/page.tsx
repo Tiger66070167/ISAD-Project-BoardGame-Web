@@ -9,6 +9,7 @@ import { boardGame } from "../../../../utils/typeStorage/boardType";
 interface BoardGamePageState {
   allBoard: Array<boardGame>;
   output: Array<boardGame>;
+  loading: boolean
 }
 
 export default class boardGameAdminPage extends React.Component<
@@ -21,6 +22,7 @@ export default class boardGameAdminPage extends React.Component<
     this.state = {
       allBoard: [],
       output: [],
+      loading: false
     };
   }
 
@@ -46,70 +48,78 @@ export default class boardGameAdminPage extends React.Component<
   }
 
   render() {
-    return (
-      <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
-        {/* Menu on top of page */}
-        <div className="grid grid-cols-3 pt-24 justify-center items-center">
-          {/* Left */}
-          <div className="flex laptop:justify-center laptop:mr-0 desktop:justify-end desktop:mr-10">
-            <h1 className="text-4xl text-[#5865F2] font-black tablet:text-xl laptop:text-3xl desktop:text-4xl">
-              Board game list
-            </h1>
+    if (this.state.loading) {
+      return (
+        <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[--primary-color]"></div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
+          {/* Menu on top of page */}
+          <div className="grid grid-cols-3 pt-24 justify-center items-center">
+            {/* Left */}
+            <div className="flex laptop:justify-center laptop:mr-0 desktop:justify-end desktop:mr-10">
+              <h1 className="text-4xl text-[#5865F2] font-black tablet:text-xl laptop:text-3xl desktop:text-4xl">
+                Board game list
+              </h1>
+            </div>
+  
+            {/* Center */}
+            <div className="flex justify-center">
+              <button
+                className="bg-[--primary-color]
+                tablet:px-2 tablet:text-sm
+                laptop:px-4 laptop:text-base
+                desktop:px-6 desktop:text-lg
+                py-1
+                rounded
+                hover:bg-[--hover-primary-color] duration-300"
+              >
+                <Link href="/admin/BoardGameAdmin/CreateBoardGame">
+                  Add Board Game
+                </Link>
+              </button>
+            </div>
+  
+            {/* Right */}
+            <div className="flex laptop:justify-center laptop:ml-0 desktop:justify-start desktop:ml-7">
+              <input
+                onChange={this.handleSearch.bind(this)}
+                type="text"
+                placeholder="search board game"
+                className="search text-[#000000]
+                mt-1 px-3 py-2 
+                border-b shadow-sm border-slate-300 rounded-lg focus:outline-none
+                tablet:w-40 sm:w-72 w-96
+                sm:text-sm"
+              />
+            </div>
           </div>
-
-          {/* Center */}
-          <div className="flex justify-center">
-            <button
-              className="bg-[--primary-color]
-              tablet:px-2 tablet:text-sm
-              laptop:px-4 laptop:text-base
-              desktop:px-6 desktop:text-lg
-              py-1
-              rounded
-              hover:bg-[--hover-primary-color] duration-300"
+  
+          {/* Body */}
+          <div className="mx-auto mt-3 min-w-[200px] max-w-[1400px] lg:block">
+            <div
+              className="grid justify-center items-center align-baseline
+              xl:grid-cols-4 xl:px-20
+              md:grid-cols-3
+              sm:grid-cols-2
+              gap-5
+              h-full w-full
+              bg-[#171717]"
             >
-              <Link href="/admin/BoardGameAdmin/CreateBoardGame">
-                Add Board Game
-              </Link>
-            </button>
-          </div>
-
-          {/* Right */}
-          <div className="flex laptop:justify-center laptop:ml-0 desktop:justify-start desktop:ml-7">
-            <input
-              onChange={this.handleSearch.bind(this)}
-              type="text"
-              placeholder="search board game"
-              className="search text-[#000000]
-              mt-1 px-3 py-2 
-              border-b shadow-sm border-slate-300 rounded-lg focus:outline-none
-              tablet:w-40 sm:w-72 w-96
-              sm:text-sm"
-            />
+              {this.state.output.map((value) => {
+                return (
+                  <div className="flex justify-center items-center">
+                    <AdminCard key={value.board_game_id} data={value} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-
-        {/* Body */}
-        <div className="mx-auto mt-3 min-w-[200px] max-w-[1400px] lg:block">
-          <div
-            className="grid justify-center items-center align-baseline
-            xl:grid-cols-4 xl:px-20
-            md:grid-cols-3
-            sm:grid-cols-2
-            gap-5
-            h-full w-full
-            bg-[#171717]"
-          >
-            {this.state.output.map((value) => {
-              return (
-                <div className="flex justify-center items-center">
-                  <AdminCard key={value.board_game_id} data={value} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
+      );
+    }
   }
 }

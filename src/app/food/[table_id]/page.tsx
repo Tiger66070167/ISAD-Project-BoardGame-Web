@@ -25,8 +25,8 @@ interface FoodPageState {
   showBasket: boolean;
 }
 
-export default class foodPage extends React.Component<{param: {table_id: number}}, FoodPageState> {
-  constructor(props: {param: {table_id: number}}) {
+export default class foodPage extends React.Component<{params: {table_id: number}}, FoodPageState> {
+  constructor(props: {params: {table_id: number}}) {
     super(props);
     this.state = {
       selectedTab: "all",
@@ -91,7 +91,7 @@ export default class foodPage extends React.Component<{param: {table_id: number}
 
     return (
       <>
-      {this.state.showBasket && <FoodOrder table_id={this.props.param.table_id} foodOrders={this.state.foodOrders} enable={this.setShowBasket.bind(this)} delete={this.handleDelete.bind(this)} />}
+      {this.state.showBasket && <FoodOrder table_id={this.props.params.table_id} foodOrders={this.state.foodOrders} enable={this.setShowBasket.bind(this)} delete={this.handleDelete.bind(this)} />}
       <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-6">
         <Tabs
           value={this.state.selectedTab}
