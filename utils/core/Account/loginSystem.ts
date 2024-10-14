@@ -7,7 +7,6 @@ import { users } from "../../typeStorage/tableDatabase";
 import tokenManage from "./tokenManage";
 import { cookies } from 'next/headers'
 const bcrypt = require('bcrypt')
-const cookie = cookies();
 
 export default class loginSystem {
     private static formatDate(date: Date) {
@@ -15,21 +14,21 @@ export default class loginSystem {
         output = ([date.getFullYear(), (date.getMonth() + 1).toString().padStart(2, '0'), (date.getDate().toString().padStart(2, "0"))].join('-') + ' ' + [(date.getHours().toString().padStart(2, '0')), (date.getMinutes().toString().padStart(2, '0')), (date.getSeconds().toString().padStart(2, '0'))].join(':'));
         return output;
     }
-
+    
     public static async createUser(username: string, email: string, password: string): Promise<boolean> {
         const passwordHash = await bcrypt.hash(password, 10);
-
+        
         try {
             await new database(new insert('default', username, 'customer', email, passwordHash, this.formatDate(new Date()), 'null', "default", 'null', 'null', 'null', 'default').table("users")).query();
         } catch (error) {
-            console.log(error);
             console.log("Cannot create user, bug at loginSystem.ts"); //TODO: maybe delete this
             return false;
         }
         return true;
     }
-
+    
     public static async checkLogin(email: string, password: string): Promise<boolean> {
+        const cookie = cookies();
         try {
             const result: any = await new database(new select<users>('email', 'password', 'users_id', 'role', 'picture', 'username').table('users').where('email', compare.EQUAL, email)).query();
 
