@@ -20,19 +20,34 @@ import Link from "next/link";
 interface FoodPageState {
   selectedTab: string;
   allFood: Array<foodMenu>;
+  loading:boolean,
+  success:boolean,
 }
 
 export default class foodPage extends React.Component<{}, FoodPageState> {
+
   constructor(props: {}) {
     super(props);
     this.state = {
       selectedTab: "all",
       allFood: [],
+      loading: true,
+      success: false,
+
     };
+  }
+  setLoading(value: boolean) {
+    this.setState({loading: value});
+  }
+
+  setSuccess(value: boolean) {
+    this.setState({success: value})
   }
 
   setAllFood(value: Array<foodMenu>) {
     this.setState({ allFood: value });
+    this.setSuccess(true);
+    this.setLoading(false)
   }
 
   async componentDidMount() {
@@ -48,7 +63,7 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
   render() {
     const { allFood } = this.state;
 
-    if (!allFood.length) {
+    if (this.state.loading) {
       return (
         <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
           <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[--primary-color]"></div>
