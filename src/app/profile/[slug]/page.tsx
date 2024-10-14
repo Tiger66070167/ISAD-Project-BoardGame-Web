@@ -191,7 +191,7 @@ export default class profilePage extends React.Component<{ params: { slug: numbe
                         <img className="profile h-full" src={this.state.account.picture} />
                       </div>
                     </label>
-                    <input onChange={this.handlePic.bind(this)} className="PFP hidden" type="file" id="picture" name="picture" />
+                    <input onChange={this.handlePic.bind(this)} className="PFP hidden" type="file" accept="image/*" id="picture" name="picture" />
                   </>
                   :
                   <div className="flex justify-center items-center bg-[#303030] h-[25vh] w-[25vh] mr-16 rounded-full overflow-hidden drop-shadow-2xl	">

@@ -1,6 +1,5 @@
 "use client";
 import React, { Component } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { foodMenu } from "../../../../../utils/typeStorage/foodType";
 import foodFetcher from "../../../../../utils/core/fetcher/tableFetcher/menuFetcher";
@@ -28,12 +27,6 @@ export default class createFoodMenu extends Component<{ data: foodMenu }> {
   async createFood(event: any) {
     event.preventDefault();
 
-    console.log(event.target.elements.menuName.value);
-    console.log(this.state.selectedMenuType);
-    console.log(event.target.elements.menuDescription.value);
-    console.log(event.target.elements.menuPrice.value);
-    console.log(event.target.elements.picture.files[0]);
-
     let food = new foodFetcher();
     if (
       !event.target.elements.menuName.value ||
@@ -55,18 +48,22 @@ export default class createFoodMenu extends Component<{ data: foodMenu }> {
     }
 
     let image: HTMLImageElement = document.querySelector(".image")!;
-    image.src = URL.createObjectURL(event.target.elements.picture.files[0]);
+    if (event.target.elements.picture.files[0]){
+      image.src = URL.createObjectURL(event.target.elements.picture.files[0]);
+    }
   }
 
   changePic() {
-    let image: HTMLImageElement = document.querySelector(".image")!;
-    let file: HTMLInputElement = document.querySelector(".pic")!;
+    let image: HTMLImageElement = document.querySelector(".foodImage")!;
+    let file: HTMLInputElement = document.querySelector(".picy")!;
     image.src = URL.createObjectURL(file.files![0]);
   }
+
   handleMenuTypeChange(value: string) {
     console.log("Selected Menu Type:", value);
     this.setState({ selectedMenuType: value });
   }
+
   render() {
     return (
       <div className="min-h-screen min-w-screen bg-[--neutrals-color]">
@@ -83,9 +80,9 @@ export default class createFoodMenu extends Component<{ data: foodMenu }> {
                   </div>
                   {/* Image */}
                   <div className="flex flex-col justify-center items-center">
-                    <Image
-                      className="image xobject-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
-                      src=""
+                    <img
+                      className="foodImage object-scale-down h-48 w-80 rounded-2xl overflow-hidden shadow-md"
+                      src="/images/boardGamePicture/boardgame.jpeg"
                       alt=""
                     />
                     <div className="mt-5 flex flex-col justify-center items-center">
@@ -97,7 +94,7 @@ export default class createFoodMenu extends Component<{ data: foodMenu }> {
                         name="picture"
                         type="file"
                         accept="image/*"
-                        className="pic w-56"
+                        className="picy w-56"
                       />
                     </div>
                   </div>

@@ -13,20 +13,29 @@ export default class createBoardGame extends Component<{ data: boardGame }> {
 
   async createBoard(event: any) {
     event.preventDefault();
-    
-    let board = new boardFetcher();
-    await board.addBoard(event.target.elements.boardName.value, event.target.elements.picture.files[0]);
+    if (
+      !event.target.elements.picture.files[0] ||
+      !event.target.elements.boardName
+    ) {
+      alert("Please insert all the information");
+    } else {
+      let board = new boardFetcher();
+      await board.addBoard(
+        event.target.elements.boardName.value,
+        event.target.elements.picture.files[0]
+      );
 
-    let image: HTMLImageElement = document.querySelector(".image")!;
-    image.src = URL.createObjectURL(event.target.elements.picture.files[0]);
-
-    window.history.back();
+      let image: HTMLImageElement = document.querySelector(".image")!;
+      if (event.target.elements.picture.files[0]) {
+        image.src = URL.createObjectURL(event.target.elements.picture.files[0]);
+      }
+      window.history.back();
+    }
   }
 
   changePic() {
     let image: HTMLImageElement = document.querySelector(".boardImage")!;
     let file: HTMLInputElement = document.querySelector(".pic")!;
-
     image.src = URL.createObjectURL(file.files![0]);
   }
 
@@ -39,7 +48,10 @@ export default class createBoardGame extends Component<{ data: boardGame }> {
               Create Board Game
             </div>
 
-            <form className="flex flex-col items-center gap-y-10" onSubmit={this.createBoard}>
+            <form
+              className="flex flex-col items-center gap-y-10"
+              onSubmit={this.createBoard}
+            >
               {/* Name */}
               <div className="flex flex-col items-center w-full tablet:px-10 laptop:px-10 desktop:px-16">
                 <label className="tablet:text-lg laptop:text-xl desktop:text-2xl font-semibold">
@@ -69,7 +81,13 @@ export default class createBoardGame extends Component<{ data: boardGame }> {
                   <label className="laptop:text-xl desktop:text-2xl font-semibold">
                     Choose Image
                   </label>
-                  <input onChange={this.changePic.bind(this)} name="picture" type="file" accept="image/*" className="pic w-56" />
+                  <input
+                    onChange={this.changePic.bind(this)}
+                    name="picture"
+                    type="file"
+                    accept="image/*"
+                    className="pic w-56"
+                  />
                 </div>
               </div>
 

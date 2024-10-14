@@ -41,8 +41,6 @@ export default class createBoardGame extends Component<{params: {board_game_id: 
     e.preventDefault();
     this.setLoading(true);
 
-    console.log("in");
-
     const name: HTMLInputElement = document.querySelector(".name")!;
     const getPic: HTMLInputElement = document.querySelector(".getPic")!;
 
@@ -101,7 +99,7 @@ export default class createBoardGame extends Component<{params: {board_game_id: 
                   <label className="laptop:text-xl desktop:text-2xl font-semibold">
                     Choose Image
                   </label>
-                  <input onChange={this.changePic.bind(this)} type="file" className="getPic w-56" />
+                  <input onChange={this.changePic.bind(this)} type="file" accept="image/*" className="getPic w-56" />
                 </div>
               </div>
 
