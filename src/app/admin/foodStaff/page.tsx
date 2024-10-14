@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
-import orderFetcher from "../../../utils/core/fetcher/tableFetcher/orderFetcher";
-import { foodOrder } from "../../../utils/typeStorage/foodType";
+import orderFetcher from "../../../../utils/core/fetcher/tableFetcher/orderFetcher";
+import { foodOrder } from "../../../../utils/typeStorage/foodType";
 
 export default function DemoPage() {
   const [data, setData] = useState<foodOrder[]>([]);

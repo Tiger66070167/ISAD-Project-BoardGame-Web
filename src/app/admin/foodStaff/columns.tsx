@@ -1,6 +1,6 @@
 // columns.ts
 import { ColumnDef } from "@tanstack/react-table"
-import { foodOrder } from "../../../utils/typeStorage/foodType"; // Import the type
+import { foodOrder } from "../../../../utils/typeStorage/foodType"; // Import the type
 
 
 export const columns: ColumnDef<foodOrder>[] = [

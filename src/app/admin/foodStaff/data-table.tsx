@@ -16,8 +16,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-import orderFetcher from "../../../utils/core/fetcher/tableFetcher/orderFetcher";
-import { foodOrder } from "../../../utils/typeStorage/foodType";
+import orderFetcher from "../../../../utils/core/fetcher/tableFetcher/orderFetcher";
+import { foodOrder } from "../../../../utils/typeStorage/foodType";
 
 interface TableData {
   order_id: number;
