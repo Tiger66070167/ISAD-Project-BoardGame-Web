@@ -139,6 +139,7 @@ export default class createBoardGame extends Component<
                         onChange={this.changePic.bind(this)}
                         name="picture"
                         type="file"
+                        accept="image/*"
                         className="pic w-56"
                       />
                     </div>

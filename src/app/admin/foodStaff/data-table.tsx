@@ -52,7 +52,7 @@ export function DataTable<TData extends TableData, TValue>({
   };
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border border-[#303030] mx-96">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -82,9 +82,9 @@ export function DataTable<TData extends TableData, TValue>({
               <TableCell>
                 <button
                   onClick={() => handleDelete(row.original as unknown as foodOrder)}
-                  className="bg-red-500 text-white px-4 py-1 rounded"
+                  className="bg-[--secondary-color] hover:bg-[--passed-color] duration-300 text-white px-4 py-1 rounded"
                 >
-                  Delete
+                  Complete
                 </button>
               </TableCell>
             </TableRow>

@@ -96,6 +96,7 @@ export default class createFoodMenu extends Component<{ data: foodMenu }> {
                         onChange={this.changePic.bind(this)}
                         name="picture"
                         type="file"
+                        accept="image/*"
                         className="pic w-56"
                       />
                     </div>

@@ -71,7 +71,7 @@ export default class Nav extends React.Component<{}, { data: userInfo | null, lo
 
             {/* Center Laptop and Desktop */}
             <ul
-              className="flex items-center justify-center
+              className="absolute translate-x-1/4 pl-6 items-center justify-center
         teblet:text-base tablet:hidden
         laptop:space-x-6 laptop:text-base laptop:flex
         desktop:space-x-9 desktop:text-lg"

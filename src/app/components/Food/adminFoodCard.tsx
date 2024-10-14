@@ -27,7 +27,7 @@ export default class adminFoodCard extends React.Component<{
               className="flex flex-col justify-center items-center bg-[#292929] hover:bg-[--neutral-color] hover:border-[--primary-color] border-transparent border-2 h-[400px] w-full rounded-2xl"
             >
               {/* inbox picture Set */}
-              <div className="w-64 mx-auto top-0  mb-3">
+              <div className="w-64 mx-auto top-0 mb-3 pt-5">
                 <div className="bg-center object-scale-down h-48 w-full rounded-2xl overflow-hidden shadow-md">
                 <div className="bg-center object-scale-down h-48 w-full rounded-2xl overflow-hidden shadow-md">
                 {this.props.picture && (
@@ -43,15 +43,15 @@ export default class adminFoodCard extends React.Component<{
                 </div>
               </div>
               {/* set name and descrip of Menu */}
-              <div className="grid grid-rows-3 text-justify">
+              <div className="grid grid-rows-3 text-justify w-full h-full px-5">
                 {/* <div className=""> */}
-                <div className="text-xl  font-bold text-white ">
+                <div className="justify-center flex items-center text-xl font-bold text-white text-center">
                   {this.props.name}
                 </div>
                 {/* Add button*/}
 
-                <div className="text-xm text-white leading-10">
-                  {this.props.price}
+                <div className="text-xm text-white">
+                  ฿ {this.props.price}
                 </div>
                 <div className="text-xm text-white">
                   {this.props.description}

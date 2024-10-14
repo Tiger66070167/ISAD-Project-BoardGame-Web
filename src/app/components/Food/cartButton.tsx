@@ -8,7 +8,7 @@ export default class cartButton extends React.Component<{show: Function, amount:
   render() {
     return (
       <Button onClick={() => {this.props.show(true)}} type="button">
-        <div className="flex flex-row absolute w-[100px] h-10 rounded-2xl right-20 mt-4  top-20  text-white bg-[--primary-color] hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color] transition">
+        <div className="flex flex-row absolute w-[100px] h-10 rounded-2xl right-20 text-white bg-[--primary-color] hover:scale-105 bg-gradient-to-r hover:from-[--primary-color] hover:to-[--accent-color] transition">
           {/* create Cart */}
           <svg
             className="w-6 h-7x me-1 items-center ml-5"

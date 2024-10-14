@@ -22,12 +22,17 @@ export default class boardGameAdminPage extends React.Component<
     this.state = {
       allBoard: [],
       output: [],
-      loading: false
+      loading: true
     };
+  }
+
+  setLoading(value: boolean) {
+    this.setState({loading: value});
   }
 
   setAllBoardGame(value: Array<boardGame>) {
     this.setState({ allBoard: value });
+    this.setLoading(false)
   }
 
   setOutput(value: Array<boardGame>) {
@@ -65,7 +70,7 @@ export default class boardGameAdminPage extends React.Component<
                 Board game list
               </h1>
             </div>
-  
+
             {/* Center */}
             <div className="flex justify-center">
               <button

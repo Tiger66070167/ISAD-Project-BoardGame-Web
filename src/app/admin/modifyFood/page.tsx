@@ -53,7 +53,6 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
   async componentDidMount() {
     let food = new foodFetcher();
     this.setAllFood(await food.getAllFood());
-    console.log(this.state.allFood);
   }
 
   handleTabChange = (value: string) => {
@@ -73,7 +72,7 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
     return (
       <div className="min-h-screen min-w-screen bg-[--neutrals-color] py-16">
         <div className="flex flex-row">
-          <div className=" mx-auto text-center text-[8vh]">
+          <div className=" mx-auto text-center text-[#5865F2] font-black tablet:text-xl laptop:text-3xl desktop:text-4xl">
             Select Menu to Edit
           </div>
         </div>
@@ -216,11 +215,6 @@ export default class foodPage extends React.Component<{}, FoodPageState> {
                 ))}
             </div>
           </TabsContent>
-          <div className="md:hidden fixed bottom-0 left-0 z-30 w-full py-8 px-16 bg-neutral-800 backdrop-blur-xl bg-opacity-50">
-            <div className="flex bg-[--primary-color] min-w-screen h-[70px] rounded-2xl text-2xl text-black items-center justify-center cursor-pointer">
-              Order
-            </div>
-          </div>
         </Tabs>
       </div>
     );

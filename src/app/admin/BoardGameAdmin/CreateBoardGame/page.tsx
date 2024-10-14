@@ -69,7 +69,7 @@ export default class createBoardGame extends Component<{ data: boardGame }> {
                   <label className="laptop:text-xl desktop:text-2xl font-semibold">
                     Choose Image
                   </label>
-                  <input onChange={this.changePic.bind(this)} name="picture" type="file" className="pic w-56" />
+                  <input onChange={this.changePic.bind(this)} name="picture" type="file" accept="image/*" className="pic w-56" />
                 </div>
               </div>
 

@@ -23,6 +23,7 @@ interface FoodPageState {
   allFood: Array<foodMenu>;
   foodOrders: {menu: foodMenu, quantity: number}[];
   showBasket: boolean;
+  loading:boolean;
 }
 
 export default class foodPage extends React.Component<{params: {table_id: number}}, FoodPageState> {
@@ -32,7 +33,8 @@ export default class foodPage extends React.Component<{params: {table_id: number
       selectedTab: "all",
       allFood: [],
       foodOrders: [],
-      showBasket: false
+      showBasket: false,
+      loading: true,
     };
   }
 
@@ -69,9 +71,14 @@ export default class foodPage extends React.Component<{params: {table_id: number
     this.setFoodOrders(newOrder);
   }
 
+  setLoading(value: boolean) {
+    this.setState({loading: value});
+  }
+
   async componentDidMount() {
     let food = new foodFetcher();
     this.setAllFood(await food.getAllFood());
+    this.setLoading(false)
   }
 
   handleTabChange = (value: string) => {
@@ -81,7 +88,7 @@ export default class foodPage extends React.Component<{params: {table_id: number
   render() {
     const { allFood } = this.state;
 
-    if (!allFood.length) {
+    if (this.state.loading) {
       return (
         <div className="text-white flex px-20 min-h-screen min-w-screen justify-center bg-[--neutrals-color] py-20">
           <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[--primary-color]"></div>
@@ -102,10 +109,13 @@ export default class foodPage extends React.Component<{params: {table_id: number
             value={this.state.selectedTab}
             onValueChange={this.handleTabChange}
           >
-            <div className="lg:hidden block px-4">
-              <SelectTrigger className="flex w-full lg:hidden bg-[#292929] text-white bg-opacity-60 border-none hover:bg-[--primary-color]">
+            <div className="lg:hidden flex place-content-between  items-center pl-20">
+              <SelectTrigger className="flex w-32 lg:hidden bg-[#292929] text-white bg-opacity-60 border-none hover:bg-[--primary-color]">
                 <SelectValue placeholder="Categories" />
               </SelectTrigger>
+              <div className="lg:block">
+                <CartButton show={this.setShowBasket.bind(this)} amount={this.state.foodOrders.length}></CartButton>
+              </div>
             </div>
             <SelectContent className="bg-[#292929] text-white bg-opacity-60 border-none">
               <SelectGroup className="flex flex-col justify-center">
@@ -208,11 +218,6 @@ export default class foodPage extends React.Component<{params: {table_id: number
                 ))}
             </div>
           </TabsContent>
-          <div className="md:hidden fixed bottom-0 left-0 z-30 w-full py-8 px-16 bg-neutral-800 backdrop-blur-xl bg-opacity-50">
-            <div className="flex bg-[--primary-color] min-w-screen h-[70px] rounded-2xl text-2xl text-black items-center justify-center cursor-pointer">
-              Order
-            </div>
-          </div>
         </Tabs>
       </div>
       </>

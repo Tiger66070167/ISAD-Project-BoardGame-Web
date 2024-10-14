@@ -41,10 +41,8 @@ export default class FoodOrder extends React.Component<{ foodOrders: { menu: foo
     return (
       <Popup>
         <div className=" p-[2%] h-[90%] w-[90%] bg-[--neutrals-color] rounded-3xl">
-          <button onClick={() => { this.props.enable(false) }} className="w-[150px] items-center  justify-centerh-[50px] hover:border-[--neutrals-color] border-[--primary-color] border-2 hover:bg-gradient-to-r from-[--primary-color] to-[--accent-color] p-1 rounded-xl">
-            <div className="flex justify-center items-center text-xl bg-[--neutrals-color] w-full  h-full rounded-xl">
+          <button onClick={() => { this.props.enable(false) }} className="w-[130px] items-center  justify-centerh-[50px] border-[--primary-color] hover:bg-[--primary-color] border-1 p-1 rounded-xl duration-300">
               Back
-            </div>
           </button>
           <div className="overflow-scroll h-[80%]">
             <Tabs
@@ -66,9 +64,9 @@ export default class FoodOrder extends React.Component<{ foodOrders: { menu: foo
           </div>
           <div className="flex justify-between items-center h-[15%] px-[5%]">
             <div>
-              <h1 className="text-2xl">รวมทั้งหมด {sum} รายการ {money}</h1>
+              <h1 className="text-2xl">Total {sum} items totaling {money} baht</h1>
             </div>
-            <button className="border-gray-300 border-2 px-[2rem] py-[0.5rem] rounded-xl hover:opacity-50 disabled:opacity-50" onClick={this.handleOrder.bind(this)} disabled={this.state.loading}>{(this.state.loading) ? "Loading" : "Confirm"}</button>
+            <button className="border-[--secondary-color] hover:border-[--passed-color] hover:bg-[--passed-color] duration-300 border-2 px-[2rem] py-[0.5rem] rounded-xl disabled:opacity-50" onClick={this.handleOrder.bind(this)} disabled={this.state.loading}>{(this.state.loading) ? "Loading" : "Confirm"}</button>
           </div>
         </div>
       </Popup>
